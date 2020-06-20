@@ -6,14 +6,14 @@ import Logo from "./logo";
 
 function GameIntroView() {
     return <div className="game-intro">
-        <AsciiImage className={"intro"} imageSrc={Logo} alt={"QuestZone Logo"}/>
-        <h1 className="sr-only">QuestZone</h1>
-        <h2 className="game-intro-subtitle">The quest for the holy artifact</h2>
+        <AsciiImage className={"intro"} imageSrc={Logo} alt={"LBPQuest Logo"}/>
+        <h1 className="sr-only">LBPQuest</h1>
+        <h2 className="game-intro-subtitle">A Quest for LBP XXI</h2>
         <h3 className="game-intro-enter"
             role="text"
             aria-label="Press enter to play the game ">
             > Press enter to play the game </h3>
-        <h3 className="game-intro-credits">Made by: Mike, Will, Dustin, Lucas </h3>
+        <h3 className="game-intro-credits">Made by: IronFury </h3>
     </div>;
 }
 

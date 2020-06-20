@@ -95,7 +95,7 @@ button {
 .imageLine {
   font-size: 1.5vw;
   white-space: pre;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .command-block-key,
