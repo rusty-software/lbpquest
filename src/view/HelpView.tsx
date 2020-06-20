@@ -18,7 +18,7 @@ function HelpView(props: HelpViewProps) {
     const helpBlock = props.visibleCommand.map(command => (
         <div key={command} className="command-block">
             <div className="command-block-key">{command}</div>
-            <div className="command-block-top">{helpMapper[command]}</div>
+            <div className="command-block-tip">{helpMapper[command]}</div>
         </div>
     ));
 
@@ -29,7 +29,7 @@ function HelpView(props: HelpViewProps) {
             </div>
             {helpBlock}
             <div className="help-description">
-                There may be more hidden commands available. Use "logic" to figure it out!
+                But there may be more hidden commands available. Use "logic" to figure it out!
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import {KeyboardEvent} from "react";
 import {GameEvent, GameEventType, NewInputEvent} from "./engine/Event"
-// import GameScenario from './scenario/main';
+import GameArea from './areas/main';
 import GameView from "./view/EventsView";
 import SOSView from "./view/hacks/SOSView";
 
@@ -19,7 +19,7 @@ class Game extends React.Component<any, AppState> {
         this.onBlur = this.onBlur.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.state = {
-            events: [], //TODO: GameScenario.getEvents(),
+            events: GameArea.getEvents(),
             lastInputPointer: 0,
             renderSOS: false
         };
@@ -34,9 +34,9 @@ class Game extends React.Component<any, AppState> {
             if (this.nameInput.value === "sos"){ // custom sos cmd
                 this.setState({renderSOS: !this.state.renderSOS})
             } else {
-                // TODO: GameScenario.send(this.nameInput.value);
+                GameArea.send(this.nameInput.value);
                 this.setState({
-                    events: [], // TODO: GameScenario.getEvents(),
+                    events: GameArea.getEvents(),
                     lastInputPointer: 0
                 });
             }
