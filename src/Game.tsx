@@ -2,7 +2,7 @@ import React from 'react';
 import {KeyboardEvent} from "react";
 import {GameEvent, GameEventType, NewInputEvent} from "./engine/Event"
 // import GameScenario from './scenario/main';
-// import GameView from "./view/EventsView";
+import GameView from "./view/EventsView";
 import SOSView from "./view/hacks/SOSView";
 
 interface AppState {
@@ -58,8 +58,7 @@ class Game extends React.Component<any, AppState> {
             <div id="game-content">
                 {this.state.renderSOS ?
                     <SOSView/> :
-                    <div>GameView goes here!</div>
-                    // TODO: <GameView events={this.state.events}/>
+                    <GameView events={this.state.events}/>
                 }
                 <span id="input">
                     <div id="input-tag">{'> '}</div>
