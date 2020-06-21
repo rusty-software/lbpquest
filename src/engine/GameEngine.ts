@@ -147,6 +147,10 @@ class GameEngine {
         }
     }
 
+    public removeInventoryItem(itemName: string) {
+        this.inventory.delete(itemName.toLowerCase());
+    }
+
     private getItem(itemName: string | undefined): Item | undefined {
         if (!!itemName) {
             const locationItem = this.currentLocation.items.get(itemName);
