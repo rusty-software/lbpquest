@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {KeyboardEvent} from "react";
 import {GameEvent, GameEventType, NewInputEvent} from "./engine/Event"
 import GameArea from './areas/main';

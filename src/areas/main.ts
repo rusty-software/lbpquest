@@ -1,8 +1,8 @@
-import courtyard from './courtyard';
 import GameEngine from '../engine/GameEngine';
+import startArea from './courtyard';
 
-const gameArea = new GameEngine(courtyard);
-gameArea.setStartLocation(courtyard);
+const gameEngine = new GameEngine(startArea);
+gameEngine.setStartLocation(startArea);
 
 const startTime = new Date();
 function timeDiffInSeconds(): number {
@@ -18,4 +18,4 @@ const tagIt = (action: string) =>
     });
 tagIt('start');
 
-export default gameArea;
+export default gameEngine;

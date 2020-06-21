@@ -3,7 +3,6 @@ import Game from "../../Game";
 import AsciiImage from "../AsciiImage";
 import Logo from "./logo";
 
-
 function GameIntroView() {
     return <div className="game-intro">
         <AsciiImage className={"intro"} imageSrc={Logo} alt={"LBPQuest Logo"}/>
