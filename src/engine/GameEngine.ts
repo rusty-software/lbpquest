@@ -151,6 +151,10 @@ class GameEngine {
         this.inventory.delete(itemName.toLowerCase());
     }
 
+    public inventoryContains(itemName: string): boolean {
+        return this.inventory.has(itemName);
+    }
+
     private getItem(itemName: string | undefined): Item | undefined {
         if (!!itemName) {
             const locationItem = this.currentLocation.items.get(itemName);

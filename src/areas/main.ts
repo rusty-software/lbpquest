@@ -23,17 +23,6 @@ bar
 
     making the marg reveals a green chip under the blender
 
-dining room
-    fingerprints all over the table, but outlines of 3 missing hand decorations
-    adding decorations, the mafia team walks in and sits down
-
-    mafia
-        bad guys: john, paul
-        good guys: joseph, tom, henry, max
-
-        accusing both bad guys before numBad >= numGood earns you the black chip
-
-
 */
 
 // locations
@@ -45,6 +34,7 @@ const diningroom = new Location();
 // items
 const fountain = new Item();
 const coin = new Item();
+const diningTable = new Item();
 const thumbStatue = new Item();
 const peaceStatue = new Item();
 const okayStatue = new Item();
@@ -52,7 +42,7 @@ const okayStatue = new Item();
 // const redChip = new Item();
 // const blueChip = new Item();
 // const greenChip = new Item();
-// const blackChip = new Item();
+const blackChip = new Item();
 
 // location details
 courtyard
@@ -76,9 +66,103 @@ kitchen
     .link("east", diningroom)
     .setOnEnter(() => tagIt("kitchen"));
 
+function shuffle(arr: any[]) {
+    let currentIndex = arr.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          temporaryValue = arr[currentIndex];
+          arr[currentIndex] = arr[randomIndex];
+          arr[randomIndex] = temporaryValue;
+    }
+    return arr;
+}
+
+let mafiaPlayable: boolean = false;
+let mafiaWon: boolean = false;
+let blackChipTaken: boolean = false;
+let mafiaPlayers: string[] = ["John", "Paul"];
+let townPlayers: string[] = ["Joseph", "Tom", "Henry", "Max"];
+let executed: string[] = [];
+
+function handleAccuse(name: string, type: string, arr: string[]) {
+    const idx = arr.indexOf(name);
+    if (idx > -1) {
+        arr.splice(idx, 1);
+    }
+    executed.push(name + " (" + type + ")");
+    if (mafiaPlayers.length == 0) {
+        return wonMafia();
+    } else if (mafiaPlayers.length > townPlayers.length) {
+        return lostMafia();
+    }
+    return playMafia();
+}
+
+const mafia = new Item();
+const John = new Item()
+    .on("accuse", () => {
+        return handleAccuse("John", "mafia", mafiaPlayers);
+    });
+const Paul = new Item()
+    .on("accuse", () => {
+        return handleAccuse("Paul", "mafia", mafiaPlayers);
+    });
+const Joseph = new Item()
+    .on("accuse", () => {
+        return handleAccuse("Joseph", "civilian", townPlayers);
+    });
+const Tom = new Item()
+    .on("accuse", () => {
+        return handleAccuse("Tom", "civilian", townPlayers);
+    });
+const Henry = new Item()
+    .on("accuse", () => {
+        return handleAccuse("Henry", "civilian", townPlayers);
+    });
+const Max = new Item()
+    .on("accuse", () => {
+        return handleAccuse("Max", "civilian", townPlayers);
+    });
+const playMafia = () => {
+    if (mafiaPlayable) {
+        let players = shuffle(mafiaPlayers.concat(townPlayers));
+        let response = "You... are a civilian."
+        + "\n\nThe Moderator speaks.\n\nRemaining players (besides you) are: " + players.join(", ")
+        + "\n\nYou have executed: " + executed.join(", ")
+        + "\n\nYou may accuse a player by entering `accuse <player name>`. If you the balance tips in the mafia's favor, the game is over!";
+        return response;
+    } else if (mafiaWon && !blackChipTaken) {
+        return "You've already won the Mafia game. You just need to take the black poker chip.";
+    } 
+    return "With whom?";
+};
+const lostMafia = () => {
+    mafiaPlayers = ["John", "Paul"];
+    townPlayers = ["Joseph", "Tom", "Henry", "Max"];
+    executed = [];
+    
+    return "\"The mafia has won!\" exclaims the Moderator. \"The game will be reset. Better luck next time, kid.\"";
+}
+const wonMafia = () => {
+    diningroom.addItem("black poker chip", blackChip);
+    mafiaWon = true;
+    mafiaPlayable = false;
+
+    return "\"You've won the game!\" declares the Moderator. \"Please accept this as a token of your prowess.\"\n\nThe Moderator slides a black poker chip toward you."
+}
+const quitMafia = () => {
+    return "You stand up and leave the table, the Moderator casting a confused look at you.";
+}
+
+let diningRoomText = "The dining room is dominated by a large glass dining table. A door to the north leads outside, and the kitchen is to your west."
+let diningRoomMafiaText = "The dining room is dominated by a large glass dining table. Seven people are sitting around the table, looking at you expectently. A door to the north leads outside, and the kitchen is to your west.";
+
 diningroom
     .setId("Dining Room")
-    .setDesc("The dining room is dominated by a large glass dining table. A door to the north leads outside, and the kitchen is to your west.")
+    .setDesc(diningRoomText)
     .link("west", kitchen)
     .setOnEnter(() => tagIt("diningroom"));
 
@@ -106,8 +190,41 @@ let thumbPlaced = false;
 let peacePlaced = false;
 let okayPlaced = false;
 let notAllStatuesPlacedText = "You place the statue in one of the empty spots on the table.";
-let allStatuesPlacedText = "As you place the final statue on the table, a group of seven guys, none of whom you recognize, walk into the kitchen. They introduce themselves as Henry, John, Joseph, Max, Paul, Tom, and Narrator. They take seats around the table, and Narrator starts shuffling some cards.\n\n\"Care for a game of Mafia?\" Narrator asks.";
-let diningRoomMafiaText = "The dining room is dominated by a large glass dining table. Seven people are sitting around the table, looking at you expectently. A door to the north leads outside, and the kitchen is to your west.";
+let allStatuesPlacedText = "As you place the final statue on the table, a group of seven guys, none of whom you recognize, walk into the kitchen. They introduce themselves as Henry, John, Joseph, Max, Paul, Tom, and Moderator. They take seats around the table, and Moderator starts shuffling some cards.\n\n\"Care for a game of Mafia?\" Moderator asks.";
+
+diningTable
+    .setExamine(() => {
+        if (mafiaPlayable) {
+            return "The table is resplendent with three statues, and is surrounded by seven people looking at you expectently.";
+        } else if (mafiaWon && !blackChipTaken) {
+            return "The table is covered in fingerprints, but is resplendent with three hand statues. A black poker chip is near the statues.";
+        } else if (mafiaWon) {
+            return "The table is covered in fingerprints, but is resplendent with three hand statues.";
+        }
+        return "The table is covered in fingerprints, except for three circles. It looks as if some things used to adorn the table top but were recently removed.";
+    })
+    .setTake(() => "The dining table definitely will NOT fit in your rucksack.")
+    .setTakeable(false);
+
+diningroom.addItem("dining table", diningTable);
+
+mafia
+    .setExamine(() => {
+        return "examining mafia. Should list game status as well as list commands and how to use them.";
+    })
+    .setTake(() => "The Moderator looks at you sternly, saying \"Those aren't your cards.\"")
+    .setTakeable(false)
+    .setUse(() => "You can accuse someone or quit the game.")
+    .on("play", playMafia)
+    .on("quit", quitMafia);
+
+diningroom.addItem("mafia", mafia);
+diningroom.addItem("john", John);
+diningroom.addItem("paul", Paul);
+diningroom.addItem("joseph", Joseph);
+diningroom.addItem("tom", Tom);
+diningroom.addItem("henry", Henry);
+diningroom.addItem("max", Max);
 
 thumbStatue
     .setExamine(() => "This is a small, decorative statue with the thumb up, Fonzie-style.")
@@ -122,6 +239,7 @@ thumbStatue
             thumbStatue.setTakeable(false);
             if (peacePlaced && okayPlaced) {
                 diningroom.setDesc(diningRoomMafiaText);
+                mafiaPlayable = true;
                 return allStatuesPlacedText;
             }
             return notAllStatuesPlacedText;
@@ -142,6 +260,7 @@ peaceStatue
             peaceStatue.setTakeable(false)
             if (thumbPlaced && okayPlaced) {
                 diningroom.setDesc(diningRoomMafiaText);
+                mafiaPlayable = true;
                 return allStatuesPlacedText;
             }
             return notAllStatuesPlacedText;
@@ -162,6 +281,7 @@ okayStatue
             okayStatue.setTakeable(false)
              if (thumbPlaced && peacePlaced) {
                 diningroom.setDesc(diningRoomMafiaText);
+                mafiaPlayable = true;
                 return allStatuesPlacedText;
             }
             return notAllStatuesPlacedText;
@@ -169,6 +289,15 @@ okayStatue
         return "This doesn't look like the right place to use the okay statue."
     });
 
+blackChip
+    .setExamine(() => "The black poker chip looks completely smooth and shiny, like it's hardly been used.")
+    .setTake(() => {
+        blackChipTaken = true;
+        diningroom.setDesc(diningRoomText);
+        return "You put the black poker chip into your rucksack. As you do, the people around the table rise, tip their hats to you, and make their way out."
+    })
+    .setTakeable(true)
+    .setUse(() => "checks here to limit usage");
 
 const gameEngine = new GameEngine(courtyard);
 gameEngine.setStartLocation(courtyard);
@@ -196,6 +325,9 @@ gameEngine.send("take thumb statue");
 gameEngine.send("take peace statue");
 gameEngine.send("take okay statue");
 gameEngine.send("go dining room");
+gameEngine.send("use thumb statue");
+gameEngine.send("use peace statue");
+gameEngine.send("use okay statue");
 // END HACK ZONE
 
 export default gameEngine;
