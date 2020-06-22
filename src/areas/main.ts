@@ -34,6 +34,7 @@ const diningroom = new Location();
 // items
 const fountain = new Item();
 const coin = new Item();
+const note = new Item();
 const diningTable = new Item();
 const thumbStatue = new Item();
 const peaceStatue = new Item();
@@ -184,7 +185,18 @@ fountain
     .setTake(() => "The fountain is fixed in place, and even if you could move it, probably wouldn't fit in your rucksack.")
     .setUse(() => "You consider sipping from the fountain's lukewarm water, but think better of it, given what everyone else does in the pool...");
 
+let noteText: string = "(in a hastily/messily scrawled pen)"
+    + "\n\nGreetings, fellow LBPer! The door's open. We're all in the tent out back. See you there!"
+    + "\n\n(there is no signature)";
+note
+    .setExamine(() => noteText)
+    .setTake(() => "You realize that you should leave this here for anyone that arrives after you.")
+    .setTakeable(false)
+    .setUse(() => "You use the hell out of that note.")
+    .on("read", () => noteText);
+
 courtyard.addItem("fountain", fountain);
+courtyard.addItem("note", note);
 
 let thumbPlaced = false;
 let peacePlaced = false;
@@ -317,17 +329,17 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
-courtyard.addItem("thumb statue", thumbStatue);
-courtyard.addItem("peace statue", peaceStatue);
-courtyard.addItem("okay statue", okayStatue);
-courtyard.link("dining room", diningroom);
-gameEngine.send("take thumb statue");
-gameEngine.send("take peace statue");
-gameEngine.send("take okay statue");
-gameEngine.send("go dining room");
-gameEngine.send("use thumb statue");
-gameEngine.send("use peace statue");
-gameEngine.send("use okay statue");
+// courtyard.addItem("thumb statue", thumbStatue);
+// courtyard.addItem("peace statue", peaceStatue);
+// courtyard.addItem("okay statue", okayStatue);
+// courtyard.link("dining room", diningroom);
+// gameEngine.send("take thumb statue");
+// gameEngine.send("take peace statue");
+// gameEngine.send("take okay statue");
+// gameEngine.send("go dining room");
+// gameEngine.send("use thumb statue");
+// gameEngine.send("use peace statue");
+// gameEngine.send("use okay statue");
 // END HACK ZONE
 
 export default gameEngine;
