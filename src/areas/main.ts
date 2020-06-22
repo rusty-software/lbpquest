@@ -1,6 +1,7 @@
 import GameEngine from '../engine/GameEngine';
 import Location from "../engine/Location";
 import Item from '../engine/Item';
+import {courtyard} from './courtyard'
 
 /*
 pool
@@ -26,15 +27,11 @@ bar
 */
 
 // locations
-const courtyard = new Location();
 const livingroom = new Location();
 const kitchen = new Location();
 const diningroom = new Location();
 
 // items
-const fountain = new Item();
-const coin = new Item();
-const note = new Item();
 const diningTable = new Item();
 const thumbStatue = new Item();
 const peaceStatue = new Item();
@@ -47,8 +44,6 @@ const blackChip = new Item();
 
 // location details
 courtyard
-    .setId("Courtyard")
-    .setDesc("You are in the courtyard of Casa Cantera. You can almost feel the rosemary pollen coat your slightly sweating skin as you listen to the sounds of tepid water trickling through the slightly-functioning fountain. To the north is the door into the Casa.\n\nThere appears to be a note taped to the door.")
     .link("north", livingroom)
     .link("through door", livingroom)
     .setOnEnter(() => tagIt("courtyard"));
@@ -94,7 +89,7 @@ function handleAccuse(name: string, type: string, arr: string[]) {
         arr.splice(idx, 1);
     }
     executed.push(name + " (" + type + ")");
-    if (mafiaPlayers.length == 0) {
+    if (mafiaPlayers.length === 0) {
         return wonMafia();
     } else if (mafiaPlayers.length > townPlayers.length) {
         return lostMafia();
@@ -168,36 +163,6 @@ diningroom
     .setOnEnter(() => tagIt("diningroom"));
 
 // item details
-coin
-    .setExamine(() => "The coin is a currency you don't recognize, but appears to be made of a copper/nickel mix and is about the size of a half dollar.")
-    .setTake(() => {
-        fountain.setExamine(() => "The fountain gurgles sporatically.");
-        return "You snatch the coin from the fountain bowl, drying it and your hands on your shirt, then put the coin into your rucksack.";
-    })
-    .setTakeable(true)
-    .setUse(() => "Logic to ensure location and viability and stuff.");
-
-fountain
-    .setExamine(() => {
-        courtyard.addItem("coin", coin);
-        return "The fountain gurgles sporatially, but the water is clear enough to make you aware of something glittering at the bottom of its bowl. It looks like a coin of some kind.";
-    })
-    .setTake(() => "The fountain is fixed in place, and even if you could move it, probably wouldn't fit in your rucksack.")
-    .setUse(() => "You consider sipping from the fountain's lukewarm water, but think better of it, given what everyone else does in the pool...");
-
-let noteText: string = "(in a hastily/messily scrawled pen)"
-    + "\n\nGreetings, fellow LBPer! The door's open. We're all in the tent out back. See you there!"
-    + "\n\n(there is no signature)";
-note
-    .setExamine(() => noteText)
-    .setTake(() => "You realize that you should leave this here for anyone that arrives after you.")
-    .setTakeable(false)
-    .setUse(() => "You use the hell out of that note.")
-    .on("read", () => noteText);
-
-courtyard.addItem("fountain", fountain);
-courtyard.addItem("note", note);
-
 let thumbPlaced = false;
 let peacePlaced = false;
 let okayPlaced = false;
