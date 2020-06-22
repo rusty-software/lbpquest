@@ -1,7 +1,8 @@
 import GameEngine from '../engine/GameEngine';
 import Location from "../engine/Location";
 import Item from '../engine/Item';
-import {courtyard} from './courtyard'
+import courtyard from './courtyard'
+import diningroom from './diningroom'
 
 /*
 pool
@@ -29,7 +30,6 @@ bar
 // locations
 const livingroom = new Location();
 const kitchen = new Location();
-const diningroom = new Location();
 
 // items
 const diningTable = new Item();
@@ -157,8 +157,6 @@ let diningRoomText = "The dining room is dominated by a large glass dining table
 let diningRoomMafiaText = "The dining room is dominated by a large glass dining table. Seven people are sitting around the table, looking at you expectently. A door to the north leads outside, and the kitchen is to your west.";
 
 diningroom
-    .setId("Dining Room")
-    .setDesc(diningRoomText)
     .link("west", kitchen)
     .setOnEnter(() => tagIt("diningroom"));
 
