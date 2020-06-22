@@ -1,8 +1,14 @@
 import GameEngine from '../engine/GameEngine';
 import Location from "../engine/Location";
-import courtyard from './courtyard'
-import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom'
-import {thumbStatue, peaceStatue, okayStatue} from './notspecified'
+import courtyard from './courtyard';
+import livingroom from './livingroom';
+import bar from './bar';
+import hallway from './hallway'
+import undecidedroom from './undecidedroom';
+import rugroom from './rugroom';
+import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
+import {thumbStatue, peaceStatue, okayStatue} from './notspecified';
+import firepit from './firepit';
 
 /*
 pool
@@ -28,7 +34,6 @@ bar
 */
 
 // locations
-const livingroom = new Location();
 const kitchen = new Location();
 
 // items
@@ -47,7 +52,9 @@ livingroom
     .setId("Living Room")
     .setDesc("This is the living room. To the south lies the courtyard, and the kitchen is to the east.")
     .link("south", courtyard)
+    .link("northeast", bar)
     .link("east", kitchen)
+    .link("west", hallway)
     .setOnEnter(() => tagIt("livingroom"));
 
 kitchen
