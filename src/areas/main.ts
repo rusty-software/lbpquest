@@ -47,6 +47,7 @@ bar
 // location wiring
 courtyard
     .link("n", livingroom)
+    .link("through door", livingroom)
     .setOnEnter(() => tagIt("courtyard"));
 
 livingroom
@@ -54,6 +55,7 @@ livingroom
     .link("ne", bar)
     .link("e", kitchen)
     .link("w", hallway)
+    .link("through door", courtyard)
     .setOnEnter(() => tagIt("livingroom"));
 
 bar
@@ -155,6 +157,9 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
+gameEngine.send("examine fountain");
+gameEngine.send("take coin");
+gameEngine.send("n");
 // courtyard.addItem("thumb statue", thumbStatue);
 // courtyard.addItem("peace statue", peaceStatue);
 // courtyard.addItem("okay statue", okayStatue);
