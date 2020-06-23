@@ -12,10 +12,10 @@ import pooleast from './pooleast';
 import poolwest from './poolwest';
 import backyard from './backyard';
 import tent from './tent';
-import bunkhouse from './bunkhouse';
+import {bunkhouse, useCupboardKey, peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
-import {thumbStatue, peaceStatue, okayStatue} from './notspecified';
+import {thumbStatue, okayStatue} from './notspecified';
 
 /*
 pool
