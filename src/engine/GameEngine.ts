@@ -50,8 +50,10 @@ class GameEngine {
 
     public send(input: string) {
         const lowerInput = input.toLowerCase().trim();
+        const inputSplit = lowerInput.split(" ");
+        const cmdText = inputSplit.shift();
         const cmd = CommandType.values.find(type =>
-            lowerInput.startsWith(type.name.toLowerCase())
+            cmdText === type.name.toLowerCase()
         );
         const rest = lowerInput.substr(!!cmd ? cmd.name.length + 1 : 0);
 
