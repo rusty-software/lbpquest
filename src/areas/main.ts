@@ -8,11 +8,11 @@ import rugroom from './rugroom';
 import firepit from './firepit';
 import kitchen from './kitchen';
 import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
-import pooleast from './pooleast';
+import {pooleast, useFish, cupboardKey} from './pooleast';
 import poolwest from './poolwest';
 import backyard from './backyard';
 import tent from './tent';
-import {bunkhouse, useCupboardKey, peaceStatue} from './bunkhouse';
+import {bunkhouse, useCupboardKey, fish, peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
 import {thumbStatue, okayStatue} from './notspecified';
@@ -130,6 +130,12 @@ insidegarage
     .setOnEnter(() => tagIt("insidegarage"));
 
 // item wiring
+fish
+    .setUse(() => useFish(gameEngine, fish));
+
+cupboardKey
+    .setUse(() => useCupboardKey(gameEngine, cupboardKey));
+
 thumbStatue
     .setUse(() => placeThumb(gameEngine, thumbStatue));
 
@@ -160,6 +166,11 @@ tagIt('start');
 gameEngine.send("examine fountain");
 gameEngine.send("take coin");
 gameEngine.send("n");
+gameEngine.send("e");
+gameEngine.send("e");
+gameEngine.send("n");
+gameEngine.send("e");
+
 // courtyard.addItem("thumb statue", thumbStatue);
 // courtyard.addItem("peace statue", peaceStatue);
 // courtyard.addItem("okay statue", okayStatue);

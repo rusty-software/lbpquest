@@ -19,34 +19,34 @@ export const bunkhouse = new Location()
     .setId("Bunkhouse")
     .setDesc(desc());
 
-const fish = new Item()
+export const fish = new Item()
     .setExamine(() => "The fish gapes at you, open-mouthed and glassy-eyed, as if it were still gasping for water.")
     .setTakeable(true)
     .setTake(() => {
         fishText = "";
         bunkhouse.setDesc(desc());
         return "You put the fish into your rucksack."
-    })
-    .setUse(() => {
-        return "TODO: logic for fish use"
     });
-
-export const peaceStatue = new Item()
-    .setExamine(() => "This is a small, decorative statue with two fingers up, peace-style.")
-    .setTake(() => "You put the peace statue in your rucksack.")
-    .setTakeable(true);
 
 let cupboardUnlocked: boolean = false;
 let cupboardOpen: boolean = false;
 let peaceStatueTaken: boolean = false;
 let closedText: string = "The cupboard is closed.";
-let openWithStatue: string = "The cupboard is open. Its only interested contents is an oddly placed statue with two fingers up.";
+let openWithStatue: string = "The cupboard is open. Its only interesting content is an oddly placed peace statue.";
 let openSansStatue: string = "The cupboard is open. It doesn't contain anything interesting.";
+
+export const peaceStatue = new Item()
+    .setExamine(() => "This is a small, decorative statue with two fingers up, peace-style.")
+    .setTake(() => {
+        peaceStatueTaken = true;
+        return "You put the peace statue in your rucksack."
+    })
+    .setTakeable(true);
 
 export function useCupboardKey(gameEngine: GameEngine, cupboardKey: Item) {
     if (gameEngine.currentLocation === bunkhouse) {
         cupboardUnlocked = true;
-        gameEngine.removeInventoryItem("cupboard key");
+        gameEngine.removeInventoryItem("small key");
         return "You use the cupboard key to unlock the cupboard.";
     }
     return "This doesn't look like the right place to use the cupboard key.";
@@ -66,13 +66,15 @@ const cupboard = new Item()
     .setUse(() => "You don't really have a use for the cupboard.")
     .on("open", () => {
         if (cupboardUnlocked) {
+            cupboardOpen = true;
             bunkhouse.addItem("peace statue", peaceStatue);
-            return "You open the cupboard, revealing "
+            return "You open the cupboard."
         }
         return "The cupboard is locked. Looks like it requires a key."
     })
     .on("close", () => {
         if (cupboardOpen) {
+            cupboardOpen = false;
             return "You close the cupboard.";
         }
         return "The cupboard is already closed.";
