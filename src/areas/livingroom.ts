@@ -6,7 +6,7 @@ let pornText: string = "You notice that the porn is prevalent here, the most app
 let bricabracText: string = "There are also baskets full of various and sundry decorative bric-a-brac littered on every flat surface. ";
 let exitText = "\n\nTo the northeast is the bar, and the kitchen is to the east. To the west is a hallway leading to some bedrooms. The front door to the south leads to the courtyard.";
 
-function getDesc() {
+function desc() {
     return vrText +
         pornText +
         bricabracText +
@@ -15,14 +15,14 @@ function getDesc() {
 
 const livingroom = new Location()
     .setId("Living Room")
-    .setDesc(getDesc());
+    .setDesc(desc());
 
 const porn = new Item()
     .setExamine(() => "\"Bovine Boudoir\", August 1999 edition. The cover is an extremely provocative picture of Bessie in profile.")
     .setTakeable(true)
     .setTake(() => {
         pornText = "You notice that the porn is prevalent here, but none of it appeals to you. ";
-        livingroom.setDesc(getDesc());
+        livingroom.setDesc(desc());
 
         return "You put the porn in your rucksack."
     })
