@@ -33,6 +33,21 @@ class GameEngine {
         return this.events;
     }
 
+    private move(direction: string) {
+        const maybeNewLocation = this.currentLocation.locations.get(direction);
+        if (maybeNewLocation) {
+            if (!maybeNewLocation.entered) {
+                maybeNewLocation.entered = true;
+                maybeNewLocation.onEnter();
+            }
+            this.changeLocation(maybeNewLocation);
+        } else {
+            this.events.push(
+                new GameErrorEvent(GameError.INVALID_PATH)
+            );
+        }
+    }
+
     public send(input: string) {
         const lowerInput = input.toLowerCase().trim();
         const cmd = CommandType.values.find(type =>
@@ -42,21 +57,20 @@ class GameEngine {
 
         this.events.push(new NewInputEvent(input));
         switch (cmd) {
+            case CommandType.N:
+            case CommandType.S: 
+            case CommandType.E: 
+            case CommandType.W: 
+            case CommandType.NE: 
+            case CommandType.NW: 
+            case CommandType.SE: 
+            case CommandType.SW: { 
+                this.move(lowerInput);
+                break;
+            }
+
             case CommandType.GO: {
-                const maybeNewLocation = this.currentLocation.locations.get(
-                    rest
-                );
-                if (maybeNewLocation) {
-                    if (!maybeNewLocation.entered) {
-                        maybeNewLocation.entered = true;
-                        maybeNewLocation.onEnter();
-                    }
-                    this.changeLocation(maybeNewLocation);
-                } else {
-                    this.events.push(
-                        new GameErrorEvent(GameError.INVALID_PATH)
-                    );
-                }
+                this.move(rest);
                 break;
             }
 

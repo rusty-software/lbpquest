@@ -1,14 +1,21 @@
 import GameEngine from '../engine/GameEngine';
-import Location from "../engine/Location";
 import courtyard from './courtyard';
 import livingroom from './livingroom';
 import bar from './bar';
 import hallway from './hallway'
 import undecidedroom from './undecidedroom';
 import rugroom from './rugroom';
-import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
-import {thumbStatue, peaceStatue, okayStatue} from './notspecified';
 import firepit from './firepit';
+import kitchen from './kitchen';
+import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
+import pooleast from './pooleast';
+import poolwest from './poolwest';
+import backyard from './backyard';
+import tent from './tent';
+import bunkhouse from './bunkhouse';
+import garage from './garage';
+import insidegarage from './insidegarage';
+import {thumbStatue, peaceStatue, okayStatue} from './notspecified';
 
 /*
 pool
@@ -23,6 +30,10 @@ garage
     snorkel gear in kayak
 
 VR 
+    white poker chip
+
+thief book
+    instructions on using thieves' tools
 
 snacks
 
@@ -33,40 +44,88 @@ bar
 
 */
 
-// locations
-const kitchen = new Location();
-
-// items
-// const whiteChip = new Item();
-// const redChip = new Item();
-// const blueChip = new Item();
-// const greenChip = new Item();
-
 // location wiring
 courtyard
-    .link("north", livingroom)
-    .link("through door", livingroom)
+    .link("n", livingroom)
     .setOnEnter(() => tagIt("courtyard"));
 
 livingroom
-    .setId("Living Room")
-    .setDesc("This is the living room. To the south lies the courtyard, and the kitchen is to the east.")
-    .link("south", courtyard)
-    .link("northeast", bar)
-    .link("east", kitchen)
-    .link("west", hallway)
+    .link("s", courtyard)
+    .link("ne", bar)
+    .link("e", kitchen)
+    .link("w", hallway)
     .setOnEnter(() => tagIt("livingroom"));
 
+bar
+    .link("sw", livingroom)
+    .setOnEnter(() => tagIt("bar"));
+
 kitchen
-    .setId("Kitchen")
-    .setDesc("You're in the kitchen. To the east is the dining room, and to the west is the living room.")
-    .link("west", livingroom)
-    .link("east", diningroom)
+    .link("w", livingroom)
+    .link("e", diningroom)
     .setOnEnter(() => tagIt("kitchen"));
 
 diningroom
-    .link("west", kitchen)
+    .link("w", kitchen)
+    .link("n", pooleast)
     .setOnEnter(() => tagIt("diningroom"));
+
+hallway
+    .link("e", livingroom)
+    .link("s", undecidedroom)
+    .link("w", rugroom)
+    .link("n", firepit)
+    .setOnEnter(() => tagIt("hallway"));
+
+undecidedroom
+    .link("n", hallway)
+    .setOnEnter(() => tagIt("undecidedroom"));
+
+rugroom
+    .link("e", hallway)
+    .setOnEnter(() => tagIt("rugroom"));
+
+firepit
+    .link("s", hallway)
+    .link("e", poolwest)
+    .setOnEnter(() => tagIt("firepit"));
+
+poolwest
+    .link("ne", backyard)
+    .link("e", pooleast)
+    .link("w", firepit)
+    .setOnEnter(() => tagIt("poolwest"));
+
+pooleast
+    .link("w", poolwest)
+    .link("nw", backyard)
+    .link("s", diningroom)
+    .link("e", bunkhouse)
+    .link("se", garage)
+    .setOnEnter(() => tagIt("pooleast"));
+
+backyard
+    .link("se", pooleast)
+    .link("sw", poolwest)
+    .link("through flap", tent)
+    .setOnEnter(() => tagIt("backyard"));
+
+tent
+    .link("through flap", backyard)
+    .setOnEnter(() => tagIt("tent"));
+
+bunkhouse
+    .link("w", pooleast)
+    .setOnEnter(() => tagIt("bunkhouse"));
+
+garage
+    .link("nw", pooleast)
+    .link("through door", insidegarage)
+    .setOnEnter(() => tagIt("garage"));
+
+insidegarage
+    .link("through door", garage)
+    .setOnEnter(() => tagIt("insidegarage"));
 
 // item wiring
 thumbStatue

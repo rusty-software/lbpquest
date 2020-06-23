@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 const helpMapper: { [s: string]: string; } = {
-    GO: ' <DIRECTION> : e.g. `go north`',
+    GO: ' <SOMEWHERE> : e.g. `go through door` to move somewhere other than cardinal or ordinal directions',
     HELP: ' : shows this help text',
     INVENTORY: ' : lists the items in your rucksack',
-    EXAMINE: ' <OBJECT> : e.g. `examine chest` to take a closer look at the chest',
+    EXAMINE: ' <OBJECT> : e.g. `examine sword` to take a closer look at the sword',
     LOOK: ' : describes the area which you are currently in',
-    TAKE: ' <OBJECT> : e.g. `take sword`',
-    USE: ' <OBJECT> : e.g. `use sword`'
+    TAKE: ' <OBJECT> : e.g. `take sword` to add an item to your rucksack',
+    USE: ' <OBJECT> : e.g. `use sword` to activate an item'
 };
 
 interface HelpViewProps {
