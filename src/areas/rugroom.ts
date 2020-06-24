@@ -1,5 +1,6 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
+import GameEngine from '../engine/GameEngine';
 
 let mainText: string = "This bedroom was dubbed The Cowskin Rug Bedroom due to its floors being covered in cowskin rugs. An ottoman sits in front of a fireplace, oddly out of place. A bookcase is built into one wall, its books arranged by color -- white, black, red, and blue. ";
 let deerHeadText: string = "There's a deer head statue sitting as an awkward decoration on a glass coffee table. ";
@@ -70,10 +71,33 @@ export const thumbStatue = new Item()
     })
     .setTakeable(true);
 
+export function wearCowskin(gameEngine: GameEngine) {
+    if (!gameEngine.inventoryContains("cowskin")) {
+        return "You have to take the cowskin before you can wear it.";
+    }
+    if (!gameEngine.inventoryContains("rope")) {
+        return "You try to wear the cowskin, but it slips off of you. If only you had something with which to secure it...";
+    }
+    gameEngine.removeInventoryItem("rope");
+    gameEngine.removeInventoryItem("cowskin");
+    gameEngine.currentLocation.addItem("robe", robe);
+    gameEngine.send("take robe");
+
+    return "Using the rope, you fashion a robe out of the fine cowskin.";
+}
+export const cowskin = new Item()
+    .setExamine(() => "The cowskin is high quality, and looks to be just your size.")
+    .setTakeable(true)
+    .setTake(() => "You put the cowskin in your rucksack.")
+    .setUse(() => "You're not exactly sure how to use the cowskin, except that it might look great if you were wearing it.");
+rugroom.addItem("cowskin", cowskin);
+
+const robe = new Item()
+    .setExamine(() => "The cowskin, synched securely around your waist with the frayed rope, looks great and feels even better.")
+    .setTakeable(true)
+    .setTake(() => "");
 
 /*
-rugs
 deer head statue
 bookcase
-ottoman
 */

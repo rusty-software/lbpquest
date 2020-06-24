@@ -4,7 +4,7 @@ import livingroom from './livingroom';
 import bar from './bar';
 import hallway from './hallway'
 import undecidedroom from './undecidedroom';
-import {rugroom, thumbStatue} from './rugroom';
+import {rugroom, thumbStatue, cowskin, wearCowskin} from './rugroom';
 import firepit from './firepit';
 import kitchen from './kitchen';
 import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
@@ -15,7 +15,7 @@ import tent from './tent';
 import {bunkhouse, useCupboardKey, fish, peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
-import {okayStatue} from './notspecified';
+import {okayStatue, rope} from './notspecified';
 
 /*
 pool
@@ -136,6 +136,9 @@ fish
 cupboardKey
     .setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
+cowskin
+    .on("wear", () => wearCowskin(gameEngine));
+
 thumbStatue
     .setUse(() => placeThumb(gameEngine, thumbStatue));
 
@@ -163,6 +166,8 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
+courtyard.addItem("rope", rope);
+gameEngine.send("take rope");
 gameEngine.send("examine fountain");
 gameEngine.send("take coin");
 gameEngine.send("n");
