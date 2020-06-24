@@ -9,7 +9,9 @@ import {rugroom,
     cowskin, 
     wearCowskin, 
     deerHead, 
-    breakDeerhead} from './rugroom';
+    breakDeerhead,
+    blueBook,
+    readBlueBook} from './rugroom';
 import firepit from './firepit';
 import kitchen from './kitchen';
 import {diningroom, 
@@ -155,6 +157,9 @@ deerHead
     .on("smash", () => breakDeerhead(gameEngine))
     .on("throw", () => breakDeerhead(gameEngine))
     .on("destroy", () => breakDeerhead(gameEngine));
+
+blueBook
+    .on("read", () => readBlueBook(gameEngine));
 
 thumbStatue
     .setUse(() => placeThumb(gameEngine, thumbStatue));

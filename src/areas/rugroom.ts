@@ -119,7 +119,31 @@ export const deerHead = new Item()
     .on("hint", () => "Maybe try breaking the damn thing.");
 rugroom.addItem("deer head statue", deerHead);
 
-/*
-deer head statue
-bookcase
-*/
+const thievery = new Item()
+    .setExamine(() => "You know how to use thieves' tools.")
+    .setTakeable(true)
+    .setTake(() => "You add the knowledge of thievery to your rucksack.")
+    .setUse(() => "You can't actively use the knowledge by itself.");
+
+export function readBlueBook(gameEngine: GameEngine) {
+    if (gameEngine.inventoryContains("thievery")) {
+        return "You already know how to use thieves' tools."
+    }
+    gameEngine.currentLocation.addItem("thievery", thievery);
+    gameEngine.send("take thievery");
+
+    return "You thumb through the book, pausing on the section on how to use thieves' tools."
+}
+export const blueBook = new Item()
+    .setExamine(() => "A well-worn blue book, titled `The Way of Thieves`.")
+    .setTakeable(true)
+    .setTake(() => "You put the blue book into your rucksack.");
+
+const bookcase = new Item()
+    .setExamine(() => {
+        rugroom.addItem("blue book", blueBook);
+        return "The bookcase has a bunch of books on it, but only the blue book looks like it might be worth reading."
+    })
+    .setTakeable(false)
+    .setTake(() => "The bookcase is built into the wall. You aren't going to be able to take it.");
+rugroom.addItem("bookcase", bookcase);
