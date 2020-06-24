@@ -4,7 +4,7 @@ import livingroom from './livingroom';
 import bar from './bar';
 import hallway from './hallway'
 import undecidedroom from './undecidedroom';
-import rugroom from './rugroom';
+import {rugroom, thumbStatue} from './rugroom';
 import firepit from './firepit';
 import kitchen from './kitchen';
 import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
@@ -15,7 +15,7 @@ import tent from './tent';
 import {bunkhouse, useCupboardKey, fish, peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
-import {thumbStatue, okayStatue} from './notspecified';
+import {okayStatue} from './notspecified';
 
 /*
 pool
@@ -166,22 +166,9 @@ tagIt('start');
 gameEngine.send("examine fountain");
 gameEngine.send("take coin");
 gameEngine.send("n");
-gameEngine.send("e");
-gameEngine.send("e");
-gameEngine.send("n");
-gameEngine.send("e");
+gameEngine.send("w");
+gameEngine.send("w");
 
-// courtyard.addItem("thumb statue", thumbStatue);
-// courtyard.addItem("peace statue", peaceStatue);
-// courtyard.addItem("okay statue", okayStatue);
-// courtyard.link("dining room", diningroom);
-// gameEngine.send("take thumb statue");
-// gameEngine.send("take peace statue");
-// gameEngine.send("take okay statue");
-// gameEngine.send("go dining room");
-// gameEngine.send("use thumb statue");
-// gameEngine.send("use peace statue");
-// gameEngine.send("use okay statue");
 // END HACK ZONE
 
 export default gameEngine;
