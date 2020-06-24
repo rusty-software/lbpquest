@@ -82,10 +82,3 @@ const cupboard = new Item()
 
 bunkhouse.addItem("fish", fish);
 bunkhouse.addItem("cupboard", cupboard);
-
-/*
-cupboard
-    peace statue
-fish
-bunkbeds
-*/

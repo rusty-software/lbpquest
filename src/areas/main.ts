@@ -5,7 +5,7 @@ import bar from './bar';
 import {hallway, 
     rope, 
     useRope} from './hallway'
-import undecidedroom from './undecidedroom';
+import {undecidedroom, okayStatue} from './undecidedroom';
 import {rugroom, 
     thumbStatue, 
     cowskin, 
@@ -30,7 +30,7 @@ import {bunkhouse,
     peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
-import {robe, okayStatue} from './notspecified';
+import {robe} from './notspecified';
 
 /*
 pool
