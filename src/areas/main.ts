@@ -47,8 +47,7 @@ garage
 VR 
     white poker chip
 
-
-snacks
+snacks?
 
 bar
     requires tequila, triple sec, lime, and ice

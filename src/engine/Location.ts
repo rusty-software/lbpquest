@@ -1,5 +1,6 @@
 import Item from './Item';
 
+// TODO: add collection of discovered items for displaying on LOOK
 class Location {
     public id: string = "";
     public description: string = "";

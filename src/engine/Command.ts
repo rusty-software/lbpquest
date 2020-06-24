@@ -1,3 +1,4 @@
+// TODO: add DROP
 export class CommandType {
     public static values: CommandType[] = [];
 
