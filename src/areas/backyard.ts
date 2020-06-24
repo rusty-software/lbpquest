@@ -17,8 +17,8 @@ export const backyard = new Location()
     .setDesc(desc());
 
 let leftToFeed: number = 5;
-export function feedMeter(gameEngine: GameEngine, pokerChip: Item) {
-    if (gameEngine.currentLocation != backyard) {
+export function feedMeter(gameEngine: GameEngine, pokerChip: Item, tent: Location) {
+    if (gameEngine.currentLocation !== backyard) {
         return "You can't used the poker chip here.";
     }
     gameEngine.removeInventoryItem(pokerChip.name);
@@ -27,6 +27,7 @@ export function feedMeter(gameEngine: GameEngine, pokerChip: Item) {
         backyard.removeItem("parking gate");
         flapText = "The front flap is open, the parking gate's arm almost waving you inside. ";
         backyard.setDesc(desc());
+        backyard.link("through flap", tent);
         return "As you place the fifth poker chip into the slot, the gate's arm slowly raises, granting you access to the tent via the flap.";
     }
     return "You put the poker chip into the meter.";
