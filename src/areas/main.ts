@@ -4,15 +4,26 @@ import livingroom from './livingroom';
 import bar from './bar';
 import hallway from './hallway'
 import undecidedroom from './undecidedroom';
-import {rugroom, thumbStatue, cowskin, wearCowskin, deerHead, breakDeerhead} from './rugroom';
+import {rugroom, 
+    thumbStatue, 
+    cowskin, 
+    wearCowskin, 
+    deerHead, 
+    breakDeerhead} from './rugroom';
 import firepit from './firepit';
 import kitchen from './kitchen';
-import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
+import {diningroom, 
+    placeThumb, 
+    placePeace, 
+    placeOkay} from './diningroom';
 import {pooleast, useFish, cupboardKey} from './pooleast';
 import poolwest from './poolwest';
 import backyard from './backyard';
 import tent from './tent';
-import {bunkhouse, useCupboardKey, fish, peaceStatue} from './bunkhouse';
+import {bunkhouse, 
+    useCupboardKey, 
+    fish, 
+    peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
 import {okayStatue, rope} from './notspecified';
