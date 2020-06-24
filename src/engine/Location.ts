@@ -30,6 +30,11 @@ class Location {
         return this;
     }
 
+    public unlink(path: string): Location {
+        this.locations.delete(path.toLowerCase());
+        return this;
+    }
+
     public addItem(name: string, item: Item): Location {
         item.setName(name.toLowerCase());
         this.items.set(name.toLowerCase(), item);
