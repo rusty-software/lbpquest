@@ -2,7 +2,9 @@ import GameEngine from '../engine/GameEngine';
 import courtyard from './courtyard';
 import livingroom from './livingroom';
 import bar from './bar';
-import hallway from './hallway'
+import {hallway, 
+    rope, 
+    useRope} from './hallway'
 import undecidedroom from './undecidedroom';
 import {rugroom, 
     thumbStatue, 
@@ -28,7 +30,7 @@ import {bunkhouse,
     peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
-import {okayStatue, rope} from './notspecified';
+import {robe, okayStatue} from './notspecified';
 
 /*
 pool
@@ -45,8 +47,6 @@ garage
 VR 
     white poker chip
 
-thief book
-    instructions on using thieves' tools
 
 snacks
 
@@ -54,6 +54,12 @@ bar
     requires tequila, triple sec, lime, and ice
 
     making the marg reveals a green chip under the blender
+
+firepit
+    too hot to get close to without robe
+    use horn 
+    cook earl
+        results in red poker chip
 
 */
 
@@ -150,7 +156,7 @@ cupboardKey
     .setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
 cowskin
-    .on("wear", () => wearCowskin(gameEngine));
+    .on("wear", () => wearCowskin(gameEngine, robe));
 
 deerHead
     .on("break", () => breakDeerhead(gameEngine))
@@ -160,6 +166,9 @@ deerHead
 
 blueBook
     .on("read", () => readBlueBook(gameEngine));
+
+rope
+    .setUse(() => useRope(gameEngine, robe));
 
 thumbStatue
     .setUse(() => placeThumb(gameEngine, thumbStatue));
@@ -189,11 +198,9 @@ tagIt('start');
 
 // HACK ZONE
 courtyard.addItem("rope", rope);
-gameEngine.send("take rope");
 gameEngine.send("examine fountain");
 gameEngine.send("take coin");
 gameEngine.send("n");
-gameEngine.send("w");
 gameEngine.send("w");
 
 // END HACK ZONE

@@ -67,7 +67,7 @@ export const thumbStatue = new Item()
     })
     .setTakeable(true);
 
-export function wearCowskin(gameEngine: GameEngine) {
+export function wearCowskin(gameEngine: GameEngine, robe: Item) {
     if (!gameEngine.inventoryContains("cowskin")) {
         return "You have to take the cowskin before you can wear it.";
     }
@@ -79,7 +79,7 @@ export function wearCowskin(gameEngine: GameEngine) {
     gameEngine.currentLocation.addItem("robe", robe);
     gameEngine.send("take robe");
 
-    return "Using the rope, you fashion a robe out of the fine cowskin.";
+    return "You fashion a robe out of the fine cowskin rug, using the rope to secure it.";
 }
 export const cowskin = new Item()
     .setExamine(() => "The cowskin is high quality, and looks to be just your size.")
@@ -87,11 +87,6 @@ export const cowskin = new Item()
     .setTake(() => "You put the cowskin in your rucksack.")
     .setUse(() => "You're not exactly sure how to use the cowskin, except that it might look great if you were wearing it.");
 rugroom.addItem("cowskin", cowskin);
-
-const robe = new Item()
-    .setExamine(() => "The cowskin, synched securely around your waist with the frayed rope, looks great and feels even better.")
-    .setTakeable(true)
-    .setTake(() => "");
 
 export function useOrnateKey(gameEngine: GameEngine) {
     return "TODO";
