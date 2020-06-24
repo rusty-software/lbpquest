@@ -8,7 +8,7 @@ interface CommandProps {
 function Command(props: CommandProps) {
     return (
         <div className="command"
-             role="text"
+             role="textbox"
              aria-label={`${props.orignalCommand}`}>
             <Text text={`> ${props.orignalCommand}`} />
         </div>

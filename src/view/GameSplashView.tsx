@@ -9,11 +9,11 @@ function GameSplashView() {
         <h1 className="sr-only">LBPQuest</h1>
         <h2 className="game-intro-subtitle">A Quest for LBP XXI</h2>
         <h3 className="game-intro-enter"
-            role="text"
-            aria-label="Press enter to play the game ">
-            => Press enter to play the game 
+            role="button"
+            aria-label="Press Enter to start the game ">
+            => Press Enter to Start the game 
         </h3>
-        <h3 className="game-intro-credits">Made by: IronFury </h3>
+        <h3 className="game-intro-credits">Dev'd by: IronFury </h3>
     </div>;
 }
 

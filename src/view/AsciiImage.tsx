@@ -14,11 +14,9 @@ function AsciiImage(props: AsciiImageProps) {
         </div>
     ));
     return (
-        <div
-            role="text"
-            aria-label={props.alt}
-            className={classNames('image', props.className)}
-        >
+        <div className={classNames('image', props.className)} 
+             role="figure" 
+             aria-label={props.alt}>
             {lines}
         </div>
     );
