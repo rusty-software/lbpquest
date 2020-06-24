@@ -4,7 +4,7 @@ import livingroom from './livingroom';
 import bar from './bar';
 import hallway from './hallway'
 import undecidedroom from './undecidedroom';
-import {rugroom, thumbStatue, cowskin, wearCowskin} from './rugroom';
+import {rugroom, thumbStatue, cowskin, wearCowskin, deerHead, breakDeerhead} from './rugroom';
 import firepit from './firepit';
 import kitchen from './kitchen';
 import {diningroom, placeThumb, placePeace, placeOkay} from './diningroom';
@@ -138,6 +138,12 @@ cupboardKey
 
 cowskin
     .on("wear", () => wearCowskin(gameEngine));
+
+deerHead
+    .on("break", () => breakDeerhead(gameEngine))
+    .on("smash", () => breakDeerhead(gameEngine))
+    .on("throw", () => breakDeerhead(gameEngine))
+    .on("destroy", () => breakDeerhead(gameEngine));
 
 thumbStatue
     .setUse(() => placeThumb(gameEngine, thumbStatue));

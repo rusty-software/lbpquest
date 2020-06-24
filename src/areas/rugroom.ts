@@ -41,7 +41,6 @@ function dislodgeCushion() {
         cushionMoved = true;
         cushionDislodgeText = "The cushion atop the ottoman has been dislodged. ";
         thumbStatueInsideText = "There is a thumb statue inside the ottoman. ";
-        ottoman.setExamine(() => ottomanDesc());
         rugroom.addItem("thumb statue", thumbStatue);
         return "Dislodging the cushion reveals a small storage compartment inside the ottoman. A familiar looking thumb statue is inside."
     }
@@ -60,13 +59,10 @@ const cushion = new Item()
     .on("move", () => dislodgeCushion())
     .on("dislodge", () => dislodgeCushion());
 
-let thumbStatueTaken: boolean = false;
 export const thumbStatue = new Item()
     .setExamine(() => "This is a small, decorative statue with the thumb up, Fonzie-style.")
     .setTake(() => {
-        thumbStatueTaken = true;
         thumbStatueInsideText = "";
-        ottoman.setExamine(() => ottomanDesc());
         return "You put the thumb statue in your rucksack."
     })
     .setTakeable(true);
@@ -96,6 +92,32 @@ const robe = new Item()
     .setExamine(() => "The cowskin, synched securely around your waist with the frayed rope, looks great and feels even better.")
     .setTakeable(true)
     .setTake(() => "");
+
+export function useOrnateKey(gameEngine: GameEngine) {
+    return "TODO";
+}
+
+const ornateKey = new Item()
+    .setExamine(() => "The key is fancy, with a fleur-de-lis as its bow and bitting that resembles a sunburst.")
+    .setTakeable(true)
+    .setTake(() => "You put the ornate key into your rucksack.");
+
+export function breakDeerhead(gameEngine: GameEngine) {
+    gameEngine.removeInventoryItem("deer head statue");
+    deerHeadText = "The powdery remains of a deer head statue are here. "
+    gameEngine.currentLocation.addItem("ornate key", ornateKey);
+
+    return "You make short work of the deer head statue. It shatters into at least a gazillion pieces. An ornate key is among its remains.";
+}
+export const deerHead = new Item()
+    .setExamine(() => "The deer head decoration looks quite hefty and potentially dangerous.")
+    .setTakeable(true)
+    .setTake(() => "You put the deerhead statue in your rucksack.")
+    .setUse(() => {
+        return "As you prepare to somehow use the deer head statue, you notice a tinkling sound coming from inside it.";
+    })
+    .on("hint", () => "Maybe try breaking the damn thing.");
+rugroom.addItem("deer head statue", deerHead);
 
 /*
 deer head statue
