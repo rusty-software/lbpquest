@@ -197,16 +197,11 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
-courtyard.addItem("rope", rope);
-gameEngine.send("examine fountain");
-gameEngine.send("take coin");
-gameEngine.send("n");
-gameEngine.send("w");
 backyard.addItem("black poker chip", blackChip);
-backyard.addItem("black poker chip", blackChip);
-backyard.addItem("black poker chip", blackChip);
-backyard.addItem("black poker chip", blackChip);
-backyard.addItem("black poker chip", blackChip);
+backyard.addItem("red poker chip", redChip);
+backyard.addItem("blue poker chip", blueChip);
+backyard.addItem("green poker chip", greenChip);
+backyard.addItem("white poker chip", whiteChip);
 
 // END HACK ZONE
 
