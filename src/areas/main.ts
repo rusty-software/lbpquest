@@ -202,6 +202,11 @@ gameEngine.send("examine fountain");
 gameEngine.send("take coin");
 gameEngine.send("n");
 gameEngine.send("w");
+backyard.addItem("black poker chip", blackChip);
+backyard.addItem("black poker chip", blackChip);
+backyard.addItem("black poker chip", blackChip);
+backyard.addItem("black poker chip", blackChip);
+backyard.addItem("black poker chip", blackChip);
 
 // END HACK ZONE
 

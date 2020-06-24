@@ -27,7 +27,9 @@ function HelpView(props: HelpViewProps) {
             <div className="help-description">
                 These are the default commands and will be most used:
             </div>
+            <br />
             {helpBlock}
+            <br />
             <div className="help-description">
                 But there may be more hidden commands available. Use "logic" to figure it out!
             </div>

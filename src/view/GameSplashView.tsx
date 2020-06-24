@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Game from "../../Game";
-import AsciiImage from "../AsciiImage";
-import Logo from "./logo";
+import Game from "../Game";
+import AsciiImage from "./AsciiImage";
+import Logo from "./title";
 
-function GameIntroView() {
+function GameSplashView() {
     return <div className="game-intro">
         <AsciiImage className={"intro"} imageSrc={Logo} alt={"LBPQuest Logo"}/>
         <h1 className="sr-only">LBPQuest</h1>
@@ -11,16 +11,17 @@ function GameIntroView() {
         <h3 className="game-intro-enter"
             role="text"
             aria-label="Press enter to play the game ">
-            > Press enter to play the game </h3>
+            => Press enter to play the game 
+        </h3>
         <h3 className="game-intro-credits">Made by: IronFury </h3>
     </div>;
 }
 
-interface GameIntroState {
+interface GameSplashState {
     gameStarted: boolean
 }
 
-class GameIntro extends React.Component<any, GameIntroState> {
+class GameSplash extends React.Component<any, GameSplashState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -49,11 +50,11 @@ class GameIntro extends React.Component<any, GameIntroState> {
         return (
             <div id="game">
                 {
-                    this.state.gameStarted ? <Game/> : <GameIntroView/>
+                    this.state.gameStarted ? <Game/> : <GameSplashView/>
                 }
             </div>
         );
     }
 }
 
-export default GameIntro;
+export default GameSplash;

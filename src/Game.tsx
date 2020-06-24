@@ -3,12 +3,10 @@ import {KeyboardEvent} from "react";
 import {GameEvent, GameEventType, NewInputEvent} from "./engine/Event"
 import GameArea from './areas/main';
 import GameView from "./view/EventsView";
-import SOSView from "./view/hacks/SOSView";
 
 interface AppState {
     events: GameEvent[]
     lastInputPointer: number
-    renderSOS: boolean;
 }
 
 class Game extends React.Component<any, AppState> {
@@ -20,8 +18,7 @@ class Game extends React.Component<any, AppState> {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.state = {
             events: GameArea.getEvents(),
-            lastInputPointer: 0,
-            renderSOS: false
+            lastInputPointer: 0
         };
     }
 
@@ -31,17 +28,12 @@ class Game extends React.Component<any, AppState> {
 
     public handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
         if (event.key === 'Enter' && this.nameInput.value.length !== 0) {
-            if (this.nameInput.value === "sos"){ // custom sos cmd
-                this.setState({renderSOS: !this.state.renderSOS})
-            } else {
-                GameArea.send(this.nameInput.value);
-                this.setState({
-                    events: GameArea.getEvents(),
-                    lastInputPointer: 0
-                });
-            }
+            GameArea.send(this.nameInput.value);
+            this.setState({
+                events: GameArea.getEvents(),
+                lastInputPointer: 0
+            });
             this.nameInput.value = "";
-
         }
         else if (event.key === 'ArrowUp') {
             event.preventDefault();
@@ -56,10 +48,8 @@ class Game extends React.Component<any, AppState> {
     public render() {
         return (
             <div id="game-content">
-                {this.state.renderSOS ?
-                    <SOSView/> :
-                    <GameView events={this.state.events}/>
-                }
+                <GameView events={this.state.events} />
+                
                 <span id="input">
                     <div id="input-tag">{'> '}</div>
                     <input id="input-element"

@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import GameIntro from "./view/intro/GameIntro";
+import GameSplash from "./view/GameSplashView";
 
 ReactDOM.render(
-  <GameIntro />,
+  <GameSplash />,
   document.getElementById('root')
 );
 
