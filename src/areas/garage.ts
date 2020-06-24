@@ -6,7 +6,7 @@ const garage = new Location()
     "\n\nThe pool is to your northwest."); 
 
 /*
-kayak with snorkel gear in seat
+TODO: pick lock
 */
 
 export default garage;

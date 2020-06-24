@@ -6,3 +6,5 @@ const bar = new Location()
     "\n\nSouthwest leads back to the living room.");
 
 export default bar;
+
+// TODO: green poker chip

@@ -6,8 +6,7 @@ const poolwest = new Location()
     "\n\nThe other end of the pool is to your east, and the firepit is to the west. Going northeast will take you into the backyard.");
 
 /*
-deep end
-    coin
+TODO: blue poker chip
 */
 
 export default poolwest;

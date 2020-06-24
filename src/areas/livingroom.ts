@@ -51,6 +51,6 @@ livingroom.addItem("porn", porn);
 livingroom.addItem("bric-a-brac", bricabrac);
 
 /* 
-vr
+TODO: vr
 */
 export default livingroom;

@@ -6,7 +6,7 @@ const backyard = new Location()
     "\n\nGoing southeast will take you to the east end of the pool, and southwest to the west end of the pool.");
 
 /*
-Tent. Requires pocker chips to enter.
+TODO: Tent. Requires pocker chips to enter.
 */
 
 export default backyard;

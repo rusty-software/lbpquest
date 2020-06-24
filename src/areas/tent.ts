@@ -6,7 +6,7 @@ const tent = new Location()
     "\n\nYou can leave by way of the flap.");
 
 /*
-Needs to have the coin to buy in.
+TODO: Needs to have the coin to buy in.
 */
 
 export default tent;

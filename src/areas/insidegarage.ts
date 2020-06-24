@@ -6,3 +6,5 @@ const insidegarage = new Location()
     "\n\nThe only exit is back through the door.");
 
 export default insidegarage;
+
+// TODO: kayak with snorkel gear in seat

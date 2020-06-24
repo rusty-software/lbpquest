@@ -5,6 +5,7 @@ const kitchen = new Location()
     .setDesc("You're in the kitchen. To the east is the dining room, and to the west is the living room."); 
 
 /*
+// TODO: earls? snacks?
 */
 
 export default kitchen;
