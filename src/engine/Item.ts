@@ -3,6 +3,7 @@ class Item {
     public examine: () => string = () => "";
     public take: () => string = () => "";
     public takeable = false;
+    public name: string = "";
 
     public customCommands: Map<string, () => string>;
 
@@ -32,6 +33,11 @@ class Item {
 
     public on(cmd: string, fn: () => string): Item {
         this.customCommands.set(cmd, fn);
+        return this;
+    }
+
+    public setName(name: string) {
+        this.name = name;
         return this;
     }
 }

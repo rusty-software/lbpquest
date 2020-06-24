@@ -31,6 +31,7 @@ class Location {
     }
 
     public addItem(name: string, item: Item): Location {
+        item.setName(name.toLowerCase());
         this.items.set(name.toLowerCase(), item);
         return this;
     }

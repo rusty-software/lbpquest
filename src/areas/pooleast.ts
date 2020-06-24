@@ -5,7 +5,7 @@ import GameEngine from '../engine/GameEngine';
 let mainText: string = "This is the east end of the pool. It's slightly shallower than the west end, and sports a hot tub to the side as well. ";
 let hottubText: string = "The hot tub is bubbling merrily, and there's a very thin haze of steam coming off its water's surface. ";
 let keyText: string = "";
-let exitText: string = "\n\nThe other end of the pool is to the west, and the bunkhouse is to the east. To the northwest lies the backyard, and the garage is to the southeast. A door to the south leads back inside the house." ;
+let exitText: string = "\n\nThe other end of the pool is to the west, and the bunkhouse is to the east. To the northwest lies the backyard which sports a jauntily decorated tent, and the garage is to the southeast. A door to the south leads back inside the house." ;
 
 function desc() {
     return mainText +

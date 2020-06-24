@@ -19,10 +19,11 @@ import kitchen from './kitchen';
 import {diningroom, 
     placeThumb, 
     placePeace, 
-    placeOkay} from './diningroom';
+    placeOkay,
+    blackChip} from './diningroom';
 import {pooleast, useFish, cupboardKey} from './pooleast';
 import poolwest from './poolwest';
-import backyard from './backyard';
+import {backyard, feedMeter} from './backyard';
 import tent from './tent';
 import {bunkhouse, 
     useCupboardKey, 
@@ -30,7 +31,11 @@ import {bunkhouse,
     peaceStatue} from './bunkhouse';
 import garage from './garage';
 import insidegarage from './insidegarage';
-import {robe} from './notspecified';
+import {robe,
+    greenChip, 
+    blueChip, 
+    redChip, 
+    whiteChip} from './notspecified';
 
 /*
 pool
@@ -148,14 +153,11 @@ insidegarage
     .setOnEnter(() => tagIt("insidegarage"));
 
 // item wiring
-fish
-    .setUse(() => useFish(gameEngine, fish));
+fish.setUse(() => useFish(gameEngine, fish));
 
-cupboardKey
-    .setUse(() => useCupboardKey(gameEngine, cupboardKey));
+cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
-cowskin
-    .on("wear", () => wearCowskin(gameEngine, robe));
+cowskin.on("wear", () => wearCowskin(gameEngine, robe));
 
 deerHead
     .on("break", () => breakDeerhead(gameEngine))
@@ -163,20 +165,19 @@ deerHead
     .on("throw", () => breakDeerhead(gameEngine))
     .on("destroy", () => breakDeerhead(gameEngine));
 
-blueBook
-    .on("read", () => readBlueBook(gameEngine));
+blueBook.on("read", () => readBlueBook(gameEngine));
 
-rope
-    .setUse(() => useRope(gameEngine, robe));
+rope.setUse(() => useRope(gameEngine, robe));
 
-thumbStatue
-    .setUse(() => placeThumb(gameEngine, thumbStatue));
+thumbStatue.setUse(() => placeThumb(gameEngine, thumbStatue));
+peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));
+okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
 
-peaceStatue
-    .setUse(() => placePeace(gameEngine, peaceStatue));
-
-okayStatue
-    .setUse(() => placeOkay(gameEngine, okayStatue));
+blackChip.setUse(() => feedMeter(gameEngine, blackChip));
+redChip.setUse(() => feedMeter(gameEngine, redChip));
+blueChip.setUse(() => feedMeter(gameEngine, blueChip));
+greenChip.setUse(() => feedMeter(gameEngine, greenChip));
+whiteChip.setUse(() => feedMeter(gameEngine, whiteChip));
 
 const gameEngine = new GameEngine(courtyard);
 gameEngine.setStartLocation(courtyard);
