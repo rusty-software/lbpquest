@@ -99,7 +99,7 @@ const ornateKey = new Item()
 
 export function breakDeerhead(gameEngine: GameEngine) {
     gameEngine.removeInventoryItem("deer head statue");
-    deerHeadText = "The powdery remains of a deer head statue are here. "
+    deerHeadText = "";
     gameEngine.currentLocation.addItem("ornate key", ornateKey);
 
     return "You make short work of the deer head statue. It shatters into at least a gazillion pieces. An ornate key is among its remains.";
@@ -107,7 +107,11 @@ export function breakDeerhead(gameEngine: GameEngine) {
 export const deerHead = new Item()
     .setExamine(() => "The deer head decoration looks quite hefty and potentially dangerous.")
     .setTakeable(true)
-    .setTake(() => "You put the deerhead statue in your rucksack.")
+    .setTake(() => {
+        deerHeadText = "";
+        rugroom.setDesc(desc());
+        return "You put the deerhead statue in your rucksack."
+    })
     .setUse(() => {
         return "As you prepare to somehow use the deer head statue, you notice a tinkling sound coming from inside it.";
     })
