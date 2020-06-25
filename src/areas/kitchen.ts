@@ -61,7 +61,7 @@ const cup = new Item()
 kitchen.addItem("cup", cup);
 // TODO: use cup?
 
-const lime = new Item()
+export const lime = new Item()
     .setExamine(() => "The lime looks simply perfect for squeezing into a margarita.")
     .setTakeable(true)
     .setTake(() => {

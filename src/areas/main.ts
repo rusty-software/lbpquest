@@ -7,7 +7,8 @@ import {livingroom,
     porn} from './livingroom';
 import {vr,
     whiteChip} from './vr'
-import bar from './bar';
+import {bar,
+    useLime} from './bar';
 import {hallway, 
     rope, 
     useRope} from './hallway'
@@ -21,7 +22,9 @@ import {rugroom,
     blueBook,
     readBlueBook} from './rugroom';
 import firepit from './firepit';
-import { kitchen, usePorn } from './kitchen';
+import { kitchen, 
+    usePorn,
+    lime } from './kitchen';
 import {diningroom, 
     placeThumb, 
     placePeace, 
@@ -159,6 +162,8 @@ headset
     .on("remove", () => removeHeadset(gameEngine, headset));
 
 porn.setUse(() => usePorn(gameEngine));
+
+lime.setUse(() => useLime(gameEngine));
 
 fish.setUse(() => useFish(gameEngine, fish));
 
