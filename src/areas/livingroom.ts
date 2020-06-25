@@ -19,8 +19,8 @@ export const livingroom = new Location()
     .setId("Living Room")
     .setDesc(desc());
 
-const porn = new Item()
-    .setExamine(() => "\"Bovine Boudoir\", August 1999 edition. The cover is an extremely provocative picture of Bessie in profile.")
+export const porn = new Item()
+    .setExamine(() => "\"Bovine Boudoir\", June 1999 edition. The cover is an extremely provocative picture of Bessie in profile.")
     .setTakeable(true)
     .setTake(() => {
         pornText = "You notice that the porn is prevalent here, but none of it appeals to you. ";
@@ -28,7 +28,6 @@ const porn = new Item()
 
         return "You put the porn in your rucksack."
     })
-    .setUse(() => "TODO: logic to ensure proper usage")
     .on("read", () => "You thumb through the magazine, pausing on the most alluring of the pictures. Gertie got the centerfold, but your favorite is Henrietta.")
 
 const deerHorn = new Item()

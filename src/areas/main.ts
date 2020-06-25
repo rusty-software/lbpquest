@@ -3,7 +3,8 @@ import courtyard from './courtyard';
 import {livingroom,
     headset,
     useHeadset,
-    removeHeadset} from './livingroom';
+    removeHeadset,
+    porn} from './livingroom';
 import {vr,
     whiteChip} from './vr'
 import bar from './bar';
@@ -20,7 +21,7 @@ import {rugroom,
     blueBook,
     readBlueBook} from './rugroom';
 import firepit from './firepit';
-import kitchen from './kitchen';
+import { kitchen, usePorn } from './kitchen';
 import {diningroom, 
     placeThumb, 
     placePeace, 
@@ -159,6 +160,8 @@ insidegarage
 headset
     .setUse(() => useHeadset(gameEngine, headset, vr))
     .on("remove", () => removeHeadset(gameEngine, headset));
+
+porn.setUse(() => usePorn(gameEngine));
 
 fish.setUse(() => useFish(gameEngine, fish));
 
