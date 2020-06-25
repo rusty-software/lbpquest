@@ -52,7 +52,7 @@ let inVR: boolean = false;
 export function useHeadset(gameEngine: GameEngine, headset: Item, vr: Location) {
     livingroom.link("vr", vr);
     inVR = true;
-    vr.addItem("vr headset", headset);
+    vr.addItem("headset", headset);
 
     gameEngine.send("go vr");
     return "";
@@ -62,9 +62,9 @@ export function removeHeadset(gameEngine: GameEngine, headset: Item) {
     if (!inVR) {
         return "You aren't wearing the vr headset right now.";
     }
-    vr.removeItem("vr headset");
+    vr.removeItem("headset");
     livingroom.unlink("vr");
-    livingroom.addItem("vr headset", headset);
+    livingroom.addItem("headset", headset);
     vr.link("reality", livingroom);
     gameEngine.send("go reality");
     vr.unlink("reality");
@@ -88,4 +88,4 @@ export const headset = new Item()
 
 livingroom.addItem("porn", porn);
 livingroom.addItem("bric-a-brac", bricabrac);
-livingroom.addItem("vr headset", headset);
+livingroom.addItem("headset", headset);

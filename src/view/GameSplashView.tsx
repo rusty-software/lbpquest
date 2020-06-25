@@ -11,7 +11,7 @@ function GameSplashView() {
         <h3 className="game-intro-enter"
             role="button"
             aria-label="Press Enter to start the game ">
-            => Press Enter to Start the game 
+            => Press Enter to start the game 
         </h3>
         <h3 className="game-intro-credits">Dev'd by: IronFury </h3>
     </div>;

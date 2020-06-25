@@ -118,7 +118,7 @@ const party = new Item()
             return "The party is over, but the white poker chip remains."
         }
         attendedParty = true;
-        vr.addItem("white poker chip", whiteChip);
+        vr.addItem("white chip", whiteChip);
         return "All of your virtual coworkers attend your party to send you off in style. Your virtual boss digs around in their virtual pocket and presents you with a token of their esteem for all your hard work.\n\nYou are presented with what looks like a white poker chip.";
     });
 

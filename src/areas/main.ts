@@ -54,9 +54,6 @@ garage
     kayak in garage
     snorkel gear in kayak
 
-VR 
-    white poker chip
-
 snacks?
 
 bar
@@ -207,11 +204,11 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
-backyard.addItem("black poker chip", blackChip);
-backyard.addItem("red poker chip", redChip);
-backyard.addItem("blue poker chip", blueChip);
-backyard.addItem("green poker chip", greenChip);
-backyard.addItem("white poker chip", whiteChip);
+backyard.addItem("black chip", blackChip);
+backyard.addItem("red chip", redChip);
+backyard.addItem("blue chip", blueChip);
+backyard.addItem("green chip", greenChip);
+backyard.addItem("white chip", whiteChip);
 
 // END HACK ZONE
 

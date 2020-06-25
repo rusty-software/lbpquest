@@ -39,7 +39,7 @@ export const kitchen = new Location()
     .setId("Kitchen")
     .setDesc(desc()); 
 
-const snacks = new Item() 
+const snacks = new Item()
     .setExamine(() => "The <YOUR FAVORITE SNACKS> look SO good... It's been a year since you've had them, after all.")
     .setTakeable(true)
     .setTake(() => {

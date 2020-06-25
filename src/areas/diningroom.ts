@@ -82,7 +82,7 @@ const lostMafia = () => {
     return "\"The mafia has won!\" exclaims the Moderator. \"The game will be reset. Better luck next time, kid.\"";
 }
 const wonMafia = () => {
-    diningroom.addItem("black poker chip", blackChip);
+    diningroom.addItem("black chip", blackChip);
     mafiaWon = true;
     mafiaPlayable = false;
 
