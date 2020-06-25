@@ -1,7 +1,9 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
+import GameEngine from '../engine/GameEngine';
+import { vr } from './vr';
 
-let vrText: string = "The living room is spacious, especially since all of the furniture has been pushed out of the way to make room for the VR setup, which looks pretty sweet/sweat. ";
+let vrText: string = "The living room is spacious, especially since all of the furniture has been pushed out of the way to make room for the VR setup. The vr headset, in particular, looks pretty sweet/sweat. ";
 let pornText: string = "You notice that the porn is prevalent here, the most appealing of which is an old copy of \"Bovine Boudoir\". ";
 let bricabracText: string = "There are also baskets full of various and sundry decorative bric-a-brac littered on every flat surface. ";
 let exitText = "\n\nTo the northeast is the bar, and the kitchen is to the east. To the west is a hallway leading to some bedrooms. The front door to the south leads to the courtyard.";
@@ -13,7 +15,7 @@ function desc() {
         exitText;
 }
 
-const livingroom = new Location()
+export const livingroom = new Location()
     .setId("Living Room")
     .setDesc(desc());
 
@@ -47,10 +49,48 @@ const bricabrac = new Item()
     .setTake(() => "There's too much bric-a-brac to take all of it. You might focus on a single piece.")
     .setUse(() => "There's no real use for bric-a-brac, is there?");
 
+let inVR: boolean = false;
+export function useHeadset(gameEngine: GameEngine, headset: Item, vr: Location) {
+    livingroom.link("vr", vr);
+    inVR = true;
+    vr.addItem("vr headset", headset);
+
+    gameEngine.send("go vr");
+    return "";
+}
+
+export function removeHeadset(gameEngine: GameEngine, headset: Item) {
+    if (!inVR) {
+        return "You aren't wearing the vr headset right now.";
+    }
+    vr.removeItem("vr headset");
+    livingroom.unlink("vr");
+    livingroom.addItem("vr headset", headset);
+    vr.link("reality", livingroom);
+    gameEngine.send("go reality");
+    vr.unlink("reality");
+    inVR = false;
+
+    return "You have returned to non-virtual reality.";
+}
+
+export const headset = new Item()
+    .setExamine(() => "The vr headset is slightly bulky, and smells (and feels) of stale sweat... the funk of 40,000 uses.")
+    .setTakeable(false)
+    .setTake(() => "Given that the vr headset will only work in the living room, you decide NOT to put it into your rucksack.")
+    .on("remove", () => {
+        if (!inVR) {
+        }
+        inVR = false;
+        livingroom.unlink("vr");
+
+        return "You remove the vr headset, returning you to non-virtual reality.";
+    })
+
 livingroom.addItem("porn", porn);
 livingroom.addItem("bric-a-brac", bricabrac);
+livingroom.addItem("vr headset", headset);
 
 /* 
 TODO: vr
 */
-export default livingroom;

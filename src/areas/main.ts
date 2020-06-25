@@ -1,6 +1,11 @@
 import GameEngine from '../engine/GameEngine';
 import courtyard from './courtyard';
-import livingroom from './livingroom';
+import {livingroom,
+    headset,
+    useHeadset,
+    removeHeadset} from './livingroom';
+import {vr,
+    whiteChip} from './vr'
 import bar from './bar';
 import {hallway, 
     rope, 
@@ -34,8 +39,7 @@ import insidegarage from './insidegarage';
 import {robe,
     greenChip, 
     blueChip, 
-    redChip, 
-    whiteChip} from './notspecified';
+    redChip} from './notspecified';
 
 /*
 pool
@@ -132,7 +136,6 @@ pooleast
 backyard
     .link("se", pooleast)
     .link("sw", poolwest)
-    .link("through flap", tent)
     .setOnEnter(() => tagIt("backyard"));
 
 tent
@@ -153,6 +156,10 @@ insidegarage
     .setOnEnter(() => tagIt("insidegarage"));
 
 // item wiring
+headset
+    .setUse(() => useHeadset(gameEngine, headset, vr))
+    .on("remove", () => removeHeadset(gameEngine, headset));
+
 fish.setUse(() => useFish(gameEngine, fish));
 
 cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
@@ -173,11 +180,11 @@ thumbStatue.setUse(() => placeThumb(gameEngine, thumbStatue));
 peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));
 okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
 
-blackChip.setUse(() => feedMeter(gameEngine, blackChip));
-redChip.setUse(() => feedMeter(gameEngine, redChip));
-blueChip.setUse(() => feedMeter(gameEngine, blueChip));
-greenChip.setUse(() => feedMeter(gameEngine, greenChip));
-whiteChip.setUse(() => feedMeter(gameEngine, whiteChip));
+blackChip.setUse(() => feedMeter(gameEngine, blackChip, tent));
+redChip.setUse(() => feedMeter(gameEngine, redChip, tent));
+blueChip.setUse(() => feedMeter(gameEngine, blueChip, tent));
+greenChip.setUse(() => feedMeter(gameEngine, greenChip, tent));
+whiteChip.setUse(() => feedMeter(gameEngine, whiteChip, tent));
 
 const gameEngine = new GameEngine(courtyard);
 gameEngine.setStartLocation(courtyard);
