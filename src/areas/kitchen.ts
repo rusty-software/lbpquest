@@ -6,21 +6,21 @@ let mainText: string = "The kitchen is exactly as you left it from the last LBP 
 let exitText: string = "\n\nTo the east is the dining room, and to the west is the living room.";
 
 let snacksTaken: boolean = false;
-let cupsTaken: boolean = false;
-let limesTaken: boolean = false;
+let cupTaken: boolean = false;
+let limeTaken: boolean = false;
 let artsApplied: boolean = false;
 function desc() {
     let counterText: string = "The counter is, simply put, a treasure trove. ";
-    if (snacksTaken && cupsTaken && limesTaken) {
+    if (snacksTaken && cupTaken && limeTaken) {
         counterText = "The counter is a mess, but you don't feel inspired either to pick over it or clean it. ";
     } else {
         if (!snacksTaken) {
             counterText += "All of your favorite snacks are here. ";
         }
-        if (!cupsTaken) {
+        if (!cupTaken) {
             counterText += "You manage to locate at least a single clean cup. "
         }
-        if (!limesTaken) {
+        if (!limeTaken) {
             counterText += "While the bananas are already gone, there's at least one lime left. ";
         }
     }
@@ -38,6 +38,39 @@ function desc() {
 export const kitchen = new Location()
     .setId("Kitchen")
     .setDesc(desc()); 
+
+const snacks = new Item() 
+    .setExamine(() => "The <YOUR FAVORITE SNACKS> look SO good... It's been a year since you've had them, after all.")
+    .setTakeable(true)
+    .setTake(() => {
+        snacksTaken = true;
+        kitchen.setDesc(desc());
+        return "You put the snacks into your rucksack."
+    });
+kitchen.addItem("snacks", snacks);
+// TODO: use snacks?
+
+const cup = new Item()
+    .setExamine(() => "The cup looks simply perfect for holding a margarita.")
+    .setTakeable(true)
+    .setTake(() => {
+        cupTaken = true;
+        kitchen.setDesc(desc());
+        return "You put the cup into your rucksack."
+    });
+kitchen.addItem("cup", cup);
+// TODO: use cup?
+
+const lime = new Item()
+    .setExamine(() => "The lime looks simply perfect for squeezing into a margarita.")
+    .setTakeable(true)
+    .setTake(() => {
+        limeTaken = true;
+        kitchen.setDesc(desc());
+        return "You put the lime into your rucksack."
+    });
+kitchen.addItem("lime", lime);
+// TODO: use lime 
 
 export function usePorn(gameEngine: GameEngine) {
     if (gameEngine.currentLocation === kitchen) {

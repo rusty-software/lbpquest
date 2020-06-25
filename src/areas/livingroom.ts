@@ -89,7 +89,3 @@ export const headset = new Item()
 livingroom.addItem("porn", porn);
 livingroom.addItem("bric-a-brac", bricabrac);
 livingroom.addItem("vr headset", headset);
-
-/* 
-TODO: vr
-*/
