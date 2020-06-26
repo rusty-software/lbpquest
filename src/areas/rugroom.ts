@@ -88,11 +88,7 @@ export const cowskin = new Item()
     .setUse(() => "You're not exactly sure how to use the cowskin, except that it might look great if you were wearing it.");
 rugroom.addItem("cowskin", cowskin);
 
-export function useOrnateKey(gameEngine: GameEngine) {
-    return "TODO";
-}
-
-const ornateKey = new Item()
+export const ornateKey = new Item()
     .setExamine(() => "The key is fancy, with a fleur-de-lis as its bow and bitting that resembles a sunburst.")
     .setTakeable(true)
     .setTake(() => "You put the ornate key into your rucksack.");

@@ -1,9 +1,10 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
+import GameEngine from '../engine/GameEngine';
 
 let mainText: string = "This bedroom was dubbed The Undecided Bedroom due to its wall art -- four prints stating 'Yes', 'No', 'Maybe', and 'OK'. "
-let chestText: string = "There's a chest against the wall under the four prints. "
-let exitText: string = "The door to the north leads back to the hallway."
+let chestText: string = "There's a chest with a fancy lock set against the wall under the four prints. "
+let exitText: string = "\n\nThe door to the north leads back to the hallway."
 
 function desc() {
     return mainText +
@@ -20,6 +21,17 @@ let okayStatueTaken: boolean = false;
 let closedText: string = "The chest is closed.";
 let openWithStatue: string = "The chest is open. Its only interesting content is an oddly placed okay statue.";
 let openSansStatue: string = "The chest is open. It doesn't contain anything interesting.";
+export function useOrnateKey(gameEngine: GameEngine) {
+    if (gameEngine.currentLocation !== undecidedroom) {
+        return "You really don't have a use for that here.";
+    }
+    if (chestUnlocked) {
+        return "You've already unlocked the chest using the ornate key!";
+    }
+    gameEngine.removeInventoryItem("ornate key");
+    chestUnlocked = true;
+    return "You use the ornate key to unlock the chest.";
+}
 
 const chest = new Item()
     .setExamine(() => {

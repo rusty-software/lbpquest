@@ -23,7 +23,9 @@ import {hallway,
     rope, 
     useRope} from './hallway'
 
-import {undecidedroom, okayStatue} from './undecidedroom';
+import {undecidedroom
+    , useOrnateKey
+    , okayStatue} from './undecidedroom';
 
 import {rugroom, 
     thumbStatue, 
@@ -32,7 +34,8 @@ import {rugroom,
     deerHead, 
     breakDeerhead,
     blueBook,
-    readBlueBook} from './rugroom';
+    readBlueBook,
+    ornateKey} from './rugroom';
 
 import {firepit,
     pit,
@@ -80,11 +83,6 @@ import insidegarage from './insidegarage';
 import {robe, snorkel} from './notspecified';
 
 /*
-pool
-    blue chip on bottom
-    can swim anytime
-    cannot dive without snorkel gear
-    dive with snorkel gear to get the blue chip
 
 garage
     requires thieves' tools to open the door
@@ -199,14 +197,13 @@ cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
 rope.setUse(() => useRope(gameEngine, robe));
 cowskin.on("wear", () => wearCowskin(gameEngine, robe));
-
 deerHead
     .on("break", () => breakDeerhead(gameEngine))
     .on("smash", () => breakDeerhead(gameEngine))
     .on("throw", () => breakDeerhead(gameEngine))
     .on("destroy", () => breakDeerhead(gameEngine));
-
 blueBook.on("read", () => readBlueBook(gameEngine));
+ornateKey.setUse(() => useOrnateKey(gameEngine));
 
 pit.setUse(() => usePit(gameEngine));
 skeweredEarl
