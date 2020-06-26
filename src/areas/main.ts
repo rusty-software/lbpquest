@@ -1,13 +1,16 @@
 import GameEngine from '../engine/GameEngine';
 import courtyard from './courtyard';
+
 import {livingroom,
     headset,
     useHeadset,
     removeHeadset,
     porn,
     horn} from './livingroom';
+
 import {vr,
     whiteChip} from './vr'
+
 import {bar,
     useLime,
     marg,
@@ -15,10 +18,13 @@ import {bar,
     greenChip,
     useCup,
     drinkMarg} from './bar';
+
 import {hallway, 
     rope, 
     useRope} from './hallway'
+
 import {undecidedroom, okayStatue} from './undecidedroom';
+
 import {rugroom, 
     thumbStatue, 
     cowskin, 
@@ -27,33 +33,44 @@ import {rugroom,
     breakDeerhead,
     blueBook,
     readBlueBook} from './rugroom';
+
 import {firepit,
     useEarlAndHorn,
     skeweredEarl,
-    roastSkeweredEarl} from './firepit';
+    roastSkeweredEarl,
+    redChip} from './firepit';
+
 import {kitchen, 
     usePorn,
     lime,
     cup,
     earl} from './kitchen';
+
 import {diningroom, 
     placeThumb, 
     placePeace, 
     placeOkay,
     blackChip} from './diningroom';
+
 import {pooleast, useFish, cupboardKey} from './pooleast';
+
 import poolwest from './poolwest';
+
 import {backyard, feedMeter} from './backyard';
+
 import tent from './tent';
+
 import {bunkhouse, 
     useCupboardKey, 
     fish, 
     peaceStatue} from './bunkhouse';
+
 import garage from './garage';
+
 import insidegarage from './insidegarage';
+
 import {robe,
-    blueChip, 
-    redChip} from './notspecified';
+    blueChip} from './notspecified';
 
 /*
 pool
