@@ -78,22 +78,14 @@ import {bunkhouse,
     fish, 
     peaceStatue} from './bunkhouse';
 
-import {garage,
-    useTools} from './garage';
+import {garage, useTools} from './garage';
 
-import insidegarage from './insidegarage';
+import {insidegarage, snorkel} from './insidegarage';
 
-import {robe, snorkel} from './notspecified';
+import {robe} from './notspecified';
 
 /*
-
-garage
-    requires thieves' tools to open the door
-    kayak in garage
-    snorkel gear in kayak
-
 snacks?
-
 */
 
 // location wiring
