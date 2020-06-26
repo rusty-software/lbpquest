@@ -46,7 +46,8 @@ const snacks = new Item()
         snacksTaken = true;
         kitchen.setDesc(desc());
         return "You put the snacks into your rucksack."
-    });
+    })
+    .setUse(() => "You <VERB> a(n) <AMOUNT> of <YOUR FAVORITE SNACKS>. SO GOOD!");
 kitchen.addItem("snacks", snacks);
 
 export const cup = new Item()
