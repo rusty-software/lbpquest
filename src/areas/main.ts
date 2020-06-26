@@ -35,6 +35,8 @@ import {rugroom,
     readBlueBook} from './rugroom';
 
 import {firepit,
+    pit,
+    usePit,
     useEarlAndHorn,
     skeweredEarl,
     roastSkeweredEarl,
@@ -201,6 +203,7 @@ marg
 fish.setUse(() => useFish(gameEngine, fish));
 cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
+rope.setUse(() => useRope(gameEngine, robe));
 cowskin.on("wear", () => wearCowskin(gameEngine, robe));
 
 deerHead
@@ -211,8 +214,7 @@ deerHead
 
 blueBook.on("read", () => readBlueBook(gameEngine));
 
-rope.setUse(() => useRope(gameEngine, robe));
-
+pit.setUse(() => usePit(gameEngine));
 skeweredEarl
     .setUse(() => roastSkeweredEarl(gameEngine))
     .on("roast", () => roastSkeweredEarl(gameEngine));

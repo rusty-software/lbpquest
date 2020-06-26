@@ -99,6 +99,7 @@ const fridge = new Item()
         }
         return fridgeDesc;
     })
+    .setUse(() => "Maybe you should try opening it...?")
     .on("open", () => {
         let fridgeContents: string = "Opening the fridge, you see a LOT of things better left untouched. "
         if (artsApplied) {
