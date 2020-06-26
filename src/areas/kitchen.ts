@@ -50,7 +50,7 @@ const snacks = new Item()
 kitchen.addItem("snacks", snacks);
 // TODO: use snacks?
 
-const cup = new Item()
+export const cup = new Item()
     .setExamine(() => "The cup looks simply perfect for holding a margarita.")
     .setTakeable(true)
     .setTake(() => {
@@ -59,7 +59,6 @@ const cup = new Item()
         return "You put the cup into your rucksack."
     });
 kitchen.addItem("cup", cup);
-// TODO: use cup?
 
 export const lime = new Item()
     .setExamine(() => "The lime looks simply perfect for squeezing into a margarita.")

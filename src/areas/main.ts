@@ -8,7 +8,12 @@ import {livingroom,
 import {vr,
     whiteChip} from './vr'
 import {bar,
-    useLime} from './bar';
+    useLime,
+    marg,
+    takeMarg,
+    greenChip,
+    useCup,
+    drinkMarg} from './bar';
 import {hallway, 
     rope, 
     useRope} from './hallway'
@@ -22,9 +27,10 @@ import {rugroom,
     blueBook,
     readBlueBook} from './rugroom';
 import firepit from './firepit';
-import { kitchen, 
+import {kitchen, 
     usePorn,
-    lime } from './kitchen';
+    lime,
+    cup} from './kitchen';
 import {diningroom, 
     placeThumb, 
     placePeace, 
@@ -41,7 +47,6 @@ import {bunkhouse,
 import garage from './garage';
 import insidegarage from './insidegarage';
 import {robe,
-    greenChip, 
     blueChip, 
     redChip} from './notspecified';
 
@@ -163,10 +168,14 @@ headset
 
 porn.setUse(() => usePorn(gameEngine));
 
+cup.setUse(() => useCup(gameEngine));
 lime.setUse(() => useLime(gameEngine));
+marg
+    .setTake(() => takeMarg(gameEngine))
+    .on("drink", () => drinkMarg(gameEngine));
+
 
 fish.setUse(() => useFish(gameEngine, fish));
-
 cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
 cowskin.on("wear", () => wearCowskin(gameEngine, robe));
