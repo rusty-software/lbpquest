@@ -58,7 +58,10 @@ import {pooleast,
     useFish, 
     cupboardKey} from './pooleast';
 
-import poolwest from './poolwest';
+import {poolwest,
+    pool, 
+    usePool,
+    blueChip} from './poolwest';
 
 import {backyard, 
     feedMeter} from './backyard';
@@ -74,8 +77,7 @@ import garage from './garage';
 
 import insidegarage from './insidegarage';
 
-import {robe,
-    blueChip} from './notspecified';
+import {robe, snorkel} from './notspecified';
 
 /*
 pool
@@ -211,6 +213,10 @@ skeweredEarl
     .setUse(() => roastSkeweredEarl(gameEngine))
     .on("roast", () => roastSkeweredEarl(gameEngine));
 
+pool.setUse(() => usePool(gameEngine))
+    .on("swim in", () => usePool(gameEngine));
+snorkel.setUse(() => usePool(gameEngine));
+
 thumbStatue.setUse(() => placeThumb(gameEngine, thumbStatue));
 peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));
 okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
@@ -239,12 +245,8 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
-backyard.addItem("black chip", blackChip);
-backyard.addItem("red chip", redChip);
-backyard.addItem("blue chip", blueChip);
-backyard.addItem("green chip", greenChip);
-backyard.addItem("white chip", whiteChip);
 
+poolwest.addItem("snorkel", snorkel);
 // END HACK ZONE
 
 export default gameEngine;

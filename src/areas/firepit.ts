@@ -51,7 +51,7 @@ export function usePit(gameEngine: GameEngine) {
 
 export const pit = new Item()
     .setExamine(() => "The firepit is roaring mightily. The flames are at least four feet high.");
-firepit.addItem("pit", pit);
+firepit.addItem("firepit", pit);
 
 export const skeweredEarl = new Item()
     .setExamine(() => "The earl is skewered on the end of the deer horn. It would be perfect for eating, if only it were roasted.")

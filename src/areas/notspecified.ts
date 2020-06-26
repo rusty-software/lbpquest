@@ -5,18 +5,5 @@ export const robe = new Item()
     .setTakeable(true)
     .setTake(() => "");
 
-export const redChip = new Item()
-    .setTakeable(true)
-    .setTake(() => "");
-
-export const blueChip = new Item()
-    .setTakeable(true)
-    .setTake(() => "");
-
-export const greenChip = new Item()
-    .setTakeable(true)
-    .setTake(() => "");
-
-export const whiteChip = new Item()
-    .setTakeable(true)
-    .setTake(() => "");
+export const snorkel = new Item()
+    .setTakeable(true);
