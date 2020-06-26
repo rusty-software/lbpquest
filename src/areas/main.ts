@@ -54,11 +54,14 @@ import {diningroom,
     placeOkay,
     blackChip} from './diningroom';
 
-import {pooleast, useFish, cupboardKey} from './pooleast';
+import {pooleast, 
+    useFish, 
+    cupboardKey} from './pooleast';
 
 import poolwest from './poolwest';
 
-import {backyard, feedMeter} from './backyard';
+import {backyard, 
+    feedMeter} from './backyard';
 
 import tent from './tent';
 
@@ -87,17 +90,6 @@ garage
     snorkel gear in kayak
 
 snacks?
-
-bar
-    requires tequila, triple sec, lime, and ice
-
-    making the marg reveals a green chip under the blender
-
-firepit
-    too hot to get close to without robe
-    use horn 
-    cook earl
-        results in red poker chip
 
 */
 

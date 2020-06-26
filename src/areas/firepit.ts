@@ -5,8 +5,16 @@ import Item from '../engine/Item';
 let mainDesc = "The firepit is ringed by a series of pale yellow, plastic chairs, which seem to be slowly melting before the force of a much larger than expected and completely unattended open fire. "
 let exitDesc = "\n\nA door to the south leads back inside the house, and the pool is to the east.";
 
+let chipCreated: boolean = false;
+let chipTaken: boolean = false;
 function desc() {
+    let chipText: string = "";
+    if (chipCreated && !chipTaken) {
+        chipText = "There is a red poker chip here. ";
+    }
+
     return mainDesc
+        + chipText
         + exitDesc;
 }
 
@@ -18,8 +26,10 @@ function createRedChip(gameEngine: GameEngine) {
     gameEngine.removeInventoryItem("skewered earl");
     gameEngine.removeInventoryItem("robe");
     firepit.addItem("red chip", redChip);
-    gameEngine.send("take red chip");
-    return "With your cowskin robe protecting you, you extend the skewered earl to the flames. The fire greedily consumes the earl, turning it from a tender sanguine red to elongated coal brick in the blink of an eye. The flame progresses up what's left of the deer horn skewer and begins to burn your fashionable cowskin robe. In a panic, you tear the robe off, fumbling the skewer. Both skewer and robe fall to the ground burning as you leap backwards. A moment later, the flames have died down, and you notice that from the ashes of the earl you can see the edge of something small, round, and red. Brushing the ashes away, you pick up a red poker chip and put it into your rucksack before anything weirder has a chance to happen.";
+    chipCreated = true;
+    firepit.setDesc(desc());
+
+    return "With your cowskin robe protecting you, you extend the skewered earl to the flames. The fire greedily consumes the earl, turning it from a tender sanguine red to elongated coal brick in the blink of an eye. The flame progresses up what's left of the deer horn skewer and begins to burn your fashionable cowskin robe. In a panic, you tear the robe off, fumbling the skewer. Both skewer and robe fall to the ground burning as you leap backwards. A moment later, the flames have died down, and you notice that from the ashes of the earl you can see the edge of something small, round, and red. Brushing the ashes away, you realize that it is a red poker chip.";
 }
 
 export function usePit(gameEngine: GameEngine) {
@@ -51,7 +61,11 @@ export const skeweredEarl = new Item()
 export const redChip = new Item()
     .setExamine(() => "The poker chip is red, with a small emblem of an earl on a horn in the middle, and feels slightly hot to the touch.")
     .setTakeable(true)
-    .setTake(() => "");
+    .setTake(() => {
+        chipTaken = true;
+        firepit.setDesc(desc());
+        return "You put the red poker chip into your rucksack."
+    });
 
 export function roastSkeweredEarl(gameEngine: GameEngine) {
     if (gameEngine.currentLocation !== firepit) {
