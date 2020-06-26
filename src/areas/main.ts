@@ -4,7 +4,8 @@ import {livingroom,
     headset,
     useHeadset,
     removeHeadset,
-    porn} from './livingroom';
+    porn,
+    horn} from './livingroom';
 import {vr,
     whiteChip} from './vr'
 import {bar,
@@ -26,11 +27,15 @@ import {rugroom,
     breakDeerhead,
     blueBook,
     readBlueBook} from './rugroom';
-import firepit from './firepit';
+import {firepit,
+    useEarlAndHorn,
+    skeweredEarl,
+    roastSkeweredEarl} from './firepit';
 import {kitchen, 
     usePorn,
     lime,
-    cup} from './kitchen';
+    cup,
+    earl} from './kitchen';
 import {diningroom, 
     placeThumb, 
     placePeace, 
@@ -167,13 +172,14 @@ headset
     .on("remove", () => removeHeadset(gameEngine, headset));
 
 porn.setUse(() => usePorn(gameEngine));
+horn.setUse(() => useEarlAndHorn(gameEngine, "horn"));
 
+earl.setUse(() => useEarlAndHorn(gameEngine, "earl"));
 cup.setUse(() => useCup(gameEngine));
 lime.setUse(() => useLime(gameEngine));
 marg
     .setTake(() => takeMarg(gameEngine))
     .on("drink", () => drinkMarg(gameEngine));
-
 
 fish.setUse(() => useFish(gameEngine, fish));
 cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
@@ -189,6 +195,10 @@ deerHead
 blueBook.on("read", () => readBlueBook(gameEngine));
 
 rope.setUse(() => useRope(gameEngine, robe));
+
+skeweredEarl
+    .setUse(() => roastSkeweredEarl(gameEngine))
+    .on("roast", () => roastSkeweredEarl(gameEngine));
 
 thumbStatue.setUse(() => placeThumb(gameEngine, thumbStatue));
 peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));

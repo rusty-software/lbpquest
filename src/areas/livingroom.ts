@@ -30,18 +30,17 @@ export const porn = new Item()
     })
     .on("read", () => "You thumb through the magazine, pausing on the most alluring of the pictures. Gertie got the centerfold, but your favorite is Henrietta.")
 
-const deerHorn = new Item()
-    .setExamine(() => "nice horn")
+export const horn = new Item()
+    .setExamine(() => "It's a nice specimin, about a foot long, slightly curved, and very pointy.")
     .setTakeable(true)
     .setTake(() => {
         bricabrac.setExamine(() => "Most of the bric-a-brac is made up of animal bones, almost certainly from deer.")
         return "You put the deer horn into your rucksack."
-    })
-    .setUse(() => "TODO: logic to ensure proper usage");
+    });
 
 const bricabrac = new Item()
     .setExamine(() => {
-        livingroom.addItem("deer horn", deerHorn);
+        livingroom.addItem("horn", horn);
         return "Most of the bric-a-brac is made up of animal bones, almost certainly from deer. One deer horn in particular catches your eye. Maybe it's the way it sticks up straight... like a... uh... tree.";
     })
     .setTakeable(false)

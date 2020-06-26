@@ -48,7 +48,6 @@ const snacks = new Item()
         return "You put the snacks into your rucksack."
     });
 kitchen.addItem("snacks", snacks);
-// TODO: use snacks?
 
 export const cup = new Item()
     .setExamine(() => "The cup looks simply perfect for holding a margarita.")
@@ -69,7 +68,6 @@ export const lime = new Item()
         return "You put the lime into your rucksack."
     });
 kitchen.addItem("lime", lime);
-// TODO: use lime 
 
 export function usePorn(gameEngine: GameEngine) {
     if (gameEngine.currentLocation === kitchen) {
@@ -82,7 +80,7 @@ export function usePorn(gameEngine: GameEngine) {
 }
 
 let earlTaken: boolean = false;
-const earl = new Item()
+export const earl = new Item()
     .setExamine(() => "The earl looks delicious, but it should probably be cooked before you eat it.")
     .setTakeable(true)
     .setTake(() => {
@@ -113,8 +111,3 @@ const fridge = new Item()
         return "You try to open the fridge, but the door won't budge. If only there was something on it to give it a little extra weight. Or decor.";
     });
 kitchen.addItem("fridge", fridge);
-
-/*
-// TODO: earls? snacks? arts and crafts supplies/tools?
-*/
-
