@@ -1,6 +1,7 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import { thievesTools } from './undecidedroom';
 
 let mainText: string = "This bedroom was dubbed The Cowskin Rug Bedroom due to its floors being covered in cowskin rugs. An ottoman sits in front of a fireplace, oddly out of place. A bookcase is built into one wall, its books arranged by color -- white, black, red, and blue. ";
 let deerHeadText: string = "There's a deer head statue sitting as an awkward decoration on a glass coffee table. ";
@@ -115,28 +116,29 @@ export const deerHead = new Item()
 rugroom.addItem("deer head statue", deerHead);
 
 const thievery = new Item()
-    .setExamine(() => "You know how to use thieves' tools.")
+    .setExamine(() => "You know the ways of the thief!")
     .setTakeable(true)
-    .setTake(() => "You add the knowledge of thievery to your rucksack.")
-    .setUse(() => "You can't actively use the knowledge by itself.");
+    .setTake(() => "")
+    .setUse(() => "You can't actively use the knowledge by itself. You probably need some tools of the trade.");
+rugroom.addItem("thievery", thievery);
 
-export function readBlueBook(gameEngine: GameEngine) {
+export function readBook(gameEngine: GameEngine) {
     if (gameEngine.inventoryContains("thievery")) {
-        return "You already know how to use thieves' tools."
+        return "You've already gained the knowledge of thievery!";
     }
-    gameEngine.currentLocation.addItem("thievery", thievery);
-    gameEngine.send("take thievery");
 
-    return "You thumb through the book, pausing on the section on how to use thieves' tools."
-}
-export const blueBook = new Item()
+    gameEngine.send("take thievery");
+    return "You thumb through `The Way of Thieves`, pausing on the section on how to use thieves tools.";
+ }
+
+export const book = new Item()
     .setExamine(() => "A well-worn blue book, titled `The Way of Thieves`.")
-    .setTakeable(true)
-    .setTake(() => "You put the blue book into your rucksack.");
+    .setTakeable(false)
+    .setTake(() => "You wisely leave `The Way of Thieves` where it is. The irony of that action is not lost on you.");
 
 const bookcase = new Item()
     .setExamine(() => {
-        rugroom.addItem("blue book", blueBook);
+        rugroom.addItem("book", book);
         return "The bookcase has a bunch of books on it, but only the blue book looks like it might be worth reading."
     })
     .setTakeable(false)

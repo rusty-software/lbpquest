@@ -2,7 +2,7 @@ import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
 
-let mainText: string = "This bedroom was dubbed The Undecided Bedroom due to its wall art -- four prints stating 'Yes', 'No', 'Maybe', and 'OK'. "
+let mainText: string = "This bedroom was dubbed The Undecided Bedroom due to its wall art -- four prints stating 'Yes', 'No', 'Maybe', and 'OK'. A bookcase is built into one wall, its books arranged by color -- black on the top shelves, and light blue on the middle. ";
 let chestText: string = "There's a chest with a fancy lock set against the wall under the four prints. "
 let exitText: string = "\n\nThe door to the north leads back to the hallway."
 
@@ -67,4 +67,40 @@ export const okayStatue = new Item()
     .setTake(() => "You put the okay statue into your rucksack.")
     .setTakeable(true);
 
-// TODO: bookcase
+export const pouch = new Item()
+    .setExamine(() => "The leather pouch contains a collection of odd looking wiry implements. The nerd in you wonders if they are thieves tools.")
+    .setTakeable(true)
+    .setTake(() => "You add the pouch of thieves tools to your rucksack.");
+
+export const thievesTools = new Item()
+    .setExamine(() => "The leather pouch contains a collection of odd looking wiry implements. The nerd/rogue in you realizes that they are thieves tools.")
+    .setTakeable(true)
+    .setTake(() => "You add the pouch of thieves tools to your rucksack.");
+
+let toolsTaken: boolean = false;
+function readBook() {
+    let text: string = "You open the book to read it, but discover that the pages have been hollowed out. ";
+    if (!toolsTaken) {
+        text += "A leather pouch sits inside the hollowed out area. The pouch appears to hold an old fashioned set of thieves tools.";
+        undecidedroom.addItem("pouch", pouch);
+        undecidedroom.addItem("thieves tools", thievesTools);
+        toolsTaken = true;
+    }
+
+    return text; 
+}
+
+const book = new Item()
+    .setExamine(() => "The blue book is laying on its side and is slightly larger than any of the other books in the bookcase.")
+    .setUse(() => readBook())
+    .on("read", () => readBook());
+
+const bookcase = new Item()
+    .setExamine(() => {
+        undecidedroom.addItem("book", book);
+        return "The bookcase has a bunch of books on it, but only the blue book looks like it might be worth reading."
+    })
+    .setTakeable(false)
+    .setTake(() => "The bookcase is built into the wall. You aren't going to be able to take it.");
+
+undecidedroom.addItem("bookcase", bookcase);

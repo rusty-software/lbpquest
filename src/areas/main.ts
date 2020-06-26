@@ -25,7 +25,9 @@ import {hallway,
 
 import {undecidedroom
     , useOrnateKey
-    , okayStatue} from './undecidedroom';
+    , okayStatue
+    , pouch
+    , thievesTools} from './undecidedroom';
 
 import {rugroom, 
     thumbStatue, 
@@ -33,8 +35,8 @@ import {rugroom,
     wearCowskin, 
     deerHead, 
     breakDeerhead,
-    blueBook,
-    readBlueBook,
+    book,
+    readBook,
     ornateKey} from './rugroom';
 
 import {firepit,
@@ -76,7 +78,8 @@ import {bunkhouse,
     fish, 
     peaceStatue} from './bunkhouse';
 
-import garage from './garage';
+import {garage,
+    useTools} from './garage';
 
 import insidegarage from './insidegarage';
 
@@ -170,7 +173,6 @@ bunkhouse
 
 garage
     .link("nw", pooleast)
-    .link("through door", insidegarage)
     .setOnEnter(() => tagIt("garage"));
 
 insidegarage
@@ -197,13 +199,20 @@ cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
 
 rope.setUse(() => useRope(gameEngine, robe));
 cowskin.on("wear", () => wearCowskin(gameEngine, robe));
+
 deerHead
     .on("break", () => breakDeerhead(gameEngine))
     .on("smash", () => breakDeerhead(gameEngine))
     .on("throw", () => breakDeerhead(gameEngine))
     .on("destroy", () => breakDeerhead(gameEngine));
-blueBook.on("read", () => readBlueBook(gameEngine));
+book.on("read", () => readBook(gameEngine));
+
 ornateKey.setUse(() => useOrnateKey(gameEngine));
+pouch.setUse(() => useTools(gameEngine, linkInsideGarage));
+thievesTools.setUse(() => useTools(gameEngine, linkInsideGarage));
+function linkInsideGarage() {
+    garage.link("through door", insidegarage);
+}
 
 pit.setUse(() => usePit(gameEngine));
 skeweredEarl
