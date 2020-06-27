@@ -245,6 +245,16 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
+// diningroom.addItem("thumb statue", thumbStatue);
+// diningroom.addItem("peace statue", peaceStatue);
+// diningroom.addItem("okay statue", okayStatue);
+// gameEngine.send("n");
+// gameEngine.send("e");
+// gameEngine.send("e");
+// gameEngine.send("use thumb statue");
+// gameEngine.send("use peace statue");
+// gameEngine.send("use okay statue");
+// gameEngine.send("play mafia");
 // END HACK ZONE
 
 export default gameEngine;

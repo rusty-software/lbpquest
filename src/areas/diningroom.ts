@@ -61,13 +61,49 @@ const Max = new Item()
     .on("accuse", () => {
         return handleAccuse("Max", "civilian", townPlayers);
     });
+
+const declarations: string[] = [
+    "I'm a simple townsperson! Don't accuse me!"
+    , "C'mon, you know me! I'm innocent!"
+    , "I'm definitely NOT mafia. You believe me, don't you?"
+    , "Well, it's obviously not me. I'm the doctor!"
+    , "Hang on, you can't think it's me -- I'm the detective!"
+    , "Surely you jest if you consider me anything but a loyal townie!"
+    , "Of everyone at this table, besides you, I am the most town-ish."
+    , "I'm the Merlin! Wait, is there a wizard of some kind in this game?"
+    , "I'm the sheriff! That's the detective's bumpkin, right?"
+    , "I can't really say who I am, since I'm in witness protection."
+    , "I shouldn't say this, but I'm an undercover cop. Don't kill me!"
+    , "Based on my voting pattern, you can tell I'm a regular townsperson."
+    , "Sorry, I wasn't paying attention. What game are we playing?"
+    , "I'm all in. I mean... uh, innocent."
+    , "Did I hear someone say that Axis and Allies is almost set up?"
+    , "Did you know there's a professional league for Mafia? I'm not in it..."
+    , "You'll notice I've only done pro-town things all the way!"
+    , "Mafia is scum! Down with the mafia!"
+    , "I don't think I've ever played a game of mafia this intense!"
+    , "Even though 90% of common knowledge is crap, I want you to know I'm a regular townsperson."
+    , "If you accuse me, you'll regret it. I mean that in a good way, not the \"I'm with the mafia!\" way."
+    , "It doesn't matter who you accuse, as long as it's not me!"
+    , "The supreme art of war is to subdue the enemy without fighting."
+    , "Appear weak when you are strong, and strong when you are weak."]
+
+const banter = (players: string[]): string => {
+    let quotes: string[] = [];
+    players.map((playerName) => {
+        quotes.push(playerName + " says: " + declarations[Math.floor(Math.random() * players.length)]);
+    });
+    return quotes.join("\n");
+}
+
 const playMafia = () => {
     if (mafiaPlayable) {
         let players = shuffle(mafiaPlayers.concat(townPlayers));
         let response = "You... are a civilian."
-        + "\n\nThe Moderator speaks.\n\nRemaining players (besides you) are: " + players.join(", ")
+        + "\n\nThe Moderator speaks. Remaining players (besides you) are: " + players.join(", ")
+        + "\n\n" + banter(players)
         + "\n\nYou have executed: " + executed.join(", ")
-        + "\n\nYou may accuse a player by entering `accuse <player name>`. If you the balance tips in the mafia's favor, the game is over!";
+        + "\n\nYou may accuse a player by entering `accuse <player name>`. Enough people at the table will agree with your decision to guarantee its adoption. If the balance tips in the mafia's favor, the game is over!";
         return response;
     } else if (mafiaWon && !blackChipTaken) {
         return "You've already won the Mafia game. You just need to take the black poker chip.";
