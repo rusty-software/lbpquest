@@ -1,10 +1,11 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 
 let mainText: string = "The bunkhouse is as warm and inviting as ever, with a special emphasis on 'warm.' ";
-let cabinetText: string = "The well-worn _cupboard_ in the kitchenette looks like it's recently had some doors installed. ";
-let fishText: string = "A poorly-taxidermied _fish_ adorns the wall. ";
+let cabinetText: string = `The well-worn _${ItemKey.Cupboard}_ in the kitchenette looks like it's recently had some doors installed. `;
+let fishText: string = `A poorly-taxidermied _${ItemKey.Fish}_ adorns the wall. `;
 let exitText: string = "\n\nThe pool is to your west."
 
 const desc = () => {
@@ -45,7 +46,7 @@ export const peaceStatue = new Item()
 export const useCupboardKey = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation === bunkhouse) {
         cupboardUnlocked = true;
-        gameEngine.removeInventoryItem("small key");
+        gameEngine.removeInventoryItem(ItemKey.SmallKey);
         return "You use the cupboard key to unlock the cupboard.";
     }
     return "This doesn't look like the right place to use the cupboard key.";
@@ -66,11 +67,11 @@ const cupboard = new Item()
     .on("open", () => {
         if (cupboardUnlocked) {
             cupboardOpen = true;
-            bunkhouse.addItem("peace statue", peaceStatue);
+            bunkhouse.addItem(ItemKey.PeaceStatue, peaceStatue);
             if (peaceStatueTaken) {
                 return "You open the cupboard. Nothing interesting is inside.";
             }
-            return "You open the cupboard. A familiar looking _peace statue_ is inside.";
+            return `You open the cupboard. A familiar looking _${ItemKey.PeaceStatue}_ is inside.`;
         }
         return "The cupboard is locked. Looks like it requires a key."
     })
@@ -82,5 +83,5 @@ const cupboard = new Item()
         return "The cupboard is already closed.";
     });
 
-bunkhouse.addItem("fish", fish);
-bunkhouse.addItem("cupboard", cupboard);
+bunkhouse.addItem(ItemKey.Fish, fish);
+bunkhouse.addItem(ItemKey.Cupboard, cupboard);

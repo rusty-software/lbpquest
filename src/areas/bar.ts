@@ -5,11 +5,11 @@ import ItemKey from './itemenums';
 
 let iceAvailable: boolean = false;
 const desc = () => {
-    let mainText: string = "You are in the bar. All of the implements you need to make a mean marg are here... Well, almost... There's a _vitamix_, _tequila_, and _triple sec_... but no lime. ";
-    let iceText: string = "You presume there's ice in the _ice maker_. "
+    let mainText: string = `You are in the bar. All of the implements you need to make a mean marg are here... Well, almost... There's a _${ItemKey.Vitamix}_, _${ItemKey.Tequila}_, and _${ItemKey.TripleSec}_... but no lime. `;
+    let iceText: string = `You presume there's ice in the _${ItemKey.IceMaker}_. `
     let exitText: string = "\n\nSouthwest leads back to the living room.";
     if (iceAvailable) {
-        iceText = "_Ice_ is available in the ice maker.";
+        iceText = `There is some _${ItemKey.Ice}_ available in the ice maker.`;
     }
 
     return mainText
@@ -228,4 +228,4 @@ const icemaker = new Item()
     .setTakeable(false)
     .setTake(() => "The ice maker is built into the bar and can't be taken.")
     .setUse(() => doQuotes("The ice maker speaks! \"Answer my questions to get the ice!\" (start your response with \"say\")"));
-bar.addItem("ice maker", icemaker);
+bar.addItem(ItemKey.IceMaker, icemaker);

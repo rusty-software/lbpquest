@@ -4,7 +4,7 @@ import GameEngine from '../engine/GameEngine';
 import ItemKey from './itemenums';
 
 let mainText: string = "The backyard has a large, jauntily decorated tent in it, the kind that would uncomfortably house all the LBPers for a poker game during a raging thunderstorm. ";
-let flapText: string = "The front _flap_ is closed, and appears to be blocked by a parking lot _gate_, the arm firmly down. ";
+let flapText: string = `The front _flap_ is closed, and appears to be blocked by a parking lot _${ItemKey.Gate}_, the arm firmly down. `;
 let exitText: string = "\n\nGoing southeast will take you to the east end of the pool, and southwest to the west end of the pool.";
 
 const desc = () => {
