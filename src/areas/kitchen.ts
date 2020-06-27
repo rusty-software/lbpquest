@@ -1,6 +1,8 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import ItemKeys from '../areas/itemenums';
+import ItemKey from '../areas/itemenums';
 
 let mainText: string = "The kitchen is exactly as you left it from the last LBP -- a riot of HEB loot. At least there are no ants! ";
 let exitText: string = "\n\nTo the east is the dining room, and to the west is the living room.";
@@ -21,13 +23,13 @@ const desc = () => {
             counterText += "You manage to locate at least a single clean _cup_. "
         }
         if (!limeTaken) {
-            counterText += "While the bananas are already gone, there's at least one _lime_ left. ";
+            counterText += `While the bananas are already gone, there's at least one _${ItemKeys.Lime}_ left. `;
         }
     }
 
-    let fridgeText: string = "The _fridge_ is covered in arts and crafts, although there is a blank space left. "
+    let fridgeText: string = `The _${ItemKey.Fridge}_ is covered in arts and crafts, although there is a blank space left. `
     if (artsApplied) {
-        fridgeText = "The _fridge_ is covered in arts and crafts, including your questionable contribution. "
+        fridgeText = `The _${ItemKey.Fridge}_ is covered in arts and crafts, including your questionable contribution. `
     }
     return mainText  
         + fridgeText 

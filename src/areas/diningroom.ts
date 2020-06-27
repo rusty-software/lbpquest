@@ -1,6 +1,7 @@
 import GameEngine from '../engine/GameEngine';
 import Location from "../engine/Location";
 import Item from "../engine/Item";
+import ItemKey from './itemenums';
 
 const shuffle = (arr: any[]) => {
     let currentIndex = arr.length, temporaryValue, randomIndex;
@@ -106,7 +107,7 @@ const playMafia = () => {
         + "\n\nYou may accuse a player by entering `accuse <player name>`. Enough people at the table will agree with your decision to guarantee its adoption. If the balance tips in the mafia's favor, the game is over!";
         return response;
     } else if (mafiaWon && !blackChipTaken) {
-        return "You've already won the Mafia game. You just need to take the _black poker chip_.";
+        return `You've already won the Mafia game. You just need to take the _${ItemKey.BlackChip}_.`;
     } 
     return "With whom?";
 };
@@ -118,11 +119,11 @@ const lostMafia = () => {
     return "\"The mafia has won!\" exclaims the Moderator. \"The game will be reset. Better luck next time, kid.\"";
 }
 const wonMafia = () => {
-    diningroom.addItem("black poker chip", blackChip);
+    diningroom.addItem(ItemKey.BlackChip, blackChip);
     mafiaWon = true;
     mafiaPlayable = false;
 
-    return "\"You've won the game!\" declares the Moderator. \"Please accept this as a token of your prowess.\"\n\nThe Moderator slides a _black poker chip_ toward you."
+    return `"You've won the game!" declares the Moderator. "Please accept this as a token of your prowess."\n\nThe Moderator slides a _${ItemKey.BlackChip}_ toward you.`
 }
 const quitMafia = () => {
     return "You stand up and leave the table, the Moderator casting a confused look at you.";
@@ -140,7 +141,7 @@ const diningTable = new Item()
         if (mafiaPlayable) {
             return "The table is resplendent with three statues, and is surrounded by seven people looking at you expectently.";
         } else if (mafiaWon && !blackChipTaken) {
-            return "The table is covered in fingerprints, but is resplendent with three hand statues. A black poker chip is near the statues.";
+            return `The table is covered in fingerprints, but is resplendent with three hand statues. A _${ItemKey.BlackChip}_ is near the statues.`;
         } else if (mafiaWon) {
             return "The table is covered in fingerprints, but is resplendent with three hand statues.";
         }
@@ -159,8 +160,8 @@ let allStatuesPlacedText = "As you place the final statue on the table, a group 
 export const placeThumb = (gameEngine: GameEngine, thumbStatue: Item) => {
     if (gameEngine.currentLocation === diningroom) {
         thumbPlaced = true;
-        diningroom.addItem("thumb statue", thumbStatue);
-        gameEngine.removeInventoryItem("thumb statue");
+        diningroom.addItem(ItemKey.ThumbStatue, thumbStatue);
+        gameEngine.removeInventoryItem(ItemKey.ThumbStatue);
         thumbStatue.setTake(() => "The thumb statue looks perfect where it is. You should leave it there.")
         thumbStatue.setTakeable(false);
         if (peacePlaced && okayPlaced) {
@@ -176,8 +177,8 @@ export const placeThumb = (gameEngine: GameEngine, thumbStatue: Item) => {
 export const placePeace = (gameEngine: GameEngine, peaceStatue: Item) => {
     if (gameEngine.currentLocation === diningroom) {
         peacePlaced = true;
-        diningroom.addItem("peace statue", peaceStatue);
-        gameEngine.removeInventoryItem("peace statue");
+        diningroom.addItem(ItemKey.PeaceStatue, peaceStatue);
+        gameEngine.removeInventoryItem(ItemKey.PeaceStatue);
         peaceStatue.setTake(() => "The peace statue looks perfect where it is. You should leave it there.")
         peaceStatue.setTakeable(false)
         if (thumbPlaced && okayPlaced) {
@@ -193,8 +194,8 @@ export const placePeace = (gameEngine: GameEngine, peaceStatue: Item) => {
 export const placeOkay = (gameEngine: GameEngine, okayStatue: Item) => {
     if (gameEngine.currentLocation === diningroom) {
         okayPlaced = true;
-        diningroom.addItem("okay statue", okayStatue);
-        gameEngine.removeInventoryItem("okay statue");
+        diningroom.addItem(ItemKey.OkayStatue, okayStatue);
+        gameEngine.removeInventoryItem(ItemKey.OkayStatue);
         okayStatue.setTake(() => "The okay statue looks perfect where it is. You should leave it there.")
         okayStatue.setTakeable(false)
         if (thumbPlaced && peacePlaced) {
@@ -222,8 +223,7 @@ export const blackChip = new Item()
         diningroom.setDesc(diningRoomText);
         return "You put the black poker chip into your rucksack. As you do, the people around the table rise, tip their hats to you, and make their way out."
     })
-    .setTakeable(true)
-    .setUse(() => "checks here to limit usage");
+    .setTakeable(true);
 
 diningroom.addItem("dining table", diningTable);
 diningroom.addItem("mafia", mafia);

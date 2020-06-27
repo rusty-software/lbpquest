@@ -16,6 +16,10 @@ enum ItemKey {
     , Fountain = "fountain"
     , Note = "note"
     , Coin = "coin"
+    , Fridge = "fridge"
+    , BlackChip = "black poker chip"
+    , ThumbStatue = "thumb statue"
+    , OkayStatue = "okay statue"
     , DeerHorn = "deer horn"
 }
 
