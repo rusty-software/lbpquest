@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Location from '../engine/Location';
 import GameEngine from '../engine/GameEngine';
 
