@@ -223,8 +223,7 @@ gameEngine.setStartLocation(courtyard);
 
 courtyard
     .link("n", livingroom)
-    .link("through door", livingroom)
-    .setOnEnter(() => tagIt("courtyard"));
+    .link("through door", livingroom);
 
 livingroom
     .link("s", courtyard)

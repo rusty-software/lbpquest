@@ -32,7 +32,7 @@ class Courtyard extends Location {
     public constructor(tagIt: (action: string) => void) {
         super();
         this.setId("Courtyard");
-        this.setDesc("You are in the courtyard of Casa Cantera. You can almost feel the rosemary pollen coat your slightly sweating skin as you listen to the sounds of tepid water trickling through the slightly-functioning fountain.\n\nTo the north is the door into the Casa. There appears to be a note taped to it.");
+        this.setDesc("You are in the courtyard of Casa Cantera. You can almost feel the rosemary pollen coat your lightly sweating skin as you listen to the sounds of tepid water trickling through the barely-functioning _fountain_.\n\nTo the north is the door into the Casa. There appears to be a _note_ taped to it.");
         this.addItem("fountain", this.fountain);
         this.addItem("note", this.note);
         this.setOnEnter(() => tagIt("courtyard"));

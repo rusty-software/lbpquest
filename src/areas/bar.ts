@@ -4,11 +4,11 @@ import GameEngine from '../engine/GameEngine';
 
 let iceAvailable: boolean = false;
 const desc = () => {
-    let mainText: string = "You are in the bar. All of the implements you need to make a mean marg are here... Well, almost... There's a vitamix, tequila, and triple sec... but no lime. ";
-    let iceText: string = "You presume there's ice in the ice maker. "
+    let mainText: string = "You are in the bar. All of the implements you need to make a mean marg are here... Well, almost... There's a _vitamix_, _tequila_, and _triple sec_... but no lime. ";
+    let iceText: string = "You presume there's ice in the _ice maker_. "
     let exitText: string = "\n\nSouthwest leads back to the living room.";
     if (iceAvailable) {
-        iceText = "Ice is available in the ice maker.";
+        iceText = "_Ice_ is available in the ice maker.";
     }
 
     return mainText
@@ -89,8 +89,8 @@ export const takeMarg = (gameEngine: GameEngine) => {
 export const drinkMarg = (gameEngine: GameEngine) => {
     if (sips > 4) {
         if (!chipTaken) {
-            gameEngine.currentLocation.addItem("green chip", greenChip);
-            gameEngine.send("take green chip");
+            gameEngine.currentLocation.addItem("green poker chip", greenChip);
+            gameEngine.send("take green poker chip");
 
             return "On taking this sip, something slides forward from the bottom of the cup. Looking inside, you see a green poker chip. You slide it into your rucksack.";
         }
@@ -132,7 +132,7 @@ export const useCup = (gameEngine: GameEngine) => {
     cupUsed = true
     gameEngine.send("take marg");
 
-    return "You pour the marg out of the vitamix and into your cup. It's ready for drinking!";
+    return "You pour the _marg_ out of the vitamix and into your cup. It's ready for drinking!";
 }
 
 let margMade: boolean = false;
@@ -140,9 +140,9 @@ const vitamix = new Item()
     .setExamine(() => {
         if (margMade) {
             if (cupUsed) {
-                return "The vitamix is empty, having been used to make a delicious marg.";
+                return "The vitamix is empty, having been used to make a delicious _marg_.";
             }
-            return "You've already made the marg! You should pour it into something from which to drink.";
+            return "You've already made the _marg_! You should pour it into something from which to drink.";
         }
         if (!tequilaPoured && !triplesecPoured && !limeUsed && !iceUsed) {
             return "The vitamix is currently empty.";
@@ -162,7 +162,7 @@ const vitamix = new Item()
         if (tequilaPoured && triplesecPoured && limeUsed && iceUsed && !margMade) {
             margMade = true;
             bar.addItem("marg", marg);
-            return "Flipping the switch, the vitamix works its votexy magic and produces a lovely looking marg.";
+            return "Flipping the switch, the vitamix works its votexy magic and produces a lovely looking _marg_.";
         }
         return "The vitamix doesn't look like it's ready to be used.";
     });
@@ -177,7 +177,7 @@ const doQuotes = (prefix: string) => {
         iceAvailable = true;
         bar.setDesc(desc());
 
-        return "The ice maker says, \"You've proven yourself worthy of ice!\" After some internal clicking, you realize the ice is available.";
+        return "The ice maker says, \"You've proven yourself worthy of ice!\" After some internal clicking, you realize the _ice_ is available.";
     }
     if (!quote1Done) {
         bar.addItem("rj", rj);
