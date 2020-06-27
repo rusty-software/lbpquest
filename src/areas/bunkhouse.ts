@@ -68,7 +68,10 @@ const cupboard = new Item()
         if (cupboardUnlocked) {
             cupboardOpen = true;
             bunkhouse.addItem("peace statue", peaceStatue);
-            return "You open the cupboard."
+            if (peaceStatueTaken) {
+                return "You open the cupboard. Nothing interesting is inside.";
+            }
+            return "You open the cupboard. A familiar looking peace statue is inside.";
         }
         return "The cupboard is locked. Looks like it requires a key."
     })

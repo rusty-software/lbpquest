@@ -24,7 +24,7 @@ export function feedMeter(gameEngine: GameEngine, pokerChip: Item, tent: Locatio
     gameEngine.removeInventoryItem(pokerChip.name);
     leftToFeed--;
     if (leftToFeed === 0) {
-        backyard.removeItem("parking gate");
+        backyard.removeItem("gate");
         flapText = "The front flap is open, the parking gate's arm almost waving you inside. ";
         backyard.setDesc(desc());
         backyard.link("through flap", tent);
@@ -42,4 +42,4 @@ const gate = new Item()
     .setTake(() => "You cannot take the parking gate. It just wouldn't be right.")
     .setUse(() => "In Soviet Russia, parking gate USE YOU!");
 
-backyard.addItem("parking gate", gate);
+backyard.addItem("gate", gate);

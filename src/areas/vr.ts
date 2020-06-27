@@ -19,7 +19,7 @@ let presented: boolean = false;
 let shreddedPaper: boolean = false;
 let jobGameHead: string = "You find yourself in a virtual office environment -- a cube, to be precise. \n\n";
 let coffeeText: string = "There's an empty coffee cup on the desk. ";
-let computerText: string = "The computer screen displays powerdot presentation. ";
+let computerText: string = "The computer screen displays a powerdot presentation. ";
 let paperText: string = "A pile of papers with sensitive spreadsheet data sits next to the desk near the shredder. ";
 function playJob(actionHeader: string) {
     if (attendedParty && whiteChipTaken) {
@@ -27,7 +27,7 @@ function playJob(actionHeader: string) {
     }
     if (filledCoffee && presented && shreddedPaper) {
         if (!attendedParty) {
-            vr.addItem("retirement party", party);
+            vr.addItem("party", party);
         }
         return jobGameHead +
             "You've done all the tasks! Time to attend your retirement party!";
@@ -48,6 +48,13 @@ function playJob(actionHeader: string) {
         paperText;
 }
 
+const fillCoffee = () => {
+    if (filledCoffee) {
+        return "You've already filled the coffee cup. Find something else to do.";
+    }
+    filledCoffee = true;
+    return playJob("You fill the cup to the rim with virtual Brim!\n\n");
+}
 const cup = new Item()
     .setExamine(() => {
         if (filledCoffee) {
@@ -57,14 +64,9 @@ const cup = new Item()
     })
     .setTakeable(false)
     .setTake(() => "You really don't need to take the coffee cup. It's VR, after all.")
-    .on("fill", () => {
-        if (filledCoffee) {
-            return "You've already filled the coffee cup. Find something else to do.";
-        }
-        filledCoffee = true;
-        return playJob("You fill the cup to the rim with virtual Brim!\n\n");
-    });
-vr.addItem("coffee cup", cup);
+    .setUse(() => fillCoffee())
+    .on("fill", () => fillCoffee());
+vr.addItem("cup", cup);
 
 const powerdot = new Item()
     .setExamine(() => {

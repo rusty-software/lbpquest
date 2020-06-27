@@ -91,7 +91,7 @@ const declarations: string[] = [
 const banter = (players: string[]): string => {
     let quotes: string[] = [];
     players.map((playerName) => {
-        quotes.push(playerName + " says: " + declarations[Math.floor(Math.random() * players.length)]);
+        quotes.push(playerName + " says: " + declarations[Math.floor(Math.random() * quotes.length)]);
     });
     return quotes.join("\n");
 }

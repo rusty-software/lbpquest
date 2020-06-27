@@ -1,7 +1,6 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
-import { thievesTools } from './undecidedroom';
 
 let mainText: string = "This bedroom was dubbed The Cowskin Rug Bedroom due to its floors being covered in cowskin rugs. An ottoman sits in front of a fireplace, oddly out of place. A bookcase is built into one wall, its books arranged by color -- white, black, red, and blue. ";
 let deerHeadText: string = "There's a deer head statue sitting as an awkward decoration on a glass coffee table. ";

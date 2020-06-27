@@ -23,6 +23,7 @@ export const cupboardKey = new Item()
     .setTakeable(true)
     .setTake(() => {
         keyText = "";
+        pooleast.setDesc(desc());
         return "You put the small key into your rucksack."
     });
 
@@ -33,7 +34,7 @@ export function useFish(gameEngine: GameEngine, fish: Item) {
         hottubText = "The hot tub is bubbling merrily, and there's a very thin haze of steam coming off its water's surface. There's also a happy fish swimming around in it. "
         keyText = "A small key sits on the edge of the hot tub. "
         pooleast.setDesc(desc());
-        return "You release the fish into the hot tub. It floats there a moment, then, much to your surprise, starts flapping its fins and wiggling its tail. It submerges for a moment, then comes back to the surface, making a gagging sound. A moment later, it regurgitates a key onto the edge of the hottub. Apparently some fisherman of little means had used it as a lure in order to catch this fish. The fish stares at you a moment, then submerges again. You are sure that, had it possessed eyelids, it would have just winked at you."
+        return "You release the fish into the hot tub. It floats there a moment, then, much to your surprise, starts flapping its fins and wiggling its tail. It submerges for a moment, then comes back to the surface, making a gagging sound. A moment later, it regurgitates a small key onto the edge of the hottub. Apparently some fisherman of little means had used it as a lure in order to catch this fish. The fish stares at you a moment, then submerges again. You are sure that, had it possessed eyelids, it would have just winked at you."
 
     }
     return "This doesn't look like the right place to use the fish.";

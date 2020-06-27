@@ -49,7 +49,10 @@ const chest = new Item()
         if (chestUnlocked) {
             chestOpen = true;
             undecidedroom.addItem("okay statue", okayStatue);
-            return "You open the chest."
+            if (okayStatueTaken) {
+                return "You open the chest. It is empty of interesting objects.";
+            }
+            return "You open the chest. A familiar looking okay statue is inside."
         }
         return "The chest is locked. Looks like it requires a key."
     })
