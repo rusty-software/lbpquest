@@ -1,7 +1,7 @@
 import Location from "../engine/Location";
 import Item from '../engine/Item';
 
-const courtyard = new Location()
+export const courtyard = new Location()
     .setId("Courtyard")
     .setDesc("You are in the courtyard of Casa Cantera. You can almost feel the rosemary pollen coat your slightly sweating skin as you listen to the sounds of tepid water trickling through the slightly-functioning fountain.\n\nTo the north is the door into the Casa. There appears to be a note taped to it.");
 
@@ -13,14 +13,13 @@ const fountain = new Item()
     .setTake(() => "The fountain is fixed in place, and even if you could move it, probably wouldn't fit in your rucksack.")
     .setUse(() => "You consider sipping from the fountain's lukewarm water, but think better of it, given what everyone else does in the pool...");
 
-const coin = new Item()
+export const coin = new Item()
     .setExamine(() => "The coin is a currency you don't recognize, but appears to be made of a copper/nickel mix and is about the size of a half dollar.")
     .setTake(() => {
         fountain.setExamine(() => "The fountain gurgles sporatically.");
         return "You snatch the coin from the fountain bowl, drying it and your hands on your shirt, then put the coin into your rucksack.";
     })
-    .setTakeable(true)
-    .setUse(() => "Logic to ensure location and viability and stuff.");
+    .setTakeable(true);
 
 let noteText: string = "(in a hastily/messily scrawled pen)"
     + "\n\nGreetings, fellow LBPer! The door's open. We're all in the tent out back. See you there!"
@@ -34,5 +33,3 @@ const note = new Item()
 
 courtyard.addItem("fountain", fountain);
 courtyard.addItem("note", note);
-
-export default courtyard;

@@ -1,5 +1,6 @@
 import GameEngine from '../engine/GameEngine';
-import courtyard from './courtyard';
+
+import {courtyard, coin} from './courtyard';
 
 import {livingroom,
     headset,
@@ -68,10 +69,9 @@ import {poolwest,
     usePool,
     blueChip} from './poolwest';
 
-import {backyard, 
-    feedMeter} from './backyard';
+import {backyard, feedMeter} from './backyard';
 
-import tent from './tent';
+import {tent, useCoin} from './tent';
 
 import {bunkhouse, 
     useCupboardKey, 
@@ -225,6 +225,8 @@ blueChip.setUse(() => feedMeter(gameEngine, blueChip, tent));
 greenChip.setUse(() => feedMeter(gameEngine, greenChip, tent));
 whiteChip.setUse(() => feedMeter(gameEngine, whiteChip, tent));
 
+coin.setUse(() => useCoin(gameEngine));
+
 const gameEngine = new GameEngine(courtyard);
 gameEngine.setStartLocation(courtyard);
 
@@ -243,8 +245,6 @@ const tagIt = (action: string) =>
 tagIt('start');
 
 // HACK ZONE
-
-poolwest.addItem("snorkel", snorkel);
 // END HACK ZONE
 
 export default gameEngine;
