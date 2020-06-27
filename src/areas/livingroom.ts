@@ -8,7 +8,7 @@ let pornText: string = "You notice that the porn is prevalent here, the most app
 let bricabracText: string = "There are also baskets full of various and sundry decorative bric-a-brac littered on every flat surface. ";
 let exitText = "\n\nTo the northeast is the bar, and the kitchen is to the east. To the west is a hallway leading to some bedrooms. The front door to the south leads to the courtyard.";
 
-function desc() {
+const desc = () => {
     return vrText +
         pornText +
         bricabracText +
@@ -48,7 +48,7 @@ const bricabrac = new Item()
     .setUse(() => "There's no real use for bric-a-brac, is there?");
 
 let inVR: boolean = false;
-export function useHeadset(gameEngine: GameEngine, headset: Item, vr: Location) {
+export const useHeadset = (gameEngine: GameEngine, headset: Item, vr: Location) => {
     livingroom.link("vr", vr);
     inVR = true;
     vr.addItem("headset", headset);
@@ -57,7 +57,7 @@ export function useHeadset(gameEngine: GameEngine, headset: Item, vr: Location) 
     return "";
 }
 
-export function removeHeadset(gameEngine: GameEngine, headset: Item) {
+export const removeHeadset = (gameEngine: GameEngine, headset: Item) => {
     if (!inVR) {
         return "You aren't wearing the vr headset right now.";
     }

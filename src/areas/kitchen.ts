@@ -9,7 +9,7 @@ let snacksTaken: boolean = false;
 let cupTaken: boolean = false;
 let limeTaken: boolean = false;
 let artsApplied: boolean = false;
-function desc() {
+const desc = () => {
     let counterText: string = "The counter is, simply put, a treasure trove. ";
     if (snacksTaken && cupTaken && limeTaken) {
         counterText = "The counter is a mess, but you don't feel inspired either to pick over it or clean it. ";
@@ -70,7 +70,7 @@ export const lime = new Item()
     });
 kitchen.addItem("lime", lime);
 
-export function usePorn(gameEngine: GameEngine) {
+export const usePorn = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation === kitchen) {
         artsApplied = true;
         kitchen.setDesc(desc());

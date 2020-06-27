@@ -2,13 +2,12 @@ import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
 
-
 let mainText: string = "The bunkhouse is as warm and inviting as ever, with a special emphasis on 'warm.' ";
 let cabinetText: string = "The well-worn cupboard in the kitchenette looks like it's recently had some doors installed. ";
 let fishText: string = "A poorly-taxidermied fish adorns the wall. ";
 let exitText: string = "\n\nThe pool is to your west."
 
-function desc() {
+const desc = () => {
     return mainText +
     cabinetText +
     fishText +
@@ -43,7 +42,7 @@ export const peaceStatue = new Item()
     })
     .setTakeable(true);
 
-export function useCupboardKey(gameEngine: GameEngine, cupboardKey: Item) {
+export const useCupboardKey = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation === bunkhouse) {
         cupboardUnlocked = true;
         gameEngine.removeInventoryItem("small key");

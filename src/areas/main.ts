@@ -170,8 +170,8 @@ marg
     .setTake(() => takeMarg(gameEngine))
     .on("drink", () => drinkMarg(gameEngine));
 
-fish.setUse(() => useFish(gameEngine, fish));
-cupboardKey.setUse(() => useCupboardKey(gameEngine, cupboardKey));
+fish.setUse(() => useFish(gameEngine));
+cupboardKey.setUse(() => useCupboardKey(gameEngine));
 
 rope.setUse(() => useRope(gameEngine, robe));
 cowskin.on("wear", () => wearCowskin(gameEngine, robe));
@@ -186,7 +186,7 @@ book.on("read", () => readBook(gameEngine));
 ornateKey.setUse(() => useOrnateKey(gameEngine));
 pouch.setUse(() => useTools(gameEngine, linkInsideGarage));
 thievesTools.setUse(() => useTools(gameEngine, linkInsideGarage));
-function linkInsideGarage() {
+const linkInsideGarage = () => {
     garage.link("through door", insidegarage);
 }
 
@@ -205,7 +205,7 @@ okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
 
 
 const startTime = new Date();
-function timeDiffInSeconds(): number {
+const timeDiffInSeconds = (): number => {
     return Math.floor((new Date().getTime() - startTime.getTime()) / 1000);
 }
 

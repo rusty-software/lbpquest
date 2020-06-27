@@ -6,7 +6,7 @@ let mainText: string = "The backyard has a large, jauntily decorated tent in it,
 let flapText: string = "The front flap is closed, and appears to be blocked by a parking lot gate, the arm firmly down. ";
 let exitText: string = "\n\nGoing southeast will take you to the east end of the pool, and southwest to the west end of the pool.";
 
-function desc() {
+const desc = () => {
     return mainText +
         flapText +
         exitText;
@@ -17,7 +17,7 @@ export const backyard = new Location()
     .setDesc(desc());
 
 let leftToFeed: number = 5;
-export function feedMeter(gameEngine: GameEngine, pokerChip: Item, tent: Location) {
+export const feedMeter = (gameEngine: GameEngine, pokerChip: Item, tent: Location) => {
     if (gameEngine.currentLocation !== backyard) {
         return "You can't used the poker chip here.";
     }

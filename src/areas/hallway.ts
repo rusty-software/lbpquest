@@ -7,7 +7,7 @@ let firepitDoorText = "On the north wall, a door leads outside to the firepit. "
 let ropeText = "A length of frayed rope dangles unobtrusively from the firepit door handle. It looks like it might've been securing the door closed at some point. "
 let otherExitsText = "There are also doors to the south and west that lead to bedrooms, and the living room is to the east. "
 
-function desc() {
+const desc = () => {
     return mainText +
     firepitDoorText +
     ropeText +
@@ -18,7 +18,7 @@ export const hallway = new Location()
     .setId("Hallway")
     .setDesc(desc());
 
-export function useRope(gameEngine: GameEngine, robe: Item) {
+export const useRope = (gameEngine: GameEngine, robe: Item) => {
     if (gameEngine.inventoryContains("robe")) {
         return "You're already using the rope to keep the cowskin robe on."
     }

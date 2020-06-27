@@ -6,7 +6,7 @@ let mainText: string = "This bedroom was dubbed The Undecided Bedroom due to its
 let chestText: string = "There's a chest with a fancy lock set against the wall under the four prints. "
 let exitText: string = "\n\nThe door to the north leads back to the hallway."
 
-function desc() {
+const desc = () => {
     return mainText +
     chestText + 
     exitText;
@@ -21,7 +21,7 @@ let okayStatueTaken: boolean = false;
 let closedText: string = "The chest is closed.";
 let openWithStatue: string = "The chest is open. Its only interesting content is an oddly placed okay statue.";
 let openSansStatue: string = "The chest is open. It doesn't contain anything interesting.";
-export function useOrnateKey(gameEngine: GameEngine) {
+export const useOrnateKey = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation !== undecidedroom) {
         return "You really don't have a use for that here.";
     }
@@ -81,7 +81,7 @@ export const thievesTools = new Item()
     .setTake(() => "You add the pouch of thieves tools to your rucksack.");
 
 let toolsTaken: boolean = false;
-function readBook() {
+const readBook = () => {
     let text: string = "You open the book to read it, but discover that the pages have been hollowed out. ";
     if (!toolsTaken) {
         text += "A leather pouch sits inside the hollowed out area. The pouch appears to hold an old fashioned set of thieves tools.";

@@ -2,7 +2,7 @@ import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
 
-function desc() {
+const desc = () => {
     let mainText: string = "This is the west side of the pool. It's slightly deeper than the east side. "
     let exitText: string = "\n\nThe other end of the pool is to your east, and the firepit is to the west. Going northeast will take you into the backyard, where there's a jauntily decorated tent.";
     return mainText
@@ -24,7 +24,7 @@ export const pool = new Item()
     });
 poolwest.addItem("pool", pool);
 
-export function usePool(gameEngine: GameEngine) {
+export const usePool = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation !== poolwest) {
         return "There's no real use for that here.";
     }

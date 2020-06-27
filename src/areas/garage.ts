@@ -2,7 +2,7 @@ import Location from '../engine/Location';
 import GameEngine from '../engine/GameEngine';
 
 let doorUnlocked: boolean = false;
-function desc() {
+const desc = () => {
     let text: string = "You are outside the garage. ";
     let lockedText: string = "The door is firmly closed and locked, preventing entry. ";
     let exitText: string = "\n\nThe pool is to your northwest. ";
@@ -18,7 +18,7 @@ export const garage = new Location()
     .setId("Garage")
     .setDesc(desc()); 
 
-export function useTools(gameEngine: GameEngine, linkInsideGarage: () => any) {
+export const useTools = (gameEngine: GameEngine, linkInsideGarage: () => void) => {
     if (gameEngine.currentLocation !== garage) {
         return "It doesn't look like you can use that here.";
     }

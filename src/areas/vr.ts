@@ -5,7 +5,7 @@ let mainText: string = "You are in... VIRTUAL REALITY! \n\n";
 let menuText: string = "You can play the following games:\n\nJob Simulator\n\nApparently the vr machine isn't very powerful this year. ";
 let exitText: string = "\n\nTo leave VR, simply remove the vr headset."
 
-function desc() {
+const desc = () => {
     return mainText +
     menuText + 
     exitText;
@@ -21,7 +21,7 @@ let jobGameHead: string = "You find yourself in a virtual office environment -- 
 let coffeeText: string = "There's an empty coffee cup on the desk. ";
 let computerText: string = "The computer screen displays a powerdot presentation. ";
 let paperText: string = "A pile of papers with sensitive spreadsheet data sits next to the desk near the shredder. ";
-function playJob(actionHeader: string) {
+const playJob = (actionHeader: string) => {
     if (attendedParty && whiteChipTaken) {
         return "You have already won the game of Job Simulator!";
     }
@@ -135,13 +135,3 @@ export const whiteChip = new Item()
         whiteChipTaken = true;
         return "You inexplicably put the virtual white poker chip into your very real rucksack.";
     })
-
-/*
-job simulator
-    make coffee
-    fill in spreadsheet
-    give powerdot presentation
-    go to retirement party
-        open gift
-            white poker chip
-*/

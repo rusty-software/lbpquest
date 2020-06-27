@@ -2,7 +2,7 @@ import GameEngine from '../engine/GameEngine';
 import Location from "../engine/Location";
 import Item from "../engine/Item";
 
-function shuffle(arr: any[]) {
+const shuffle = (arr: any[]) => {
     let currentIndex = arr.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -23,7 +23,7 @@ let mafiaPlayers: string[] = ["John", "Paul"];
 let townPlayers: string[] = ["Joseph", "Tom", "Henry", "Max"];
 let executed: string[] = [];
 
-function handleAccuse(name: string, type: string, arr: string[]) {
+const handleAccuse = (name: string, type: string, arr: string[]) => {
     const idx = arr.indexOf(name);
     if (idx > -1) {
         arr.splice(idx, 1);
@@ -155,7 +155,8 @@ let okayPlaced = false;
 let notAllStatuesPlacedText = "You place the statue in one of the empty spots on the table.";
 let allStatuesPlacedText = "As you place the final statue on the table, a group of seven guys, none of whom you recognize, walk into the kitchen. They introduce themselves as Henry, John, Joseph, Max, Paul, Tom, and Moderator. They take seats around the table, and Moderator starts shuffling some cards.\n\n\"Care for a game of Mafia?\" Moderator asks.";
 
-export function placeThumb(gameEngine: GameEngine, thumbStatue: Item) {
+// TODO: DRY
+export const placeThumb = (gameEngine: GameEngine, thumbStatue: Item) => {
     if (gameEngine.currentLocation === diningroom) {
         thumbPlaced = true;
         diningroom.addItem("thumb statue", thumbStatue);
@@ -172,7 +173,7 @@ export function placeThumb(gameEngine: GameEngine, thumbStatue: Item) {
     return "This doesn't look like the right place to use the thumb statue."
 }
 
-export function placePeace(gameEngine: GameEngine, peaceStatue: Item) {
+export const placePeace = (gameEngine: GameEngine, peaceStatue: Item) => {
     if (gameEngine.currentLocation === diningroom) {
         peacePlaced = true;
         diningroom.addItem("peace statue", peaceStatue);
@@ -189,7 +190,7 @@ export function placePeace(gameEngine: GameEngine, peaceStatue: Item) {
     return "This doesn't look like the right place to use the peace statue."
 }
 
-export function placeOkay(gameEngine: GameEngine, okayStatue: Item) {
+export const placeOkay = (gameEngine: GameEngine, okayStatue: Item) => {
     if (gameEngine.currentLocation === diningroom) {
         okayPlaced = true;
         diningroom.addItem("okay statue", okayStatue);
@@ -234,4 +235,3 @@ diningroom.addItem("joseph", Joseph);
 diningroom.addItem("tom", Tom);
 diningroom.addItem("henry", Henry);
 diningroom.addItem("max", Max);
-

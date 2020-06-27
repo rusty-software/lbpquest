@@ -7,7 +7,7 @@ let exitDesc = "\n\nA door to the south leads back inside the house, and the poo
 
 let chipCreated: boolean = false;
 let chipTaken: boolean = false;
-function desc() {
+const desc = () => {
     let chipText: string = "";
     if (chipCreated && !chipTaken) {
         chipText = "There is a red poker chip here. ";
@@ -22,7 +22,7 @@ export const firepit = new Location()
     .setId("Firepit")
     .setDesc(desc());
 
-function createRedChip(gameEngine: GameEngine) {
+const createRedChip = (gameEngine: GameEngine) => {
     gameEngine.removeInventoryItem("skewered earl");
     gameEngine.removeInventoryItem("robe");
     firepit.addItem("red chip", redChip);
@@ -32,7 +32,7 @@ function createRedChip(gameEngine: GameEngine) {
     return "With your cowskin robe protecting you, you extend the skewered earl to the flames. The fire greedily consumes the earl, turning it from a tender sanguine red to elongated coal brick in the blink of an eye. The flame progresses up what's left of the deer horn skewer and begins to burn your fashionable cowskin robe. In a panic, you tear the robe off, fumbling the skewer. Both skewer and robe fall to the ground burning as you leap backwards. A moment later, the flames have died down, and you notice that from the ashes of the earl you can see the edge of something small, round, and red. Brushing the ashes away, you realize that it is a red poker chip.";
 }
 
-export function usePit(gameEngine: GameEngine) {
+export const usePit = (gameEngine: GameEngine) => {
     if (!gameEngine.inventoryContains("robe")) {
         return "As you approach the fire pit, the heat from the suddenly flaring flames starts to blister your skin. If only you had some protection..."
     }
@@ -67,7 +67,7 @@ export const redChip = new Item()
         return "You put the red poker chip into your rucksack."
     });
 
-export function roastSkeweredEarl(gameEngine: GameEngine) {
+export const roastSkeweredEarl = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation !== firepit) {
         return "There's nothing with which to roast the skewered earl properly here.";
     }
@@ -78,7 +78,7 @@ export function roastSkeweredEarl(gameEngine: GameEngine) {
     return createRedChip(gameEngine);
 }
 
-export function useEarlAndHorn(gameEngine: GameEngine, tryItem: string) {
+export const useEarlAndHorn = (gameEngine: GameEngine, tryItem: string) => {
     if (gameEngine.inventoryContains("earl") && gameEngine.inventoryContains("horn")) {
         gameEngine.currentLocation.addItem("skewered earl", skeweredEarl);
         gameEngine.send("take skewered earl");

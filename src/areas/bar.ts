@@ -3,7 +3,7 @@ import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
 
 let iceAvailable: boolean = false;
-function desc() {
+const desc = () => {
     let mainText: string = "You are in the bar. All of the implements you need to make a mean marg are here... Well, almost... There's a vitamix, tequila, and triple sec... but no lime. ";
     let iceText: string = "You presume there's ice in the ice maker. "
     let exitText: string = "\n\nSouthwest leads back to the living room.";
@@ -49,7 +49,7 @@ const triplesec = new Item()
 bar.addItem("triple sec", triplesec);
 
 let limeUsed: boolean = false;
-export function useLime(gameEngine: GameEngine) {
+export const useLime = (gameEngine: GameEngine) => {
     if (limeUsed) {
         return "You've already added the lime.";
     }
@@ -76,7 +76,7 @@ export const greenChip = new Item()
 
 let sips: number = 0;
 let chipTaken: boolean = false;
-export function takeMarg(gameEngine: GameEngine) {
+export const takeMarg = (gameEngine: GameEngine) => {
     if (!gameEngine.inventoryContains("cup")) {
         gameEngine.removeInventoryItem("marg");
         bar.addItem("marg", marg);
@@ -86,7 +86,7 @@ export function takeMarg(gameEngine: GameEngine) {
     return "You put the marg into your rucksack. You're sure it'll be fine.";
 }
 
-export function drinkMarg(gameEngine: GameEngine) {
+export const drinkMarg = (gameEngine: GameEngine) => {
     if (sips > 4) {
         if (!chipTaken) {
             gameEngine.currentLocation.addItem("green chip", greenChip);
@@ -98,20 +98,20 @@ export function drinkMarg(gameEngine: GameEngine) {
         return "You've taken the last sip of the marg. It was great while it lasted.";
     }
     sips++;
-    switch(sips) {
-        case 1: { 
+    switch (sips) {
+        case 1: {
             return "You take a sip of the marg. It's pleasantly citrusy and intoxicating. There's still plenty left in the cup."
         }
-        case 2: { 
+        case 2: {
             return "You take a sip of the marg. It's pleazantly citrusey and intoxicating. There's a little less than plenty left in the cup."
         }
-         case 3: { 
+        case 3: {
             return "You take a sip of the marg. It's ploozantly citrusay and intoxicating. There's about half left in the cup."
         }
-         case 4: { 
+        case 4: {
             return "You take a sip of the marg. It's citroosly pleesant and intoxicating. There's less than half left in the cup."
         }
-         case 5: { 
+        case 5: {
             return "You take a sip of the marg. It's clitrantly ploosey and intoxicating. There's only a little left in the cup."
         }
     }
@@ -122,7 +122,7 @@ export const marg = new Item()
     .setTakeable(true);
 
 let cupUsed: boolean = false;
-export function useCup(gameEngine: GameEngine) {
+export const useCup = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation !== bar) {
         return "You can't use the cup here.";
     }
@@ -144,7 +144,7 @@ const vitamix = new Item()
             }
             return "You've already made the marg! You should pour it into something from which to drink.";
         }
-        if (!tequilaPoured && ! triplesecPoured && !limeUsed && !iceUsed) {
+        if (!tequilaPoured && !triplesecPoured && !limeUsed && !iceUsed) {
             return "The vitamix is currently empty.";
         } else if (tequilaPoured && triplesecPoured && limeUsed && iceUsed && !margMade) {
             return "The vitamix looks full! Time to make the marg!";
@@ -171,7 +171,7 @@ bar.addItem("vitamix", vitamix);
 let quote1Done: boolean = false;
 let quote2Done: boolean = false;
 let quote3Done: boolean = false;
-function doQuotes(prefix: string) {
+const doQuotes = (prefix: string) => {
     if (quote1Done && quote2Done && quote3Done) {
         bar.addItem("ice", ice);
         iceAvailable = true;
@@ -192,7 +192,7 @@ function doQuotes(prefix: string) {
     return prefix + "\n\nWhere will you never go as long as you stick with me?";
 }
 
-const rj = new Item() 
+const rj = new Item()
     .on("say", () => {
         if (!quote1Done) {
             quote1Done = true;
@@ -202,7 +202,7 @@ const rj = new Item()
         return "";
     });
 
-const woodenDolly = new Item() 
+const woodenDolly = new Item()
     .on("say", () => {
         if (!quote2Done) {
             quote2Done = true;

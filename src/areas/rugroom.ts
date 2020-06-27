@@ -6,7 +6,7 @@ let mainText: string = "This bedroom was dubbed The Cowskin Rug Bedroom due to i
 let deerHeadText: string = "There's a deer head statue sitting as an awkward decoration on a glass coffee table. ";
 let exitText: string = "\n\nThe door to the east leads back to the hallway.";
 
-function desc() {
+const desc = () => {
     return mainText +
     deerHeadText + 
     exitText;
@@ -19,7 +19,7 @@ export const rugroom = new Location()
 let ottomanText: string = "Tie ottoman looks out of place, given there's no chair or couch near it. You wonder if it is meant to be used for something other than foot-resting... ";
 let cushionDislodgeText: string = "";
 let thumbStatueInsideText: string = "";
-function ottomanDesc() {
+const ottomanDesc = () => {
     return ottomanText +
     cushionDislodgeText + 
     thumbStatueInsideText;
@@ -36,7 +36,7 @@ const ottoman = new Item()
 rugroom.addItem("ottoman", ottoman);
 
 let cushionMoved = false;
-function dislodgeCushion() {
+const dislodgeCushion = () => {
     if (!cushionMoved) {
         cushionMoved = true;
         cushionDislodgeText = "The cushion atop the ottoman has been dislodged. ";
@@ -67,7 +67,7 @@ export const thumbStatue = new Item()
     })
     .setTakeable(true);
 
-export function wearCowskin(gameEngine: GameEngine, robe: Item) {
+export const wearCowskin = (gameEngine: GameEngine, robe: Item) => {
     if (!gameEngine.inventoryContains("cowskin")) {
         return "You have to take the cowskin before you can wear it.";
     }
@@ -93,7 +93,7 @@ export const ornateKey = new Item()
     .setTakeable(true)
     .setTake(() => "You put the ornate key into your rucksack.");
 
-export function breakDeerhead(gameEngine: GameEngine) {
+export const breakDeerhead = (gameEngine: GameEngine) => {
     gameEngine.removeInventoryItem("deer head statue");
     deerHeadText = "";
     gameEngine.currentLocation.addItem("ornate key", ornateKey);
@@ -121,7 +121,7 @@ const thievery = new Item()
     .setUse(() => "You can't actively use the knowledge by itself. You probably need some tools of the trade.");
 rugroom.addItem("thievery", thievery);
 
-export function readBook(gameEngine: GameEngine) {
+export const readBook = (gameEngine: GameEngine) => {
     if (gameEngine.inventoryContains("thievery")) {
         return "You've already gained the knowledge of thievery!";
     }
