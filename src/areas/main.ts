@@ -71,7 +71,7 @@ import {poolwest,
 
 import {backyard, feedMeter} from './backyard';
 
-import {tent, useCoin} from './tent';
+import Tent from './Tent';
 
 import {bunkhouse, 
     useCupboardKey, 
@@ -155,9 +155,6 @@ backyard
     .link("sw", poolwest)
     .setOnEnter(() => tagIt("backyard"));
 
-tent
-    .link("through flap", backyard)
-    .setOnEnter(() => tagIt("tent"));
 
 bunkhouse
     .link("w", pooleast)
@@ -219,13 +216,7 @@ thumbStatue.setUse(() => placeThumb(gameEngine, thumbStatue));
 peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));
 okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
 
-blackChip.setUse(() => feedMeter(gameEngine, blackChip, tent));
-redChip.setUse(() => feedMeter(gameEngine, redChip, tent));
-blueChip.setUse(() => feedMeter(gameEngine, blueChip, tent));
-greenChip.setUse(() => feedMeter(gameEngine, greenChip, tent));
-whiteChip.setUse(() => feedMeter(gameEngine, whiteChip, tent));
 
-coin.setUse(() => useCoin(gameEngine));
 
 const gameEngine = new GameEngine(courtyard);
 gameEngine.setStartLocation(courtyard);
@@ -242,19 +233,37 @@ const tagIt = (action: string) =>
         event_label: new Date().toUTCString(),
         value: timeDiffInSeconds(),
     });
-tagIt('start');
+
+const tent = new Tent(gameEngine, tagIt);
+tent.link("through flap", backyard);
+blackChip.setUse(() => feedMeter(gameEngine, blackChip, tent));
+redChip.setUse(() => feedMeter(gameEngine, redChip, tent));
+blueChip.setUse(() => feedMeter(gameEngine, blueChip, tent));
+greenChip.setUse(() => feedMeter(gameEngine, greenChip, tent));
+whiteChip.setUse(() => feedMeter(gameEngine, whiteChip, tent));
+coin.setUse(() => tent.useCoin());
 
 // HACK ZONE
-// diningroom.addItem("thumb statue", thumbStatue);
-// diningroom.addItem("peace statue", peaceStatue);
-// diningroom.addItem("okay statue", okayStatue);
+// backyard.addItem("coin", coin);
+// backyard.addItem("black", blackChip);
+// backyard.addItem("blue", blueChip);
+// backyard.addItem("green", greenChip);
+// backyard.addItem("red", redChip);
+// backyard.addItem("white", whiteChip);
 // gameEngine.send("n");
 // gameEngine.send("e");
 // gameEngine.send("e");
-// gameEngine.send("use thumb statue");
-// gameEngine.send("use peace statue");
-// gameEngine.send("use okay statue");
-// gameEngine.send("play mafia");
+// gameEngine.send("n");
+// gameEngine.send("nw");
+// gameEngine.send("use black");
+// gameEngine.send("use blue");
+// gameEngine.send("use green");
+// gameEngine.send("use red");
+// gameEngine.send("use white");
+// gameEngine.send("take coin");
+// gameEngine.send("go through flap");
 // END HACK ZONE
+
+tagIt("start");
 
 export default gameEngine;
