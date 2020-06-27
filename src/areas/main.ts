@@ -1,6 +1,6 @@
 import GameEngine from '../engine/GameEngine';
 
-import {courtyard, coin} from './courtyard';
+import Courtyard from './Courtyard';
 
 import {livingroom,
     headset,
@@ -89,19 +89,6 @@ snacks?
 */
 
 // location wiring
-courtyard
-    .link("n", livingroom)
-    .link("through door", livingroom)
-    .setOnEnter(() => tagIt("courtyard"));
-
-livingroom
-    .link("s", courtyard)
-    .link("ne", bar)
-    .link("e", kitchen)
-    .link("w", hallway)
-    .link("through door", courtyard)
-    .setOnEnter(() => tagIt("livingroom"));
-
 bar
     .link("sw", livingroom)
     .setOnEnter(() => tagIt("bar"));
@@ -217,10 +204,6 @@ peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));
 okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
 
 
-
-const gameEngine = new GameEngine(courtyard);
-gameEngine.setStartLocation(courtyard);
-
 const startTime = new Date();
 function timeDiffInSeconds(): number {
     return Math.floor((new Date().getTime() - startTime.getTime()) / 1000);
@@ -234,6 +217,24 @@ const tagIt = (action: string) =>
         value: timeDiffInSeconds(),
     });
 
+const courtyard = new Courtyard(tagIt);
+const gameEngine = new GameEngine(courtyard);
+gameEngine.setStartLocation(courtyard);
+
+courtyard
+    .link("n", livingroom)
+    .link("through door", livingroom)
+    .setOnEnter(() => tagIt("courtyard"));
+
+livingroom
+    .link("s", courtyard)
+    .link("ne", bar)
+    .link("e", kitchen)
+    .link("w", hallway)
+    .link("through door", courtyard)
+    .setOnEnter(() => tagIt("livingroom"));
+
+
 const tent = new Tent(gameEngine, tagIt);
 tent.link("through flap", backyard);
 blackChip.setUse(() => feedMeter(gameEngine, blackChip, tent));
@@ -241,7 +242,7 @@ redChip.setUse(() => feedMeter(gameEngine, redChip, tent));
 blueChip.setUse(() => feedMeter(gameEngine, blueChip, tent));
 greenChip.setUse(() => feedMeter(gameEngine, greenChip, tent));
 whiteChip.setUse(() => feedMeter(gameEngine, whiteChip, tent));
-coin.setUse(() => tent.useCoin());
+courtyard.coin.setUse(() => tent.useCoin());
 
 // HACK ZONE
 // backyard.addItem("coin", coin);
