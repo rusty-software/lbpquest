@@ -3,8 +3,8 @@ import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
 
 let mainText: string = "The bunkhouse is as warm and inviting as ever, with a special emphasis on 'warm.' ";
-let cabinetText: string = "The well-worn cupboard in the kitchenette looks like it's recently had some doors installed. ";
-let fishText: string = "A poorly-taxidermied fish adorns the wall. ";
+let cabinetText: string = "The well-worn _cupboard_ in the kitchenette looks like it's recently had some doors installed. ";
+let fishText: string = "A poorly-taxidermied _fish_ adorns the wall. ";
 let exitText: string = "\n\nThe pool is to your west."
 
 const desc = () => {
@@ -31,7 +31,7 @@ let cupboardUnlocked: boolean = false;
 let cupboardOpen: boolean = false;
 let peaceStatueTaken: boolean = false;
 let closedText: string = "The cupboard is closed.";
-let openWithStatue: string = "The cupboard is open. Its only interesting content is an oddly placed peace statue.";
+let openWithStatue: string = "The cupboard is open. Its only interesting content is an oddly placed _peace statue_.";
 let openSansStatue: string = "The cupboard is open. It doesn't contain anything interesting.";
 
 export const peaceStatue = new Item()
@@ -70,7 +70,7 @@ const cupboard = new Item()
             if (peaceStatueTaken) {
                 return "You open the cupboard. Nothing interesting is inside.";
             }
-            return "You open the cupboard. A familiar looking peace statue is inside.";
+            return "You open the cupboard. A familiar looking _peace statue_ is inside.";
         }
         return "The cupboard is locked. Looks like it requires a key."
     })

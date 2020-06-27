@@ -2,7 +2,7 @@ import Location from '../engine/Location';
 import GameEngine from '../engine/GameEngine';
 import Item from '../engine/Item';
 
-let mainDesc = "The firepit is ringed by a series of pale yellow, plastic chairs, which seem to be slowly melting before the force of a much larger than expected and completely unattended open fire. "
+let mainDesc = "The _firepit_ is ringed by a series of pale yellow, plastic chairs, which seem to be slowly melting before the force of a much larger than expected and completely unattended open fire. "
 let exitDesc = "\n\nA door to the south leads back inside the house, and the pool is to the east.";
 
 let chipCreated: boolean = false;
@@ -10,7 +10,7 @@ let chipTaken: boolean = false;
 const desc = () => {
     let chipText: string = "";
     if (chipCreated && !chipTaken) {
-        chipText = "There is a red poker chip here. ";
+        chipText = "There is a _red poker chip_ here. ";
     }
 
     return mainDesc
@@ -25,11 +25,11 @@ export const firepit = new Location()
 const createRedChip = (gameEngine: GameEngine) => {
     gameEngine.removeInventoryItem("skewered earl");
     gameEngine.removeInventoryItem("robe");
-    firepit.addItem("red chip", redChip);
+    firepit.addItem("red poker chip", redChip);
     chipCreated = true;
     firepit.setDesc(desc());
 
-    return "With your cowskin robe protecting you, you extend the skewered earl to the flames. The fire greedily consumes the earl, turning it from a tender sanguine red to elongated coal brick in the blink of an eye. The flame progresses up what's left of the deer horn skewer and begins to burn your fashionable cowskin robe. In a panic, you tear the robe off, fumbling the skewer. Both skewer and robe fall to the ground burning as you leap backwards. A moment later, the flames have died down, and you notice that from the ashes of the earl you can see the edge of something small, round, and red. Brushing the ashes away, you realize that it is a red poker chip.";
+    return "With your cowskin robe protecting you, you extend the skewered earl to the flames. The fire greedily consumes the earl, turning it from a tender sanguine red to elongated coal brick in the blink of an eye. The flame progresses up what's left of the deer horn skewer and begins to burn your fashionable cowskin robe. In a panic, you tear the robe off, fumbling the skewer. Both skewer and robe fall to the ground burning as you leap backwards. A moment later, the flames have died down, and you notice that from the ashes of the earl you can see the edge of something small, round, and red. Brushing the ashes away, you realize that it is a _red poker chip_.";
 }
 
 export const usePit = (gameEngine: GameEngine) => {
@@ -88,10 +88,10 @@ export const useEarlAndHorn = (gameEngine: GameEngine, tryItem: string) => {
     }
 
     if (tryItem === "horn" && !gameEngine.inventoryContains("earl")) {
-        return "You wave the horn around like a magic wand.\n\nNothing happens.\n\nMaybe if you put something on it...?";
+        return "You wave the deer horn around like a magic wand.\n\nNothing happens.\n\nMaybe if you put something on it...?";
     }
     if (tryItem === "earl" && !gameEngine.inventoryContains("horn")) {
-        return "You wave the earl around like a magic wand.\n\nNothinghappens.\n\nMaybe if you put it on something...?";
+        return "You wave the earl around like a magic wand.\n\nNothing happens.\n\nMaybe if you put it on something...?";
     }
     return "";
 }

@@ -34,8 +34,8 @@ export const usePool = (gameEngine: GameEngine) => {
     if (blueChipTaken) {
         return "You swim around for a few minutes, basking in the protection the snorkel provides you.";
     }
-    poolwest.addItem("blue chip", blueChip);
-    return "You jump into the pool, the snorkel providing you with protection from whatever substances might be in the water. Through the snorkel, you can now see that the thing on the bottom of the pool is a blue poker chip.";
+    poolwest.addItem("blue poker chip", blueChip);
+    return "You jump into the pool, the snorkel providing you with protection from whatever substances might be in the water. Through the snorkel, you can now see that the thing on the bottom of the pool is a _blue poker chip_.";
 }
 
 export const blueChip = new Item()

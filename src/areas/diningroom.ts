@@ -6,12 +6,12 @@ const shuffle = (arr: any[]) => {
     let currentIndex = arr.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-      
-          temporaryValue = arr[currentIndex];
-          arr[currentIndex] = arr[randomIndex];
-          arr[randomIndex] = temporaryValue;
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = arr[currentIndex];
+        arr[currentIndex] = arr[randomIndex];
+        arr[randomIndex] = temporaryValue;
     }
     return arr;
 }
@@ -106,7 +106,7 @@ const playMafia = () => {
         + "\n\nYou may accuse a player by entering `accuse <player name>`. Enough people at the table will agree with your decision to guarantee its adoption. If the balance tips in the mafia's favor, the game is over!";
         return response;
     } else if (mafiaWon && !blackChipTaken) {
-        return "You've already won the Mafia game. You just need to take the black poker chip.";
+        return "You've already won the Mafia game. You just need to take the _black poker chip_.";
     } 
     return "With whom?";
 };
@@ -118,11 +118,11 @@ const lostMafia = () => {
     return "\"The mafia has won!\" exclaims the Moderator. \"The game will be reset. Better luck next time, kid.\"";
 }
 const wonMafia = () => {
-    diningroom.addItem("black chip", blackChip);
+    diningroom.addItem("black poker chip", blackChip);
     mafiaWon = true;
     mafiaPlayable = false;
 
-    return "\"You've won the game!\" declares the Moderator. \"Please accept this as a token of your prowess.\"\n\nThe Moderator slides a black poker chip toward you."
+    return "\"You've won the game!\" declares the Moderator. \"Please accept this as a token of your prowess.\"\n\nThe Moderator slides a _black poker chip_ toward you."
 }
 const quitMafia = () => {
     return "You stand up and leave the table, the Moderator casting a confused look at you.";
@@ -208,9 +208,7 @@ export const placeOkay = (gameEngine: GameEngine, okayStatue: Item) => {
 }
 
 const mafia = new Item()
-    .setExamine(() => {
-        return "examining mafia. Should list game status as well as list commands and how to use them.";
-    })
+    .setExamine(() => playMafia())
     .setTake(() => "The Moderator looks at you sternly, saying \"Those aren't your cards.\"")
     .setTakeable(false)
     .setUse(() => "You can accuse someone or quit the game.")

@@ -117,11 +117,11 @@ const party = new Item()
             return "You have already won the game of Job Simulator!";
         }
         if (attendedParty && !whiteChipTaken) {
-            return "The party is over, but the white poker chip remains."
+            return "The party is over, but the _white poker chip_ remains."
         }
         attendedParty = true;
-        vr.addItem("white chip", whiteChip);
-        return "All of your virtual coworkers attend your party to send you off in style. Your virtual boss digs around in their virtual pocket and presents you with a token of their esteem for all your hard work.\n\nYou are presented with what looks like a white poker chip.";
+        vr.addItem("white poker chip", whiteChip);
+        return "All of your virtual coworkers attend your party to send you off in style. Your virtual boss digs around in their virtual pocket and presents you with a token of their esteem for all your hard work.\n\nYou are presented with what looks like a _white poker chip_.";
     });
 
 const jobGame = new Item()
