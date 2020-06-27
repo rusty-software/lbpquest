@@ -1,6 +1,7 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 
 let mainText: string = "The backyard has a large, jauntily decorated tent in it, the kind that would uncomfortably house all the LBPers for a poker game during a raging thunderstorm. ";
 let flapText: string = "The front _flap_ is closed, and appears to be blocked by a parking lot _gate_, the arm firmly down. ";
@@ -24,7 +25,7 @@ export const feedMeter = (gameEngine: GameEngine, pokerChip: Item, tent: Locatio
     gameEngine.removeInventoryItem(pokerChip.name);
     leftToFeed--;
     if (leftToFeed === 0) {
-        backyard.removeItem("gate");
+        backyard.removeItem(ItemKey.Gate);
         flapText = "The front _flap_ is open, the parking gate's arm almost waving you inside. ";
         backyard.setDesc(desc());
         backyard.link("through flap", tent);
@@ -42,4 +43,4 @@ const gate = new Item()
     .setTake(() => "You cannot take the parking gate. It just wouldn't be right.")
     .setUse(() => "In Soviet Russia, parking gate USE YOU!");
 
-backyard.addItem("gate", gate);
+backyard.addItem(ItemKey.Gate, gate);

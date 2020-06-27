@@ -15,19 +15,19 @@ const desc = () => {
         counterText = "The counter is a mess, but you don't feel inspired either to pick over it or clean it. ";
     } else {
         if (!snacksTaken) {
-            counterText += "All of your favorite snacks are here. ";
+            counterText += "All of your favorite _snacks_ are here. ";
         }
         if (!cupTaken) {
-            counterText += "You manage to locate at least a single clean cup. "
+            counterText += "You manage to locate at least a single clean _cup_. "
         }
         if (!limeTaken) {
-            counterText += "While the bananas are already gone, there's at least one lime left. ";
+            counterText += "While the bananas are already gone, there's at least one _lime_ left. ";
         }
     }
 
-    let fridgeText: string = "The fridge is covered in arts and crafts, although there is a blank space left. "
+    let fridgeText: string = "The _fridge_ is covered in arts and crafts, although there is a blank space left. "
     if (artsApplied) {
-        fridgeText = "The fridge is covered in arts and crafts, including your questionable contribution. "
+        fridgeText = "The _fridge_ is covered in arts and crafts, including your questionable contribution. "
     }
     return mainText  
         + fridgeText 
@@ -75,7 +75,7 @@ export const usePorn = (gameEngine: GameEngine) => {
         artsApplied = true;
         kitchen.setDesc(desc());
         gameEngine.removeInventoryItem("porn");
-        return "After inspecting the offerings already on the fridge, you attach your copy of \"Bovine Boudoir\" to the door using the ladybug magnet clip. You swear you hear the fridge sigh as you feel the door loosen.";
+        return "After inspecting the offerings already on the fridge, you attach your copy of \"Bovine Boudoir\" to the door using the ladybug magnet clip. You swear you hear the _fridge_ sigh as you feel the door loosen.";
     }
     return "You can't find a use for the porn here.";
 }
@@ -96,7 +96,7 @@ const fridge = new Item()
     .setExamine(() => {
         let fridgeDesc: string = "The fridge seems to be holding up alright under the strain of the LBP groceries and arts and crafts. ";
         if (artsApplied && !earlTaken) {
-            fridgeDesc += "There is an earl inside.";
+            fridgeDesc += "There is an _earl_ inside.";
         }
         return fridgeDesc;
     })
@@ -108,7 +108,7 @@ const fridge = new Item()
                 return fridgeContents;
             }
             kitchen.addItem("earl", earl);
-            return fridgeContents + "The exception is an earl. You want that earl. You NEED that earl!";
+            return fridgeContents + "The exception is an _earl_. You want that earl. You NEED that earl!";
         }
         return "You try to open the fridge, but the door won't budge. If only there was something on it to give it a little extra weight. Or decor.";
     });

@@ -3,7 +3,7 @@ import Item from '../engine/Item';
 
 export const insidegarage = new Location()
     .setId("Inside the Garage")
-    .setDesc("You are inside the garage. The space is littered with the trappings of tools of a lawn long neglected. You notice a kayak perched precariously atop a broken down ATV." + 
+    .setDesc("You are inside the garage. The space is littered with the trappings of tools of a lawn long neglected. You notice a _kayak_ perched precariously atop a broken down ATV." + 
     "\n\nThe only exit is back through the door.");
 
 let snorkelTaken: boolean = false;
@@ -20,7 +20,7 @@ const kayak = new Item()
     .setExamine(() => {
         let text: string = "The kayak is sunflare orange and might even stay afloat in water.";
         if (!snorkelTaken) {
-            text += "There appears to be a snorkel stuffed into the kayak's seat.";
+            text += "There appears to be a _snorkel_ stuffed into the kayak's seat.";
         }
         return text; 
     })

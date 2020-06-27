@@ -1,6 +1,7 @@
 import Location from '../engine/Location'
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 
 let iceAvailable: boolean = false;
 const desc = () => {
@@ -32,7 +33,7 @@ const tequila = new Item()
         tequilaPoured = true;
         return "You pour the proper amount of tequila into the vitamix.";
     });
-bar.addItem("tequila", tequila);
+bar.addItem(ItemKey.Tequila, tequila);
 
 let triplesecPoured: boolean = false;
 const triplesec = new Item()
@@ -46,7 +47,7 @@ const triplesec = new Item()
         triplesecPoured = true;
         return "You pour the proper amount of tequila into the vitamix.";
     });
-bar.addItem("triple sec", triplesec);
+bar.addItem(ItemKey.TripleSec, triplesec);
 
 let limeUsed: boolean = false;
 export const useLime = (gameEngine: GameEngine) => {
@@ -55,7 +56,7 @@ export const useLime = (gameEngine: GameEngine) => {
     }
 
     limeUsed = true;
-    gameEngine.removeInventoryItem("lime");
+    gameEngine.removeInventoryItem(ItemKey.Lime);
     return "You cut the lime, squeezing each wedge into the vitamix. Then you thrown the rinds in for good measure.";
 }
 
@@ -77,20 +78,20 @@ export const greenChip = new Item()
 let sips: number = 0;
 let chipTaken: boolean = false;
 export const takeMarg = (gameEngine: GameEngine) => {
-    if (!gameEngine.inventoryContains("cup")) {
-        gameEngine.removeInventoryItem("marg");
-        bar.addItem("marg", marg);
+    if (!gameEngine.inventoryContains(ItemKey.Cup)) {
+        gameEngine.removeInventoryItem(ItemKey.Marg);
+        bar.addItem(ItemKey.Marg, marg);
         return "You don't have anything to pour the marg into!";
     }
-    gameEngine.removeInventoryItem("cup");
+    gameEngine.removeInventoryItem(ItemKey.Cup);
     return "You put the marg into your rucksack. You're sure it'll be fine.";
 }
 
 export const drinkMarg = (gameEngine: GameEngine) => {
     if (sips > 4) {
         if (!chipTaken) {
-            gameEngine.currentLocation.addItem("green poker chip", greenChip);
-            gameEngine.send("take green poker chip");
+            gameEngine.currentLocation.addItem(ItemKey.GreenChip, greenChip);
+            gameEngine.send(`take ${ItemKey.GreenChip}`);
 
             return "On taking this sip, something slides forward from the bottom of the cup. Looking inside, you see a green poker chip. You slide it into your rucksack.";
         }
@@ -130,7 +131,7 @@ export const useCup = (gameEngine: GameEngine) => {
         return "You don't have a use for the cup... yet...";
     }
     cupUsed = true
-    gameEngine.send("take marg");
+    gameEngine.send(`take ${ItemKey.Marg}`);
 
     return "You pour the _marg_ out of the vitamix and into your cup. It's ready for drinking!";
 }

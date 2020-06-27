@@ -3,9 +3,9 @@ import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
 import { vr } from './vr';
 
-let vrText: string = "The living room is spacious, especially since all of the furniture has been pushed out of the way to make room for the VR setup. The vr headset, in particular, looks pretty sweet/sweat. ";
-let pornText: string = "You notice that the porn is prevalent here, the most appealing of which is an old copy of \"Bovine Boudoir\". ";
-let bricabracText: string = "There are also baskets full of various and sundry decorative bric-a-brac littered on every flat surface. ";
+let vrText: string = "The living room is spacious, especially since all of the furniture has been pushed out of the way to make room for the VR setup. The vr _headset_, in particular, looks pretty sweet/sweat. ";
+let pornText: string = "You notice that the _porn_ is prevalent here, the most appealing of which is an old copy of \"Bovine Boudoir\". ";
+let bricabracText: string = "There are also baskets full of various and sundry decorative _bric-a-brac_ littered on every flat surface. ";
 let exitText = "\n\nTo the northeast is the bar, and the kitchen is to the east. To the west is a hallway leading to some bedrooms. The front door to the south leads to the courtyard.";
 
 const desc = () => {
@@ -40,8 +40,8 @@ export const horn = new Item()
 
 const bricabrac = new Item()
     .setExamine(() => {
-        livingroom.addItem("horn", horn);
-        return "Most of the bric-a-brac is made up of animal bones, almost certainly from deer. One deer horn in particular catches your eye. Maybe it's the way it sticks up straight... like a... uh... tree.";
+        livingroom.addItem("deer horn", horn);
+        return "Most of the bric-a-brac is made up of animal bones, almost certainly from deer. One _deer horn_ in particular catches your eye. Maybe it's the way it sticks up straight... like a... uh... tree.";
     })
     .setTakeable(false)
     .setTake(() => "There's too much bric-a-brac to take all of it. You might focus on a single piece.")
