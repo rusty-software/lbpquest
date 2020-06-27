@@ -14,14 +14,16 @@ import Location from './Location';
 
 class GameEngine {
     public currentLocation: Location;
-    private inventory: Map<string, Item>;
+    public actionCount: number;
 
+    private inventory: Map<string, Item>;
     private events: GameEvent[];
 
     constructor(location: Location) {
         this.currentLocation = location;
         this.events = [];
         this.inventory = new Map();
+        this.actionCount = 0;
     }
 
     public setStartLocation(location: Location): GameEngine {
@@ -49,6 +51,7 @@ class GameEngine {
     }
 
     public send(input: string) {
+        this.actionCount++;
         const lowerInput = input.toLowerCase().trim();
         const inputSplit = lowerInput.split(" ");
         const cmdText = inputSplit.shift();
