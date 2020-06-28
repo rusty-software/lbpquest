@@ -1,7 +1,6 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
-import ItemKeys from '../areas/itemenums';
 import ItemKey from '../areas/itemenums';
 
 let mainText: string = "The kitchen is exactly as you left it from the last LBP -- a riot of HEB loot. At least there are no ants! ";
@@ -17,13 +16,13 @@ const desc = () => {
         counterText = "The counter is a mess, but you don't feel inspired either to pick over it or clean it. ";
     } else {
         if (!snacksTaken) {
-            counterText += "All of your favorite _snacks_ are here. ";
+            counterText += `All of your favorite _${ItemKey.Snacks}_ are here. `;
         }
         if (!cupTaken) {
-            counterText += "You manage to locate at least a single clean _cup_. "
+            counterText += `You manage to locate at least a single clean _${ItemKey.Cup}_. `
         }
         if (!limeTaken) {
-            counterText += `While the bananas are already gone, there's at least one _${ItemKeys.Lime}_ left. `;
+            counterText += `While the bananas are already gone, there's at least one _${ItemKey.Lime}_ left. `;
         }
     }
 
@@ -50,7 +49,7 @@ const snacks = new Item()
         return "You put the snacks into your rucksack."
     })
     .setUse(() => "You <VERB> a(n) <AMOUNT> of <YOUR FAVORITE SNACKS>. SO GOOD!");
-kitchen.addItem("snacks", snacks);
+kitchen.addItem(ItemKey.Snacks, snacks);
 
 export const cup = new Item()
     .setExamine(() => "The cup looks simply perfect for holding a margarita.")
@@ -60,7 +59,7 @@ export const cup = new Item()
         kitchen.setDesc(desc());
         return "You put the cup into your rucksack."
     });
-kitchen.addItem("cup", cup);
+kitchen.addItem(ItemKey.Cup, cup);
 
 export const lime = new Item()
     .setExamine(() => "The lime looks simply perfect for squeezing into a margarita.")
@@ -70,13 +69,13 @@ export const lime = new Item()
         kitchen.setDesc(desc());
         return "You put the lime into your rucksack."
     });
-kitchen.addItem("lime", lime);
+kitchen.addItem(ItemKey.Lime, lime);
 
 export const usePorn = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation === kitchen) {
         artsApplied = true;
         kitchen.setDesc(desc());
-        gameEngine.removeInventoryItem("porn");
+        gameEngine.removeInventoryItem(ItemKey.Porn);
         return "After inspecting the offerings already on the fridge, you attach your copy of \"Bovine Boudoir\" to the door using the ladybug magnet clip. You swear you hear the _fridge_ sigh as you feel the door loosen.";
     }
     return "You can't find a use for the porn here.";
@@ -98,7 +97,7 @@ const fridge = new Item()
     .setExamine(() => {
         let fridgeDesc: string = "The fridge seems to be holding up alright under the strain of the LBP groceries and arts and crafts. ";
         if (artsApplied && !earlTaken) {
-            fridgeDesc += "There is an _earl_ inside.";
+            fridgeDesc += `There is an _${ItemKey.Earl}_ inside.`;
         }
         return fridgeDesc;
     })
@@ -109,9 +108,9 @@ const fridge = new Item()
             if (earlTaken) {
                 return fridgeContents;
             }
-            kitchen.addItem("earl", earl);
-            return fridgeContents + "The exception is an _earl_. You want that earl. You NEED that earl!";
+            kitchen.addItem(ItemKey.Earl, earl);
+            return fridgeContents + `The exception is an _${ItemKey.Earl}_. You want that earl. You NEED that earl!`;
         }
         return "You try to open the fridge, but the door won't budge. If only there was something on it to give it a little extra weight. Or decor.";
     });
-kitchen.addItem("fridge", fridge);
+kitchen.addItem(ItemKey.Fridge, fridge);

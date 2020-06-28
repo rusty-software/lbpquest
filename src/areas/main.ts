@@ -27,8 +27,7 @@ import {hallway,
 import {undecidedroom
     , useOrnateKey
     , okayStatue
-    , pouch
-    , thievesTools} from './undecidedroom';
+    , pouch} from './undecidedroom';
 
 import {rugroom, 
     thumbStatue, 
@@ -185,7 +184,6 @@ book.on("read", () => readBook(gameEngine));
 
 ornateKey.setUse(() => useOrnateKey(gameEngine));
 pouch.setUse(() => useTools(gameEngine, linkInsideGarage));
-thievesTools.setUse(() => useTools(gameEngine, linkInsideGarage));
 const linkInsideGarage = () => {
     garage.link("through door", insidegarage);
 }

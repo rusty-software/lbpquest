@@ -1,9 +1,10 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 
 const desc = () => {
-    let mainText: string = "This is the west side of the pool. It's slightly deeper than the east side. "
+    let mainText: string = `This is the west side of the _${ItemKey.Pool}_. It's slightly deeper than the east side. `
     let exitText: string = "\n\nThe other end of the pool is to your east, and the firepit is to the west. Going northeast will take you into the backyard, where there's a jauntily decorated tent.";
     return mainText
         + exitText;
@@ -22,20 +23,20 @@ export const pool = new Item()
         }
         return text;
     });
-poolwest.addItem("pool", pool);
+poolwest.addItem(ItemKey.Pool, pool);
 
 export const usePool = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation !== poolwest) {
         return "There's no real use for that here.";
     }
-    if (!gameEngine.inventoryContains("snorkel")) {
+    if (!gameEngine.inventoryContains(ItemKey.Snorkel)) {
         return "Without some kind of protective gear, you would last two seconds in that pool.";
     }
     if (blueChipTaken) {
         return "You swim around for a few minutes, basking in the protection the snorkel provides you.";
     }
-    poolwest.addItem("blue poker chip", blueChip);
-    return "You jump into the pool, the snorkel providing you with protection from whatever substances might be in the water. Through the snorkel, you can now see that the thing on the bottom of the pool is a _blue poker chip_.";
+    poolwest.addItem(ItemKey.BlueChip, blueChip);
+    return `You jump into the pool, the snorkel providing you with protection from whatever substances might be in the water. Through the snorkel, you can now see that the thing on the bottom of the pool is a _${ItemKey.BlueChip}_.`;
 }
 
 export const blueChip = new Item()

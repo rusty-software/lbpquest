@@ -1,14 +1,15 @@
 import Location from '../engine/Location';
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 
 let doorUnlocked: boolean = false;
 const desc = () => {
     let text: string = "You are outside the garage. ";
-    let lockedText: string = "The _door_ is firmly closed and locked, preventing entry. ";
+    let lockedText: string = `The _${ItemKey.GarageDoor}_ is firmly closed and locked, preventing entry. `;
     let exitText: string = "\n\nThe pool is to your northwest. ";
     if (doorUnlocked) {
-        lockedText = "The _door_ was locked, but has recently been expertly unlocked without using a key. ";
-        exitText += "You can also go through the garage _door_ to see what's inside. ";
+        lockedText = `The _${ItemKey.GarageDoor}_ was locked, but has recently been expertly unlocked without using a key. `;
+        exitText += `You can also go through the garage _${ItemKey.GarageDoor}_ to see what's inside. `;
     }
     return text
         + lockedText
@@ -23,13 +24,13 @@ export const useTools = (gameEngine: GameEngine, linkInsideGarage: () => void) =
         return "It doesn't look like you can use that here.";
     }
     if (doorUnlocked) {
-        return "You've already unlocked the garage _door_. You just need to go through it.";
+        return `You've already unlocked the _${ItemKey.GarageDoor}_. You just need to go through it.`;
     }
-    if (!gameEngine.inventoryContains("thievery")) {
+    if (!gameEngine.inventoryContains(ItemKey.Thievery)) {
         return "You have no idea how to use thieves tools!";
     }
     doorUnlocked = true;
     linkInsideGarage();
     garage.setDesc(desc());
-    return "Using your knowledge of thievery, you pick the lock to the garage using the thieves tools. The garage _door_ is now open -- you just have to go through it.";
+    return `Using your knowledge of thievery, you pick the lock to the garage using the thieves tools. The _${ItemKey.GarageDoor}_ is now open -- you just have to go through it.`;
 }

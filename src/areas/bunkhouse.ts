@@ -46,7 +46,7 @@ export const peaceStatue = new Item()
 export const useCupboardKey = (gameEngine: GameEngine) => {
     if (gameEngine.currentLocation === bunkhouse) {
         cupboardUnlocked = true;
-        gameEngine.removeInventoryItem(ItemKey.SmallKey);
+        gameEngine.removeInventoryItem(ItemKey.CupboardKey);
         return "You use the cupboard key to unlock the cupboard.";
     }
     return "This doesn't look like the right place to use the cupboard key.";

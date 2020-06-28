@@ -1,11 +1,12 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 import { vr } from './vr';
 
-let vrText: string = "The living room is spacious, especially since all of the furniture has been pushed out of the way to make room for the VR setup. The vr _headset_, in particular, looks pretty sweet/sweat. ";
-let pornText: string = "You notice that the _porn_ is prevalent here, the most appealing of which is an old copy of \"Bovine Boudoir\". ";
-let bricabracText: string = "There are also baskets full of various and sundry decorative _bric-a-brac_ littered on every flat surface. ";
+let vrText: string = `The living room is spacious, especially since all of the furniture has been pushed out of the way to make room for the VR setup. The vr _${ItemKey.Headset}_, in particular, looks pretty sweet/sweat. `;
+let pornText: string = `You notice that the _${ItemKey.Porn}_ is prevalent here, the most appealing of which is an old copy of "Bovine Boudoir". `;
+let bricabracText: string = `There are also baskets full of various and sundry decorative _${ItemKey.Bricabrac}_ littered on every flat surface. `;
 let exitText = "\n\nTo the northeast is the bar, and the kitchen is to the east. To the west is a hallway leading to some bedrooms. The front door to the south leads to the courtyard.";
 
 const desc = () => {
@@ -40,8 +41,8 @@ export const horn = new Item()
 
 const bricabrac = new Item()
     .setExamine(() => {
-        livingroom.addItem("deer horn", horn);
-        return "Most of the bric-a-brac is made up of animal bones, almost certainly from deer. One _deer horn_ in particular catches your eye. Maybe it's the way it sticks up straight... like a... uh... tree.";
+        livingroom.addItem(ItemKey.DeerHorn, horn);
+        return `Most of the bric-a-brac is made up of animal bones, almost certainly from deer. One _${ItemKey.DeerHorn}_ in particular catches your eye. Maybe it's the way it sticks up straight... like a... uh... tree.`;
     })
     .setTakeable(false)
     .setTake(() => "There's too much bric-a-brac to take all of it. You might focus on a single piece.")
@@ -51,7 +52,7 @@ let inVR: boolean = false;
 export const useHeadset = (gameEngine: GameEngine, headset: Item, vr: Location) => {
     livingroom.link("vr", vr);
     inVR = true;
-    vr.addItem("headset", headset);
+    vr.addItem(ItemKey.Headset, headset);
 
     gameEngine.send("go vr");
     return "";
@@ -61,9 +62,9 @@ export const removeHeadset = (gameEngine: GameEngine, headset: Item) => {
     if (!inVR) {
         return "You aren't wearing the vr headset right now.";
     }
-    vr.removeItem("headset");
+    vr.removeItem(ItemKey.Headset);
     livingroom.unlink("vr");
-    livingroom.addItem("headset", headset);
+    livingroom.addItem(ItemKey.Headset, headset);
     vr.link("reality", livingroom);
     gameEngine.send("go reality");
     vr.unlink("reality");
@@ -85,6 +86,6 @@ export const headset = new Item()
         return "You remove the vr headset, returning you to non-virtual reality.";
     })
 
-livingroom.addItem("porn", porn);
-livingroom.addItem("bric-a-brac", bricabrac);
-livingroom.addItem("headset", headset);
+livingroom.addItem(ItemKey.Porn, porn);
+livingroom.addItem(ItemKey.Bricabrac, bricabrac);
+livingroom.addItem(ItemKey.Headset, headset);

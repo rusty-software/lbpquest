@@ -24,9 +24,7 @@ class Tent extends Location {
             + "\n\nThe chief is yours! YOU HAVE WON ALL THE THINGS in:"
             + "\n\n*** " + this.gameEngine.actionCount + " moves! ***"
             + "\n\nThus ends your LBPQuest. WELL DONE! See you next year!"
-
     }
-
 }
 
 export default Tent;

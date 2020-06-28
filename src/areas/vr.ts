@@ -1,5 +1,6 @@
 import Location from '../engine/Location';
 import Item from '../engine/Item';
+import ItemKey from './itemenums';
 
 let mainText: string = "You are in... VIRTUAL REALITY! \n\n";
 let menuText: string = "You can play the following games:\n\nJob Simulator\n\nApparently the vr machine isn't very powerful this year. ";
@@ -18,19 +19,19 @@ let filledCoffee: boolean = false;
 let presented: boolean = false;
 let shreddedPaper: boolean = false;
 let jobGameHead: string = "You find yourself in a virtual office environment -- a cube, to be precise. \n\n";
-let coffeeText: string = "There's an empty coffee cup on the desk. ";
-let computerText: string = "The computer screen displays a powerdot presentation. ";
-let paperText: string = "A pile of papers with sensitive spreadsheet data sits next to the desk near the shredder. ";
+let coffeeText: string = `There's an empty _${ItemKey.CoffeeCup}_ on the desk. `;
+let computerText: string = `The computer screen displays a _${ItemKey.Powerdot}_ presentation. `;
+let paperText: string = `A pile of _${ItemKey.Papers}_ with sensitive spreadsheet data sits next to the desk near the shredder. `;
 const playJob = (actionHeader: string) => {
     if (attendedParty && whiteChipTaken) {
         return "You have already won the game of Job Simulator!";
     }
     if (filledCoffee && presented && shreddedPaper) {
         if (!attendedParty) {
-            vr.addItem("party", party);
+            vr.addItem(ItemKey.RetirementParty, party);
         }
         return jobGameHead +
-            "You've done all the tasks! Time to attend your retirement party!";
+            `You've done all the tasks! Time to attend your _${ItemKey.RetirementParty}_!`;
     }
     if (filledCoffee) {
         coffeeText = "There's a full cup of coffee on the desk. ";
@@ -66,7 +67,7 @@ const cup = new Item()
     .setTake(() => "You really don't need to take the coffee cup. It's VR, after all.")
     .setUse(() => fillCoffee())
     .on("fill", () => fillCoffee());
-vr.addItem("cup", cup);
+vr.addItem(ItemKey.CoffeeCup, cup);
 
 const powerdot = new Item()
     .setExamine(() => {
@@ -84,7 +85,7 @@ const powerdot = new Item()
         presented = true;
         return playJob("You present the Powerdot. It goes so well that you think you're in line for a promotion!\n\n");
     });
-vr.addItem("powerdot", powerdot);
+vr.addItem(ItemKey.Powerdot, powerdot);
 
 let shreddedCount: number = 0;
 const papers = new Item()
@@ -107,7 +108,7 @@ const papers = new Item()
         shreddedCount = 1;
         return playJob("You carefully feed all of the papers into the shredder. It gleefully converts them into tiny pieces.");
     });
-vr.addItem("papers", papers);
+vr.addItem(ItemKey.Papers, papers);
 
 let attendedParty: boolean = false;
 let whiteChipTaken: boolean = false;
@@ -117,11 +118,11 @@ const party = new Item()
             return "You have already won the game of Job Simulator!";
         }
         if (attendedParty && !whiteChipTaken) {
-            return "The party is over, but the _white poker chip_ remains."
+            return `The party is over, but the _${ItemKey.WhiteChip}_ remains.`
         }
         attendedParty = true;
-        vr.addItem("white poker chip", whiteChip);
-        return "All of your virtual coworkers attend your party to send you off in style. Your virtual boss digs around in their virtual pocket and presents you with a token of their esteem for all your hard work.\n\nYou are presented with what looks like a _white poker chip_.";
+        vr.addItem(ItemKey.WhiteChip, whiteChip);
+        return `All of your virtual coworkers attend your party to send you off in style. Your virtual boss digs around in their virtual pocket and presents you with a token of their esteem for all your hard work.\n\nYou are presented with what looks like a _${ItemKey.WhiteChip}_.`;
     });
 
 const jobGame = new Item()
