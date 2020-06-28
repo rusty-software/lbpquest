@@ -4,7 +4,7 @@ import GameEngine from '../engine/GameEngine';
 import ItemKey from './itemenums';
 
 let mainText: string = "The backyard has a large, jauntily decorated tent in it, the kind that would uncomfortably house all the LBPers for a poker game during a raging thunderstorm. ";
-let flapText: string = `The front _flap_ is closed, and appears to be blocked by a parking lot _${ItemKey.Gate}_, the arm firmly down. `;
+let flapText: string = `The front flap is closed, and appears to be blocked by a parking lot _${ItemKey.Gate}_, the arm firmly down. `;
 let exitText: string = "\n\nGoing southeast will take you to the east end of the pool, and southwest to the west end of the pool.";
 
 const desc = () => {
@@ -26,10 +26,10 @@ export const feedMeter = (gameEngine: GameEngine, pokerChip: Item, tent: Locatio
     leftToFeed--;
     if (leftToFeed === 0) {
         backyard.removeItem(ItemKey.Gate);
-        flapText = "The front _flap_ is open, the parking gate's arm almost waving you inside. ";
+        flapText = "The front flap is open, the parking gate's arm almost waving you inside. ";
         backyard.setDesc(desc());
         backyard.link("through flap", tent);
-        return "As you place the fifth poker chip into the slot, the gate's arm slowly raises, granting you access to the tent via the _flap_.";
+        return "As you place the fifth poker chip into the slot, the gate's arm slowly raises, granting you access to the tent via the flap.";
     }
     return "You put the poker chip into the meter.";
 }

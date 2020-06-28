@@ -5,7 +5,7 @@ import ItemKey from './itemenums';
 let doorUnlocked: boolean = false;
 const desc = () => {
     let text: string = "You are outside the garage. ";
-    let lockedText: string = `The _${ItemKey.GarageDoor}_ is firmly closed and locked, preventing entry. `;
+    let lockedText: string = `The ${ItemKey.GarageDoor} is firmly closed and locked, preventing entry. `;
     let exitText: string = "\n\nThe pool is to your northwest. ";
     if (doorUnlocked) {
         lockedText = `The _${ItemKey.GarageDoor}_ was locked, but has recently been expertly unlocked without using a key. `;
@@ -24,7 +24,7 @@ export const useTools = (gameEngine: GameEngine, linkInsideGarage: () => void) =
         return "It doesn't look like you can use that here.";
     }
     if (doorUnlocked) {
-        return `You've already unlocked the _${ItemKey.GarageDoor}_. You just need to go through it.`;
+        return `You've already unlocked the ${ItemKey.GarageDoor}. You just need to go through it.`;
     }
     if (!gameEngine.inventoryContains(ItemKey.Thievery)) {
         return "You have no idea how to use thieves tools!";

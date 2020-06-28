@@ -5,7 +5,7 @@ import ItemKey from './itemenums';
 
 let mainText = "The hallway is long and narrow. "
 let firepitDoorText = "On the north wall, a door leads outside to the firepit. "
-let ropeText = `A length of frayed _${ItemKey.Rope}rope_ dangles unobtrusively from the firepit door handle. It looks like it might've been securing the door closed at some point. `
+let ropeText = `A length of frayed _${ItemKey.Rope}_ dangles unobtrusively from the firepit door handle. It looks like it might've been securing the door closed at some point. `
 let otherExitsText = "There are also doors to the south and west that lead to bedrooms, and the living room is to the east. "
 
 const desc = () => {
@@ -27,7 +27,7 @@ export const useRope = (gameEngine: GameEngine, robe: Item) => {
         return "You have to take the rope before you can use it.";
     }
     if (!gameEngine.inventoryContains(ItemKey.Cowskin)) {
-        return "You tie the rope around your waist. It makes a pretty nice belt. Pretty useless, that is...";
+        return "You tie the rope around your waist. It makes a pretty nice belt. Sorry, I meant \"useless\"... It makes a pretty useless belt.";
     }
     gameEngine.removeInventoryItem(ItemKey.Rope);
     gameEngine.removeInventoryItem(ItemKey.Cowskin);

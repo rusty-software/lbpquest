@@ -76,7 +76,7 @@ export const usePorn = (gameEngine: GameEngine) => {
         artsApplied = true;
         kitchen.setDesc(desc());
         gameEngine.removeInventoryItem(ItemKey.Porn);
-        return "After inspecting the offerings already on the fridge, you attach your copy of \"Bovine Boudoir\" to the door using the ladybug magnet clip. You swear you hear the _fridge_ sigh as you feel the door loosen.";
+        return "After inspecting the offerings already on the fridge, you attach your copy of \"Bovine Boudoir\" to the door using the ladybug magnet clip. You swear you hear the fridge sigh as you feel the door loosen.";
     }
     return "You can't find a use for the porn here.";
 }
@@ -91,7 +91,8 @@ export const earl = new Item()
             return "You put the earl into your rucksack.";
         }
         return "";
-    });
+    })
+    .on("eat", () => "There is no way you're going to eat that earl uncooked.");
 
 const fridge = new Item()
     .setExamine(() => {

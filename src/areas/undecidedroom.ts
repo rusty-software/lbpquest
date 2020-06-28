@@ -90,12 +90,14 @@ const readBook = () => {
 
 const book = new Item()
     .setExamine(() => "The yellow book is laying on its side and is slightly larger than any of the other books in the bookcase.")
-    .setUse(() => readBook())
+    .setTakeable(false)
+    .setTake(() => "Nope.")
+    .setUse(() => "\"Use\" the book...? What does one normally do with books?")
     .on("read", () => readBook());
 
 const bookcase = new Item()
     .setExamine(() => {
-        undecidedroom.addItem(ItemKey.UndecidedBookcase, book);
+        undecidedroom.addItem(ItemKey.UndecidedBook, book);
         return `The bookcase has a bunch of books on it, but only the _${ItemKey.UndecidedBook}_ looks like it might be worth reading.`
     })
     .setTakeable(false)

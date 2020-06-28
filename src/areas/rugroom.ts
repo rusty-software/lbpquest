@@ -17,7 +17,7 @@ export const rugroom = new Location()
     .setId("Cowskin Rug Bedroom")
     .setDesc(desc());
 
-let ottomanText: string = `The _${ItemKey.Ottoman}_ looks out of place, given there's no chair or couch near it. You wonder if it is meant to be used for something other than foot-resting... `;
+let ottomanText: string = `The ottoman looks out of place, given there's no chair or couch near it. You wonder if it is meant to be used for something other than foot-resting... `;
 let cushionDislodgeText: string = "";
 let thumbStatueInsideText: string = "";
 const ottomanDesc = () => {
@@ -28,10 +28,10 @@ const ottomanDesc = () => {
 const ottoman = new Item()
     .setExamine(() => ottomanDesc())
     .setTakeable(false)
-    .setTake(() => `As oddly out of place as it is, you think the _${ItemKey.Ottoman}_ should probably stay where it is.`)
+    .setTake(() => `As oddly out of place as it is, you think the ${ItemKey.Ottoman} should probably stay where it is.`)
     .setUse(() => {
         rugroom.addItem(ItemKey.Cushion, cushion);
-        return `You try putting your feet on the _${ItemKey.Ottoman}_, and notice that the top _${ItemKey.Cushion}_ seems loose.`
+        return `You try putting your feet on the ${ItemKey.Ottoman}, and notice that the top _${ItemKey.Cushion}_ seems loose.`
     });
 
 rugroom.addItem(ItemKey.Ottoman, ottoman);
@@ -40,23 +40,23 @@ let cushionMoved = false;
 const dislodgeCushion = () => {
     if (!cushionMoved) {
         cushionMoved = true;
-        cushionDislodgeText = `The _${ItemKey.Cushion}_ atop the _${ItemKey.Ottoman}_ has been dislodged. `;
-        thumbStatueInsideText = `There is a _${ItemKey.ThumbStatue}_ inside the _${ItemKey.Ottoman}_. `;
+        cushionDislodgeText = `The ${ItemKey.Cushion} atop the ${ItemKey.Ottoman} has been dislodged. `;
+        thumbStatueInsideText = `There is a _${ItemKey.ThumbStatue}_ inside the ${ItemKey.Ottoman}. `;
         rugroom.addItem(ItemKey.ThumbStatue, thumbStatue);
-        return `Dislodging the _${ItemKey.Cushion}_ reveals a small storage compartment inside the ottoman. A familiar looking _${ItemKey.ThumbStatue}_ is inside.`
+        return `Dislodging the ${ItemKey.Cushion} reveals a small storage compartment inside the ottoman. A familiar looking _${ItemKey.ThumbStatue}_ is inside.`
     }
-    return `You've already dislodged the _${ItemKey.Cushion}_cushion.`;
+    return `You've already dislodged the ${ItemKey.Cushion}.`;
 }
 const cushion = new Item()
     .setExamine(() => {
         if (cushionMoved) {
-            return `The _${ItemKey.Cushion}_ atop the _${ItemKey.Ottoman}_ has been dislodged. It looks really good this way.`
+            return `The ${ItemKey.Cushion} atop the ${ItemKey.Ottoman} has been dislodged. It looks really good this way.`
         }
-        return `The _${ItemKey.Cushion}_ atop the _${ItemKey.Ottoman}_ feels like it could be moved.`
+        return `The ${ItemKey.Cushion} atop the ${ItemKey.Ottoman} feels like it could be moved.`
     })
     .setTakeable(false)
-    .setTake(() => `As much fun as it would be to carry around the _${ItemKey.Ottoman}_'s _${ItemKey.Cushion}_, you don't want to permanently tear the thing off.`)
-    .setUse(() => `You consider laying your head on the _${ItemKey.Cushion}_cushion, but as your nose gets closer to it, your reasoning brain slows you down, bringing you to a stop while still a safe distance away.`)
+    .setTake(() => `As much fun as it would be to carry around the ${ItemKey.Ottoman}'s ${ItemKey.Cushion}, you don't want to permanently tear the thing off.`)
+    .setUse(() => `You consider laying your head on the ${ItemKey.Cushion}, but as your nose gets closer to it, your reasoning brain slows you down, bringing you to a stop while still a safe distance away.`)
     .on("move", () => dislodgeCushion())
     .on("dislodge", () => dislodgeCushion());
 
@@ -73,7 +73,7 @@ export const wearCowskin = (gameEngine: GameEngine, robe: Item) => {
         return `You have to take the _${ItemKey.Cowskin}_ before you can wear it.`;
     }
     if (!gameEngine.inventoryContains(ItemKey.Rope)) {
-        return `You try to wear the _${ItemKey.Cowskin}_, but it slips off of you. If only you had something with which to secure it...`;
+        return `You try to wear the ${ItemKey.Cowskin}, but it slips off of you. If only you had something with which to secure it...`;
     }
     gameEngine.removeInventoryItem(ItemKey.Rope);
     gameEngine.removeInventoryItem(ItemKey.Cowskin);
@@ -97,6 +97,7 @@ export const ornateKey = new Item()
 export const breakDeerhead = (gameEngine: GameEngine) => {
     gameEngine.removeInventoryItem(ItemKey.DeerHeadStatue);
     deerHeadText = "";
+    rugroom.setDesc(desc());
     gameEngine.currentLocation.addItem(ItemKey.OrnateKey, ornateKey);
 
     return `You make short work of the deer head statue. It shatters into at least a gazillion pieces. An _${ItemKey.OrnateKey}_ is among its remains.`;
@@ -112,6 +113,8 @@ export const deerHead = new Item()
     .setUse(() => {
         return "As you prepare to somehow use the deer head statue, you notice a tinkling sound coming from inside it.";
     })
+    .on("shake", () => "You hear something rattling around inside. If only you could somehow get at it...")
+    .on("open", () => "Open it? Really? Surely you can think of something more violent...")
     .on("hint", () => "Maybe try breaking the damn thing.");
 rugroom.addItem(ItemKey.DeerHeadStatue, deerHead);
 
@@ -134,7 +137,8 @@ export const readBook = (gameEngine: GameEngine) => {
 export const book = new Item()
     .setExamine(() => "A well-worn blue book, titled `The Way of Thieves`.")
     .setTakeable(false)
-    .setTake(() => "You wisely leave `The Way of Thieves` where it is. The irony of that action is not lost on you.");
+    .setTake(() => "You wisely leave `The Way of Thieves` where it is. The irony of that action is not lost on you.")
+    .setUse(() => "\"Use\" the book...? What does one normally do with books?");
 
 const bookcase = new Item()
     .setExamine(() => {

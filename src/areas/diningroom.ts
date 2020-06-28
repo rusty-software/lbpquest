@@ -92,7 +92,7 @@ const declarations: string[] = [
 const banter = (players: string[]): string => {
     let quotes: string[] = [];
     players.map((playerName) => {
-        quotes.push(playerName + " says: " + declarations[Math.floor(Math.random() * quotes.length)]);
+        quotes.push(playerName + " says: " + declarations[Math.floor(Math.random() * declarations.length)]);
     });
     return quotes.join("\n");
 }
@@ -129,7 +129,7 @@ const quitMafia = () => {
     return "You stand up and leave the table, the Moderator casting a confused look at you.";
 }
 
-let diningRoomText = "The dining room is dominated by a large glass dining table. A door to the north leads outside, and the kitchen is to your west."
+let diningRoomText = "The dining room is dominated by a large glass _dining table_. A door to the north leads outside, and the kitchen is to your west."
 let diningRoomMafiaText = "The dining room is dominated by a large glass dining table. Seven people are sitting around the table, looking at you expectently. A door to the north leads outside, and the kitchen is to your west.";
 
 export const diningroom = new Location()
@@ -148,7 +148,13 @@ const diningTable = new Item()
         return "The table is covered in fingerprints, except for three circles. It looks as if some things used to adorn the table top but were recently removed.";
     })
     .setTake(() => "The dining table definitely will NOT fit in your rucksack.")
-    .setTakeable(false);
+    .setTakeable(false)
+    .setUse(() => {
+        if (!mafiaPlayable) {
+            return "Using the dining table probably involves replacing whatever was recently removed.";
+        }
+        return playMafia();
+    });
 
 let thumbPlaced = false;
 let peacePlaced = false;

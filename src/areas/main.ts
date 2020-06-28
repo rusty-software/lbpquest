@@ -1,4 +1,5 @@
 import GameEngine from '../engine/GameEngine';
+import ItemKey from './itemenums';
 
 import Courtyard from './Courtyard';
 
@@ -151,7 +152,7 @@ garage
     .setOnEnter(() => tagIt("garage"));
 
 insidegarage
-    .link("through door", garage)
+    .link(`through ${ItemKey.GarageDoor}`, garage)
     .setOnEnter(() => tagIt("insidegarage"));
 
 // item wiring
@@ -177,6 +178,7 @@ cowskin.on("wear", () => wearCowskin(gameEngine, robe));
 
 deerHead
     .on("break", () => breakDeerhead(gameEngine))
+    .on("drop", () => breakDeerhead(gameEngine))
     .on("smash", () => breakDeerhead(gameEngine))
     .on("throw", () => breakDeerhead(gameEngine))
     .on("destroy", () => breakDeerhead(gameEngine));
@@ -185,7 +187,7 @@ book.on("read", () => readBook(gameEngine));
 ornateKey.setUse(() => useOrnateKey(gameEngine));
 pouch.setUse(() => useTools(gameEngine, linkInsideGarage));
 const linkInsideGarage = () => {
-    garage.link("through door", insidegarage);
+    garage.link(`through ${ItemKey.GarageDoor}`, insidegarage);
 }
 
 pit.setUse(() => usePit(gameEngine));
@@ -200,7 +202,6 @@ snorkel.setUse(() => usePool(gameEngine));
 thumbStatue.setUse(() => placeThumb(gameEngine, thumbStatue));
 peaceStatue.setUse(() => placePeace(gameEngine, peaceStatue));
 okayStatue.setUse(() => placeOkay(gameEngine, okayStatue));
-
 
 const startTime = new Date();
 const timeDiffInSeconds = (): number => {

@@ -62,6 +62,9 @@ export const useLime = (gameEngine: GameEngine) => {
 
 let iceUsed: boolean = false;
 const ice = new Item()
+    .setExamine(() => "Looks pretty cold, but not Sonic-style crunchy.")
+    .setTakeable(false)
+    .setTake(() => "Eh, it'll probably melt before you can get out of the bar area...")
     .setUse(() => {
         iceUsed = true;
         return "You add the ice to the vitamix."
@@ -93,7 +96,7 @@ export const drinkMarg = (gameEngine: GameEngine) => {
             gameEngine.currentLocation.addItem(ItemKey.GreenChip, greenChip);
             gameEngine.send(`take ${ItemKey.GreenChip}`);
 
-            return "On taking this sip, something slides forward from the bottom of the cup. Looking inside, you see a green poker chip. You slide it into your rucksack.";
+            return `On taking this sip, something slides forward from the bottom of the cup. Looking inside, you see a green poker chip. You slide it into your rucksack.`;
         }
 
         return "You've taken the last sip of the marg. It was great while it lasted.";
@@ -120,6 +123,7 @@ export const drinkMarg = (gameEngine: GameEngine) => {
 }
 
 export const marg = new Item()
+    .setExamine(() => "This marg was brought to you by the vitamix.")
     .setTakeable(true);
 
 let cupUsed: boolean = false;
@@ -227,5 +231,6 @@ const icemaker = new Item()
     .setExamine(() => "The ice maker hums quietly to itself.")
     .setTakeable(false)
     .setTake(() => "The ice maker is built into the bar and can't be taken.")
-    .setUse(() => doQuotes("The ice maker speaks! \"Answer my questions to get the ice!\" (start your response with \"say\")"));
+    .setUse(() => doQuotes("The ice maker speaks! \"Answer my questions to get the ice!\" (start your response with \"say\")"))
+    .on("open", () => doQuotes("The ice maker speaks! \"Answer my questions to get the ice!\" (start your response with \"say\")"));
 bar.addItem(ItemKey.IceMaker, icemaker);
