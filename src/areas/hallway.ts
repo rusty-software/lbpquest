@@ -49,6 +49,7 @@ export const rope = new Item()
     .setTakeable(true)
     .setTake(() => {
         ropeText = "";
+        ropeTaken = true;
         hallway.setDesc(desc());
         return "You put the rope into your rucksack."
     });

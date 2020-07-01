@@ -98,13 +98,22 @@ vr.addItem(ItemKey.Powerdot, powerdot);
 let shreddedCount: number = 0;
 const papers = new Item()
     .setExamine(() => {
-        if (shreddedPaper) {
+        if (shreddedPaper && shreddedCount < 5) {
             return "The papers are nothing but a pile of confetti at this point.";
+        } else if (shreddedCount === 5) {
+            return "The papers look like particulate matter.";
         }
         return "The papers are spreadsheet printouts containing all of the financial data from the virtual company!";
     })
     .setTakeable(false)
-    .setTake(() => "Those papers are too sensitive to take.")
+    .setTake(() => {
+        if (shreddedPaper && shreddedCount < 5) {
+            return "Even in their shredded state, the papers are too sensitive to take.";
+        } else if (shreddedCount === 5) {
+            return "You cannot take particulate matter, especially the virtual kind.";
+        }
+        return "Those papers are too sensitive to take.";
+    })
     .setUse(() => {
         if (shreddedPaper && shreddedCount < 5) {
             return "You create small piles of virtual confetti. Given there's nothing to celebrate, that's the end of the story for them.";
