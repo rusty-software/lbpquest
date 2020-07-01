@@ -88,7 +88,7 @@ const powerdot = new Item()
     .setTake(() => "Powerdot is an application on the computer. You have to present it, not take it.")
     .on("present", () => {
         if (presented) {
-            return "No one is around for whom to perform the presentation.";
+            return "You've already done the presentation, remember? Given your memory, perhaps you should consider retirement...?";
         }
         presented = true;
         return playJob("You present the Powerdot. It goes so well that you think you're in line for a promotion!\n\n");
