@@ -32,6 +32,9 @@ function HelpView(props: HelpViewProps) {
             <br />
             <div className="help-description">
                 But there may be more hidden commands available. Use "logic" to figure it out!
+                <br/>
+                <br/>
+                Also, words surrounded by "_" are typically interactable somehow. There, I've pretty much given away the entire game. You're welcome.
             </div>
         </div>
     );

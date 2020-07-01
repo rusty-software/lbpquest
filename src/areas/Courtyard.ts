@@ -19,7 +19,7 @@ class Courtyard extends Location {
         .setTake(() => "The fountain is fixed in place, and even if you could move it, probably wouldn't fit in your rucksack.")
         .setUse(() => "You consider sipping from the fountain's lukewarm water, but think better of it, given what everyone else does in the pool...");
 
-    private noteText: string = "(in a hastily/messily scrawled pen)"
+    private noteText: string = "The note says: (in a hastily/messily scrawled pen)"
     + "\n\nGreetings, fellow LBPer! The door's open. We're all in the tent out back. See you there!"
     + "\n\n(there is no signature)";
 

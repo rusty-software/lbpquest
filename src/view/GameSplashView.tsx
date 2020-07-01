@@ -13,7 +13,7 @@ function GameSplashView() {
             aria-label="Press Enter to start the game ">
             => Press Enter to start the game 
         </h3>
-        <h3 className="game-intro-credits">Dev'd by: IronFury </h3>
+        <h3 className="game-intro-credits">Dev'd by: rusty-software </h3>
     </div>;
 }
 
