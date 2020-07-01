@@ -15,6 +15,7 @@ export const vr = new Location()
     .setId("Virtual Reality")
     .setDesc(desc());
 
+let playingJob: boolean = false;
 let filledCoffee: boolean = false;
 let presented: boolean = false;
 let shreddedPaper: boolean = false;
@@ -23,6 +24,7 @@ let coffeeText: string = `There's an empty _${ItemKey.CoffeeCup}_ on the desk. `
 let computerText: string = `The computer screen displays a _${ItemKey.Powerdot}_ presentation. `;
 let paperText: string = `A pile of _${ItemKey.Papers}_ with sensitive spreadsheet data sits next to the desk near the shredder. `;
 const playJob = (actionHeader: string) => {
+    if (!playingJob) { return ""; }
     if (attendedParty && whiteChipTaken) {
         return "You have already won the game of Job Simulator!";
     }
@@ -103,16 +105,24 @@ const papers = new Item()
     })
     .setTakeable(false)
     .setTake(() => "Those papers are too sensitive to take.")
+    .setUse(() => {
+        if (shreddedPaper && shreddedCount < 5) {
+            return "You create small piles of virtual confetti. Given there's nothing to celebrate, that's the end of the story for them.";
+        } else if (shreddedCount === 5) {
+            return "You cannot use particulate matter, especially the virtual kind.";
+        }
+        return "You use one of the papers to make a virtual paper airplane. You throw it, and it falls straight to the virtual ground... next to the shredder. (hint hint)";
+    })
     .on("shred", () => {
         if (shreddedPaper && shreddedCount < 5) {
             shreddedCount++;
-            return playJob("You tear all of the tiny pieces into even tinier pieces.");
+            return playJob("You tear all of the tiny pieces into even tinier pieces.\n\n");
         } else if (shreddedCount === 5) {
-            return playJob("The pieces are now particulate matter. You can't grasp them any more, so the shredding is over.");
+            return playJob("The pieces are now particulate matter. You can't grasp them any more, so the shredding is over.\n\n");
         }
         shreddedPaper = true;
         shreddedCount = 1;
-        return playJob("You carefully feed all of the papers into the shredder. It gleefully converts them into tiny pieces.");
+        return playJob("You carefully feed all of the papers into the shredder. It gleefully converts them into tiny pieces.\n\n");
     });
 vr.addItem(ItemKey.Papers, papers);
 
@@ -132,7 +142,10 @@ const party = new Item()
     });
 
 const jobGame = new Item()
-    .on("play", () => playJob(""));
+    .on("play", () => {
+        playingJob = true;
+        return playJob("");
+    });
 vr.addItem("job simulator", jobGame);
 
 export const whiteChip = new Item()
