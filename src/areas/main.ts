@@ -161,12 +161,13 @@ headset
     .on("remove", () => removeHeadset(gameEngine, headset));
 
 porn.setUse(() => usePorn(gameEngine));
-horn.setUse(() => useEarlAndHorn(gameEngine, "horn"));
+horn.setUse(() => useEarlAndHorn(gameEngine, ItemKey.DeerHorn));
 
-earl.setUse(() => useEarlAndHorn(gameEngine, "earl"));
+earl.setUse(() => useEarlAndHorn(gameEngine, ItemKey.Earl));
 cup.setUse(() => useCup(gameEngine));
 lime.setUse(() => useLime(gameEngine));
 marg
+    .setUse(() => takeMarg(gameEngine))
     .setTake(() => takeMarg(gameEngine))
     .on("drink", () => drinkMarg(gameEngine));
 

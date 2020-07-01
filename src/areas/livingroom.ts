@@ -50,6 +50,9 @@ const bricabrac = new Item()
 
 let inVR: boolean = false;
 export const useHeadset = (gameEngine: GameEngine, headset: Item, vr: Location) => {
+    if (inVR) {
+        return "You're already in VR. If you'd like to leave, just remove the headset.";
+    }
     livingroom.link("vr", vr);
     inVR = true;
     vr.addItem(ItemKey.Headset, headset);

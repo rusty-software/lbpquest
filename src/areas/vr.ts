@@ -72,9 +72,15 @@ vr.addItem(ItemKey.CoffeeCup, cup);
 const powerdot = new Item()
     .setExamine(() => {
         if (presented) {
-            return "You shut down the computer as soon as it was finished.";
+            return "You shut down the computer as soon as it was finished. Please stop trying to create more work for yourself.";
         }
         return "The presesentation looks like it's going to be spectacular!";
+    })
+    .setUse(() => {
+        if (presented) {
+            return "You shut down the computer as soon as the presentation was finished. You're trying to *finish* work, not create more of it..."
+        }
+        return "The powerdot presentation is already perfect. You just need to present it!"
     })
     .setTakeable(false)
     .setTake(() => "Powerdot is an application on the computer. You have to present it, not take it.")
